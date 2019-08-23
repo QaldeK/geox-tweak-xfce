@@ -1,0 +1,67 @@
+# By Jesse_Avalos , modified for Geox
+background no
+use_xft yes
+xftfont Roboto:size=9
+xftalpha 0.8
+update_interval 10
+total_run_times 0
+own_window yes
+own_window_transparent yes
+##############################################
+# Compositing tips:
+# Conky can play strangely when used with
+# different compositors. I have found the
+# following to work well, but your mileage
+# may vary. Comment/uncomment to suit.
+##############################################
+## no compositor
+#own_window_type override
+#own_window_argb_visual no
+
+## xcompmgr
+#own_window_type override
+#own_window_argb_visual yes
+
+## cairo-compmgr
+own_window_type override
+own_window_argb_visual no
+##############################################
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+stippled_borders 0
+border_margin 5
+border_width 1
+default_color EDEBEB
+default_shade_color 000000
+default_outline_color 000000
+alignment top_right
+minimum_size 300 300
+maximum_width 900
+gap_x 1
+gap_y 1
+alignment top_right
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+short_units yes
+text_buffer_size 2048
+use_spacer none
+override_utf8_locale yes
+
+color1 ffffff
+color2 212021
+color3 E82A2A
+
+own_window_argb_value 76
+own_window_colour 000000
+TEXT
+
+${color1}${voffset 50}${font Podkova Medium:size=80}${if_match "pfix${time %p}" == "pmfix"}${time %k:%M}${else}${time %l:%M}${endif}${image line.png -p 350,27 -s 3x220}
+${offset 190}${color1}${voffset -45}${font Podkova ExtraBold:size=22}${time %d %B}
+${offset 170}${color1}${voffset -60}${font Podkova Medium:size=19}${time %A}
+${offset 380}${color1}${voffset -177}${font Podkova:size=22}

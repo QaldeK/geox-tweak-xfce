@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="color8" mtime="1556297101" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color7" mtime="1556297101" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color6" mtime="1556297101" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color5" mtime="1556297101" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color4_alpha" mtime="1556297101" type="int" value="127"/>
+	<entry name="color4" mtime="1556297101" type="string">
+		<stringvalue>#ffffff</stringvalue>
+	</entry>
+	<entry name="color3_alpha" mtime="1556297101" type="int" value="127"/>
+	<entry name="color3" mtime="1556297101" type="string">
+		<stringvalue>#00fffa</stringvalue>
+	</entry>
+	<entry name="color2_alpha" mtime="1556297101" type="int" value="204"/>
+	<entry name="color2" mtime="1556297101" type="string">
+		<stringvalue>#ffffff</stringvalue>
+	</entry>
+	<entry name="color1_alpha" mtime="1556297101" type="int" value="127"/>
+	<entry name="color1" mtime="1556297101" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="popup_style_file" mtime="1563935129" type="string">
+		<stringvalue>EOW.tar.gz</stringvalue>
+	</entry>
+</gconf>

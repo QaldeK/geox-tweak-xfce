@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="color8_alpha" mtime="1556297149" type="int" value="255"/>
+	<entry name="color8" mtime="1556297149" type="string">
+		<stringvalue>#ff4050</stringvalue>
+	</entry>
+	<entry name="color7_alpha" mtime="1556297149" type="int" value="255"/>
+	<entry name="color7" mtime="1556297149" type="string">
+		<stringvalue>#398ee7</stringvalue>
+	</entry>
+	<entry name="color6_alpha" mtime="1556297149" type="int" value="255"/>
+	<entry name="color6" mtime="1556297149" type="string">
+		<stringvalue>#2c6eb3</stringvalue>
+	</entry>
+	<entry name="color5_alpha" mtime="1556297149" type="int" value="255"/>
+	<entry name="color5" mtime="1556297149" type="string">
+		<stringvalue>#ebebeb</stringvalue>
+	</entry>
+	<entry name="color4" mtime="1556297149" type="string">
+		<stringvalue>#9C9C9C</stringvalue>
+	</entry>
+	<entry name="color3_alpha" mtime="1556297149" type="int" value="255"/>
+	<entry name="color3" mtime="1556297149" type="string">
+		<stringvalue>#398ee7</stringvalue>
+	</entry>
+	<entry name="color2" mtime="1556297149" type="string">
+		<stringvalue>#FFFFFF</stringvalue>
+	</entry>
+	<entry name="color1_alpha" mtime="1556297149" type="int" value="209"/>
+	<entry name="color1" mtime="1556297149" type="string">
+		<stringvalue>#3c3c3c</stringvalue>
+	</entry>
+	<entry name="popup_style_file" mtime="1563935314" type="string">
+		<stringvalue>dbx.tar.gz</stringvalue>
+	</entry>
+</gconf>

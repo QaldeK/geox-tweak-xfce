@@ -1,0 +1,55 @@
+#!/bin/bash
+
+###################################
+# Install script for geox-tweak.
+# For install geox-tweak : open a terminal in the "install" script directory, and enter "sudo ./install"
+# For uninstall : "sudo ./uninstall"
+#
+# You can modify the path at your conveniance : change "/usr/share" of path_base by your prefered directory.
+##################################
+
+path_base="/usr/share"
+
+mkdir $path_base/geox-tweak
+mkdir $path_base/geox-tweak/img
+mkdir $path_base/geox-tweak/panel
+mkdir $path_base/geox-tweak/script
+
+cp -v -R ./geox-tweak/img/* $path_base/geox-tweak/img
+
+cp -v -R ./geox-tweak/panel/* $path_base/geox-tweak/panel
+
+cp -v -R ./geox-tweak/script/* $path_base/geox-tweak/script
+chmod +x $path_base/geox-tweak/script/*
+
+cp -v ./geox-tweak/activ.conf $path_base/geox-tweak
+chmod 666 $path_base/geox-tweak/activ.conf
+
+cp -v ./geox-tweak/geox.glade $path_base/geox-tweak
+
+cp -v ./geox-tweak/geox-tweak $path_base/geox-tweak
+chmod +x $path_base/geox-tweak
+
+cp -v ./geox-tweak/GeoX-Tweak.desktop $path_base/applications
+chmod +x $path_base/applications/GeoX-Tweak.desktop
+
+cp -v ./geox-tweak/script/geox-tweak /usr/bin
+chmod +x /usr/bin/geox-tweak
+
+### Theme ###
+cp -v -R ./geox-tweak/theme/dockbarx/* ~/.gconf/apps
+cp -v -R ./geox-tweak/theme/plank/* /usr/share/plank
+cp -v ./geox-tweak/theme/xfdashboard/xfdashboard.xml ~/.config/xfce4/xfconf/
+cp -v -Rf ./geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock/* /usr/share/themes/xfdashboard-dark-nodock
+cp -v ./geox-tweak/theme/synapse/config.json ~/.config/synapse
+tar -jxvf $share/$gt/themes.tar.bz2 -C $share/themes/
+
+#preserve whiskermenu config.
+path_panel=$path_base/geox-tweak/panel
+find $HOME/.config/xfce4/panel/ -name "whisker*" -exec cp -f -r -v {} $path_panel/whiskermenu-20.rc \;
+find $path_panel/*/.config/xfce4/panel/  -maxdepth 0 -exec cp -f -v $path_panel/whiskermenu-20.rc {} \;
+
+
+
+
+

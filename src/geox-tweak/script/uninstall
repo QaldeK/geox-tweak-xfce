@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -r /usr/share/geox-tweak
+rm /usr/bin/geox-tweak
+rm /usr/share/applications/GeoX-Tweak.desktop

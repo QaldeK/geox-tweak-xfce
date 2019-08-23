@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="color8" mtime="1563935145" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color7" mtime="1563935145" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color6" mtime="1563935145" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color5" mtime="1563935145" type="string">
+		<stringvalue>#000000</stringvalue>
+	</entry>
+	<entry name="color4_alpha" mtime="1563935145" type="int" value="255"/>
+	<entry name="color4" mtime="1563935145" type="string">
+		<stringvalue>#ababab</stringvalue>
+	</entry>
+	<entry name="color3_alpha" mtime="1563935145" type="int" value="127"/>
+	<entry name="color3" mtime="1563935145" type="string">
+		<stringvalue>#00ffff</stringvalue>
+	</entry>
+	<entry name="color2_alpha" mtime="1563935145" type="int" value="255"/>
+	<entry name="color2" mtime="1563935145" type="string">
+		<stringvalue>#d4d4d4</stringvalue>
+	</entry>
+	<entry name="color1_alpha" mtime="1563935145" type="int" value="0"/>
+	<entry name="color1" mtime="1563935145" type="string">
+		<stringvalue>#ff4300</stringvalue>
+	</entry>
+	<entry name="popup_style_file" mtime="1563935145" type="string">
+		<stringvalue>Elegance.tar.gz</stringvalue>
+	</entry>
+</gconf>
