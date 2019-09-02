@@ -48,6 +48,8 @@ tar -jxvf $share/$gt/themes.tar.bz2 -C $share/themes/
 path_panel=$path_base/geox-tweak/panel
 find $HOME/.config/xfce4/panel/ -name "whisker*" -exec cp -f -r -v {} $path_panel/whiskermenu-20.rc \;
 find $path_panel/*/.config/xfce4/panel/  -maxdepth 0 -exec cp -f -v $path_panel/whiskermenu-20.rc {} \;
+sh share/gt/script/papirus-folders-master/install.sh
+
 
 
 
