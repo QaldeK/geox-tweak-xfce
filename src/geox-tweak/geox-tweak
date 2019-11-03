@@ -2,7 +2,7 @@
 
 import configparser  # traiter les fichiers de configuration
 import os
-from os import path
+# from os import path
 import os.path
 import subprocess  # os et subprocess : executer des commandes et script bash
 import gi  # nécessaire pour utiliser le fichier glade
@@ -18,1224 +18,1243 @@ plank_theme = config.get("Style", "plank_theme")
 
 class Geox:
 
-	# Pour que le logiciel quitte proprement
-	def on_main_window_destroy(self, data=None):
-		Gtk.main_quit()
-
-	# Initialisation : chargement du gtk builder lisant le fichier glade ...
-	def __init__(self):
-
-		self.builder = Gtk.Builder()
-		glade_file = os.path.join(sdir, "geox.glade")
-		self.builder.add_from_file(glade_file)
-		self.builder.connect_signals(self)
-
-		go = self.builder.get_object
-
-		# notebook
-		self.notebook = go("notebook")
-
-		# bouton pref
-		self.btn_plank_pref = go("btn_plank_pref")
-		self.btn_xfdashboard_pref = go("btn_xfdashboard_pref")
-		self.btn_conky_pref = go("btn_conky_pref")
-		self.btn_notes_pref = go("btn_notes_pref")
-		self.btn_ddterm_pref = go("btn_ddterm_pref")
-
-		# Toogle Tools
-		self.plank = go("plank")
-		self.xfdashboard = go("xfdashboard")
-		self.synapse = go("synapse")
-		self.conky = go("conky")
-
-		self.ddterm = go("ddterm")
-		self.notes = go("notes")
-
-		# Toggle Help
-		self.btn_plank_help = go("btn_plank_help")
-		self.btn_xfdashboard_help = go("btn_xfdashboard_help")
-		self.btn_synapse_help = go("btn_synapse_help")
-		self.btn_conky_help = go("btn_conky_help")
-		self.btn_notes_help = go("btn_notes_help")
-
-		self.help_txt_zone = go("help_txt_zone")
-		self.defaut_help()
-
-		self.state_app(
-			self
-		)  # /!\ Positionner apres la declaration des btn rapportées aux états
-		# testés ;
-
-		# Layout preview
-		self.geox = go("geox")
-		self.geox.set_from_file(sdir + "/img/pv-geox.png")
-		self.xubuntu = go("xubuntu")
-		self.xubuntu.set_from_file(sdir + "/img/pv-xubuntu.png")
-		self.ubuntu = go("ubuntu")
-		self.ubuntu.set_from_file(sdir + "/img/pv-ubuntu.png")
-		self.W95 = go("W95")
-		self.W95.set_from_file(sdir + "/img/pv-W95.png")
-		self.W7 = go("W7")
-		self.W7.set_from_file(sdir + "/img/pv-W7.png")
-		self.budgie = go("budgie")
-		self.budgie.set_from_file(sdir + "/img/pv-budgie.png")
-		self.mate = go("mate")
-		self.mate.set_from_file(sdir + "/img/pv-mate.png")
-		self.mxlinux = go("mxlinux")
-		self.mxlinux.set_from_file(sdir + "/img/pv-mxlinux.png")
-
-		# self.cb_adapta = go("cb_adapta")
-		self.btn_all_theme = go("btn_all_theme")
-		self.btn_widows_decor = go("btn_widows_decor")
-		self.btn_apply = go("btn_apply")
-		self.toggle_adapta_compact = go("toggle_adapta_compact")
-
-		# preview self.theme
-		self.preview_adapta = go("preview_adapta")
-		self.preview_adapta.set_from_file(sdir + "/img/adapta.png")
-		self.preview_arc = go("preview_arc")
-		self.preview_arc.set_from_file(sdir + "/img/arc.png")
-		self.preview_adwaita = go("preview_adwaita")
-		self.preview_adwaita.set_from_file(sdir + "/img/adwaita.png")
-		self.preview_qogir = go("preview_qogir")
-		self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
-		self.preview_macos = go("preview_macos")
-		self.preview_macos.set_from_file(sdir + "/img/macos.png")
-		self.preview_materia = go("preview_materia")
-		self.preview_materia.set_from_file(sdir + "/img/materia.png")
-		self.preview_greybird = go("preview_greybird")
-		self.preview_greybird.set_from_file(sdir + "/img/greybird.png")
-		self.preview_numix = go("preview_numix")
-		self.preview_numix.set_from_file(sdir + "/img/numix.png")
-		self.preview_clearlooks = go("preview_clearlooks")
-		self.preview_clearlooks.set_from_file(sdir + "/img/clearlooks.png")
-		self.preview_prodark = go("preview_prodark")
-		self.preview_prodark.set_from_file(sdir + "/img/pro-dark-xfce.png")
-
-		self.bar_theme = go("bar_theme")
-		self.bar_theme.hide()
-
-		# Icon color
-		self.folder = ""
-
-		self.icon_black = go("icon_black")
-		self.icon_black.set_from_file(sdir + "/img/black.svg")
-		self.icon_cyan = go("icon_cyan")
-		self.icon_cyan.set_from_file(sdir + "/img/cyan.svg")
-		self.icon_green = go("icon_green")
-		self.icon_green.set_from_file(sdir + "/img/green.svg")
-		self.icon_blue = go("icon_blue")
-		self.icon_blue.set_from_file(sdir + "/img/blue.svg")
-		self.icon_bluegrey = go("icon_bluegrey")
-		self.icon_bluegrey.set_from_file(sdir + "/img/bluegrey.svg")
-		self.icon_brown = go("icon_brown")
-		self.icon_brown.set_from_file(sdir + "/img/brown.svg")
-		self.icon_teal = go("icon_teal")
-		self.icon_teal.set_from_file(sdir + "/img/teal.svg")
-		self.icon_orange = go("icon_orange")
-		self.icon_orange.set_from_file(sdir + "/img/orange.svg")
-		self.icon_red = go("icon_red")
-		self.icon_red.set_from_file(sdir + "/img/red.svg")
-		self.icon_violet = go("icon_violet")
-		self.icon_violet.set_from_file(sdir + "/img/violet.svg")
-		self.icon_yellow = go("icon_yellow")
-		self.icon_yellow.set_from_file(sdir + "/img/yellow.svg")
-		self.icon_grey = go("icon_grey")
-		self.icon_grey.set_from_file(sdir + "/img/grey.svg")
-
-		# ID des label du fichier de configuration activ.conf (> modifié par "config.")
-		self.var_theme = ""
-		self.theme = ""
-		self.windows_decor = ""
-		self.icons = ""
-		self.layout = ""
-
-		##
-		self.iconslibreoffice = ""
-		self.theme_name = go("theme_name")
-		self.chk_folder_color = go("chk_folder_color")
-		self.plank_theme = plank_theme
-
-		# Onglet "Other"
-		self.btn_simpleclic_thunar = go("btn_simpleclic_thunar")
-		self.btn_simpleclic_desktop = go("btn_simpleclic_desktop")
-		self.btn_txt_next_icons = go("btn_txt_next_icons")
-		self.btn_folder_file = go("btn_folder_file")
-		self.btn_removable_desktop = go("btn_removable_desktop")
-		self.btn_trash_desktop = go("btn_trash_desktop")
-		self.btn_allhome_desktop = go("btn_allhome_desktop")
-		self.btn_home_desktop = go("btn_home_desktop")
-		self.btn_xfce_settings = go("btn_xfce_settings")
-		self.btn_lightdm_settings = go("btn_lightdm_settings")
-		self.btn_xfwm4_tweaks_settings = go("btn_xfwm4_tweaks_settings")
-		self.btn_notification_settings = go("btn_notification_settings")
-		self.btn_panel_settings = go("btn_panel_settings")
-		self.btn_desktop_settings = go("btn_desktop_settings")
-		self.btn_thunar_settings = go("btn_thunar_settings")
-
-		self.state_settings(
-		)  # /!\ Positionner apres la declaration des btn rapportées aux états testés
-
-		# affichage de la fenetre
-		self.window = go("main_window")
-		self.window.show()
-
-	@staticmethod
-	def on_btn_quit_clicked(widget):
-		Gtk.main_quit()
-
-	def defaut_help(self):
-		defaut = ""
-		self.help_txt_zone.get_buffer().set_text(defaut)
-
-	# Panel TOOLS # Bouton Toggle # TODO > dependances : app & conkytoggle.sh;)
-	@staticmethod
-	def app_activ(widget, xf, xd, ck, nt):
-		# s'execture quand app est/sont activé, avec les arguments définis dans on_app_toggled, permettant de s'adapter aux specificité d'exectution/extinction des app
-		app = Gtk.Buildable.get_name(widget)
-		# TODO > os.subs ?os.
-		os.system(
-			nt + app + ck + xd +
-			''' & sed -i 's/\(Hidden=true\).*/\Hidden=false/' $HOME/.config/autostart/'''
-			+ nt + app + xf + '''.desktop & ''')
-		widget.set_label("actif")
-
-	@staticmethod
-	def app_inactiv(widget, xf, xq, pkill, nt):
-		# s'execture quand app est/sont activé...
-		app = Gtk.Buildable.get_name(widget)
-		# TODO > os.subs ?os.
-		os.system(
-			pkill + nt + app + xq +
-			''' & sed -i 's/\(Hidden=false\).*/\Hidden=true/' $HOME/.config/autostart/'''
-			+ nt + app + xf + '''.desktop &''')
-		widget.set_label("activer")
-
-	def on_app_toggled(self, widget):
-		# Variable permettant d'envoyer les commandes d'execution et d'extinction spécifique aux logiciels
-		# (notamment conky, lancer par le script conkytoggle.sh, et xfdashboard lancer en mode démon (- d)...
-		app = Gtk.Buildable.get_name(widget)
-		ck = xf = xq = xd = nt = ""
-		pkill = "pkill "
-
-		if widget.get_active():
-
-			if app == "conky":
-				ck = "toggle.sh"  # conky est lancé par conkytoggle.sh
-				self.btn_conky_pref.show()
-				self.app_activ(widget, xf, xd, ck, nt)
-
-			elif app == "xfdashboard":
-				xf = "-autostart"
-				xd = " -d"
-				self.btn_xfdashboard_pref.show()
-				self.app_activ(widget, xf, xd, ck, nt)
-
-			elif app == "notes":
-				xf = "-autostart"
-				nt = "xfce4-"
-				self.btn_notes_pref.show()
-				self.app_activ(widget, xf, xd, ck, nt)
-
-			else:
-				app = Gtk.Buildable.get_name(widget)
-				self.app_activ(widget, xf, xd, ck, nt)
-				if app == "plank":
-					self.btn_plank_pref.show()
-
-		else:
-
-			if app == "conky":
-				# ck = "toggle.sh" # conky est lancé par conkytoggle.sh
-				self.btn_conky_pref.hide()
-				self.app_inactiv(widget, xf, xq, pkill, nt)
-
-			elif app == "xfdashboard":
-				xf = "-autostart"
-				xq = " -q"
-				pkill = ""
-				self.btn_xfdashboard_pref.hide()
-				self.app_inactiv(widget, xf, xq, pkill, nt)
-
-			elif app == "notes":
-				xf = "-autostart"
-				nt = "xfce4-"
-				self.btn_notes_pref.hide()
-				self.app_inactiv(widget, xf, xq, pkill, nt)
-
-			else:
-				app = Gtk.Buildable.get_name(widget)
-				self.app_inactiv(widget, xf, xq, pkill, nt)
-				if app == "plank":
-					self.btn_plank_pref.hide()
-
-	def on_ddterm_toggled(self, widget):
-		# TODO > xfconf query command & state app fct.
-		if widget.get_active():
-			os.system(
-				'''xfce4-terminal --drop-down --hide-menubar --hide-toolbar''')
-			self.btn_ddterm_pref.show()
-		else:
-			self.btn_ddterm_pref.hide()
-
-	# Bouton préférences #####################################################
-	@staticmethod
-	def on_btn_plank_pref_clicked(widget):
-		# TODO > os.subs ?
-		os.system(''' plank --preferences ''')
-
-	@staticmethod
-	def on_btn_xfdashboard_pref_clicked(widget):
-		# TODO > os.subs ?
-		os.system(''' xfdashboard-settings ''')
-
-	@staticmethod
-	def on_btn_conky_pref_clicked(widget):
-		# TODO > os.subs ?
-		os.system(''' conky-manager ''')
-
-	@staticmethod
-	def on_btn_ddterm_pref_clicked(widget):
-		# TODO > os.subs ?
-		os.system("xfce4-notes-settings")
-
-	@staticmethod
-	def on_btn_notes_pref_clicked(widget):
-		# TODO > os.subs ?
-		os.system(''' xfce4-notes-settings ''')
-
-	# Bouton Toggle HELP ##################################################
-	def on_btn_plank_help_clicked(self, widget):
-		help_txt = _("PLANK est une barre de lancement d'application.")
-		self.help_txt_zone.get_buffer().set_text(help_txt)
-
-	def on_btn_synapse_help_clicked(self, widget):
-		help_txt = _("Synapse permet lancer des \n " \
-				   "applications mais aussi de trouver et d'accéder rapidement aux documents et" \
-				   "fichiers désirés (en utilisant le moteur Zeitgeist)." \
-				   "Pour l'utiliser, appuyez sur les touches Ctrl+Espace, commencez à taper ce que vous cherchez" \
-				   "puis appuyez sur la touche Entrer pour ouvrir l'application ou le fichier sélectionné")
-		self.help_txt_zone.get_buffer().set_text(help_txt)
-
-	def on_btn_xfdashboard_help_clicked(self, widget):
-		help_txt = _("Xfdashboard permet d'exposer les logiciels en cours d'execution \
-		sous forme de miniature, à la manière de gnome 3. \
-		 Pointez votre curseur au coin en haut à gauche de l'écran pour l'activer")
-
-		self.help_txt_zone.get_buffer().set_text(help_txt)
-
-	def on_btn_conky_help_clicked(self, widget):
-		help_txt = _("Conky affiche des informations sur votre bureau (date, heure, CPU, RAM...")
-		self.help_txt_zone.get_buffer().set_text(help_txt)
-
-	def on_btn_ddterm_help_clicked(self, widget):
-		help_txt = _("Permet d'afficher un terminal déroulant en haut de l'écran.")
-		self.help_txt_zone.get_buffer().set_text(help_txt)
-
-	def on_btn_notes_help_clicked(self, widget):
-		help_txt = _("Xfce4-notes permet d'écrire de petites notes et d'y acceder facilement \
-		 depuis la zone de notification")
-
-		self.help_txt_zone.get_buffer().set_text(help_txt)
-
-	# Verification de l'etat des logiciels (actif ou pas) #####################
-	def state_app(self, widget):
-		apps = {
-			"synapse": self.synapse,
-			"plank": self.plank,
-			"xfdashboard": self.xfdashboard,
-			"conky": self.conky,
-			"xfce4-notes": self.notes
-		}  # dictinnaire des app a verifier
-		prefapps = {
-			"plank": self.btn_plank_pref,
-			"xfdashboard": self.btn_xfdashboard_pref,
-			"conky": self.btn_conky_pref,
-			"xfce4-notes": self.btn_notes_pref
-		}
-		appactive = bool
-
-		for app in apps.keys():
-			selfapp = apps[app]
-			if os.system("pidof " + app +
-						 " >/dev/null 2>&1"):  # /!\ Renvoie True si non-actif
-				self.app_state(selfapp, appactive(True))
-
-			else:
-				self.app_state(selfapp, appactive(False))
-
-		for prefapp in prefapps.keys():
-			selfprefapp = prefapps[prefapp]
-			if os.system("pidof " + prefapp + " >/dev/null 2>&1"):
-				self.state_btn_pref(selfprefapp, appactive(True))
-
-			else:
-				self.state_btn_pref(selfprefapp, appactive(False))
-
-	def app_state(self, selfapp, appactive):
-
-		if appactive:
-			selfapp.handler_block_by_func(self.on_app_toggled)
-			selfapp.set_active(False)
-			selfapp.handler_unblock_by_func(self.on_app_toggled)
-			selfapp.set_label("activer")
-
-		else:
-			selfapp.handler_block_by_func(self.on_app_toggled)
-			state = selfapp.get_active()
-			selfapp.set_active(not state)
-			selfapp.handler_unblock_by_func(self.on_app_toggled)
-			selfapp.set_label("actif")
-
-	@staticmethod
-	def state_btn_pref(selfprefapp, appactive):
-
-		if appactive:
-			selfprefapp.hide()
-
-		else:
-			selfprefapp.show()
-
-	# ###################################################################
-	# Panel layout  ####### TODO  autre configuration : theme xfdashboard ? &
-	# path des fichiers de conf !!
-	# TODO > config dockbarx : /home/geo/.gconf/apps/dockbarx/%gconf.xml
-	@staticmethod
-	def radio_layout_toggled(layout):
-		args = '''xfce4-panel --quit; pkill xfconfd; rm -Rf ~/.config/xfce4/panel; \
-		 cp -Rf ''' + sdir + '''/panel/''' + layout + '''/.config/xfce4/panel ~/.config/xfce4/panel; \
-					cp -f ''' + sdir + '''/panel/''' + layout + '''/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
-					~/.config/xfce4/xfconf/xfce-perchannel-xml; \
-					sleep 1; xfce4-panel &'''
-
-		subprocess.check_call(args, shell=True)
-		config.set('Style', 'layout', layout)
-		config.write(open('activ.conf', 'w'))
-
-	def plank_config(self, pinned, offset, position, theme):
-		args = "gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ pinned-only " + pinned + " ; \
-				gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ offset " + offset + " ; \
-				gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ position " + position + " ; \
-				gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme " + theme + " ;"
-		subprocess.Popen(args, shell=True)
-		config.set('Style', 'plank_theme', theme)
-		config.write(open('activ.conf', 'w'))
-
-	def dockbarx_config(self, launcher, theme, the_me): #Todo > theming consistent with xfce theme
-		args0 = "pkill -f dockbarx-plug "
-		args1 = '''gconftool-2 --type list --list-type string --set /apps/dockbarx/launchers "''' + launcher + '''" '''
-		args2 = '''gconftool-2 --type string --set /apps/dockbarx/theme "''' + theme + '''" '''
-		args3 = ''' gconftool-2 --type string --set /apps/dockbarx/themes/''' + the_me + '''/popup_style_file Magic_trans.tar.gz '''
-		subprocess.Popen(args0, shell=True)
-		subprocess.check_call(args1, shell=True)
-		subprocess.check_call(args2, shell=True)
-		subprocess.check_call(args3, shell=True)
-
-
-	def pulseaudio_config(self, size):
-		gtkcss = os.path.expanduser('~/.config/gtk-3.0/gtk.css')
-		args1 = "sed -i s'/#pulseaudio-button \* { -gtk-icon-transform: scale(.*); }/#pulseaudio-button \* { -gtk-icon-transform: scale(" + size + "); }'/ $HOME/.config/gtk-3.0/gtk.css"
-		
-		if not os.path.isfile(gtkcss):
-			# open(gtkcss, 'a')
-			file = open(gtkcss, 'w')
-			file.write("#pulseaudio-button * { -gtk-icon-transform: scale(" + size + "); }")
-		else :
-			subprocess.check_call(args1, shell=True)
-
-		
-	def on_radio_geox_toggled(self, widget):
-		if widget.get_active():
-			self.plank_config(pinned="true",
-							  offset="100",
-							  position="bottom",
-							  theme=self.plank_theme)
-			self.plank.set_active(True)
-			self.pulseaudio_config(size="0.6")
-			self.dockbarx_config(launcher="[]", theme="Unite Faenza", the_me="Unite_Faenza")
-			self.radio_layout_toggled(layout="geox")
-			self.xfdashboard.set_active(True)
-
-	def on_radio_mx_toggled(self, widget):
-		if widget.get_active():
-			self.pulseaudio_config(size="0.6")
-			self.radio_layout_toggled(layout="mxlinux")
-			self.plank_config("true", "100", "bottom", theme=self.plank_theme)
-			self.plank.set_active(False)
-			self.xfdashboard.set_active(False)
-
-	def on_radio_win95_toggled(self, widget):
-		if widget.get_active():
-			self.pulseaudio_config(size="1")
-			self.radio_layout_toggled(layout="win95")
-			self.plank_config("true", "0", "top", theme=self.plank_theme)
-			self.plank.set_active(False)
-			self.xfdashboard.set_active(False)
-
-	def on_radio_win7_toggled(self, widget):
-		if widget.get_active():
-			self.dockbarx_config(
-				launcher=
-				"[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
-				theme="Gaia",
-				the_me="Gaia"
-				)
-			self.pulseaudio_config(size="0.6")
-			self.plank.set_active(False)
-			self.radio_layout_toggled(layout="win7")
-			self.xfdashboard.set_active(False)
-			self.plank_config("true", "0", "right", theme=self.plank_theme)
-
-	def on_radio_ubuntu_toggled(self, widget):
-		if widget.get_active():
-			self.pulseaudio_config(size="1")
-			self.plank.set_active(False)
-			self.dockbarx_config(
-				launcher=
-				"[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
-				theme="Unite Faenza",
-				the_me="Unite_Faenza")
-			self.radio_layout_toggled(layout="ubuntu", )
-			self.plank_config("true", "100", "bottom", theme=self.plank_theme)
-			self.xfdashboard.set_active(True)
-
-	def on_radio_mate_toggled(self, widget):
-		if widget.get_active():
-			self.pulseaudio_config(size="1")
-			self.radio_layout_toggled(layout="mate")
-			self.plank.set_active(False)
-			self.xfdashboard.set_active(False)
-			self.plank_config("true", "0", "left", theme=self.plank_theme)
-
-	def on_radio_xubuntu_toggled(self, widget):
-		if widget.get_active():
-			self.pulseaudio_config(size="1")
-			self.radio_layout_toggled(layout="xubuntu")
-			self.plank_config("true", "0", "bottom", theme=self.plank_theme)
-			self.plank.set_active(True)
-			self.xfdashboard.set_active(False)
-
-	def on_radio_budgie_toggled(self, widget):
-		if widget.get_active():
-			self.pulseaudio_config(size="1")
-			self.plank.set_active(False)
-			self.dockbarx_config(
-				launcher=
-				"[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
-				theme="Deep",
-				the_me="Deep")
-			self.radio_layout_toggled(layout="budgie")
-			self.plank_config("true", "100", "left", theme=self.plank_theme)
-			self.xfdashboard.set_active(False)
-
-	# Pane : "Window theme" ##################################################
-	# Bouton additonnel pointant vers les outils de parametrage xfce natifs
-	@staticmethod
-	def on_btn_widows_decor_clicked(widget):
-		os.system("xfwm4-settings")
-
-	@staticmethod
-	def on_btn_all_theme_clicked(widget):
-		os.system("xfce4-appearance-settings")
-
-	def on_toggle_adapta_compact_toggled(self, widget):
-		if widget.get_active() :
-			self.var_theme = "-Eta"
-		else:
-			self.var_theme = ""	
-
-	# theme # Button : Apply selected theme ################
-	def on_btn_apply_clicked(self, widget):
-		print(config.get('Style', 'icons'))
-		if self.icons != config.get('Style', 'icons'):
-			subprocess.Popen(
-				'''xfconf-query -c xsettings -p /Net/IconThemeName -s ''' +
-				self.icons + "",
-				shell=True)
-			print("new icon theme : " + self.icons)
-		subprocess.Popen(
-			'''xfconf-query -c xfwm4 -p /general/theme -s ''' +
-			self.windows_decor + "&",
-			shell=True)  # Decoration pour le compositeur xfwm4 (et compton?)
-		print("new windows decorator theme : " + self.windows_decor)
-		if "Adapta" in self.theme :
-			theme = self.theme + self.var_theme
-		else:
-			theme = self.theme
-		subprocess.Popen(
-			'''xfconf-query -c xsettings -p /Net/ThemeName -s ''' +
-			theme + " &",
-			shell=True)
-		print("new theme : " + theme)
-		subprocess.Popen(
-			'''sed -i s'#"SymbolStyle" oor:op="fuse"><value>.*</value></prop></item>#"SymbolStyle" oor:op="fuse"><value>'''
-			+ self.iconslibreoffice +
-			'''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ;
-			sed -i s'#papirus</item>#''' + self.iconslibreoffice +
-			'''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ''',
-			shell=True)
-		print("libreoffice : " + self.iconslibreoffice)
-		if self.chk_folder_color.get_active():
-			if config.get('Style', 'folder') != self.folder:
-				self.change_folder_color(folder_color=self.folder)
-
-		if config.get('Style', 'plank_theme') != self.plank_theme:
-			subprocess.check_call(
-				"gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme "
-				+ self.plank_theme + " ;",
-				shell=True)
-
-		# inscription dans le fichier activ.conf des options selectionnees
-		# config. fonction pour les fichiers structurés comme les fichier .ini
-		config.set('Style', 'theme', theme)
-		config.set('Style', 'icons', self.icons)
-		config.set('Style', 'windows_decor', self.windows_decor)
-		config.set('Style', 'plank_theme', self.plank_theme)
-		config.write(open('activ.conf', 'w'))
-
-	def on_radio_adapta_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir + "/img/adapta.png")
-			self.folder = "cyan"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta"
-			self.iconslibreoffice = "papirus"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta"
-
-	def on_radio_adapta_bluegrey_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir +
-											  "/img/adapta-bluegrey.png")
-			self.folder = "bluegrey"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta"
-			self.iconslibreoffice = "papirus"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-BlueGrey")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-BlueGrey"
-
-	def on_radio_adapta_bluegrey_nokto_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir +
-											  "/img/adapta-bluegrey-nokto.png")
-			self.folder = "bluegrey"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-BlueGrey-Nokto")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-BlueGrey-Nokto"
-	
-	def on_radio_adapta_pink_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir + "/img/adapta-pink.png")
-			self.folder = "red"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta"
-			self.iconslibreoffice = "papirus"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Pink")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Pink"
-
-	def on_radio_adapta_pink_nokto_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir +
-											  "/img/adapta-pink-nokto.png")
-			self.folder = "red"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Pink-Nokto")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Pink-Nokto"
-
-
-	def on_radio_adapta_deeppurple_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir +
-											  "/img/adapta-deeppurple.png")
-			self.folder = "violet"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta"
-			self.iconslibreoffice = "papirus"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-DeepPurple")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-DeepPurple"
-
-	def on_radio_adapta_deeppurple_nokto_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(
-				sdir + "/img/adapta-deeppurple-nokto.png")
-			self.folder = "violet"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-DeepPurple-Nokto")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-DeepPurple-Nokto"
-
-	def on_radio_adapta_green_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir + "/img/adapta-green.png")
-			self.folder = "green"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta"
-			self.iconslibreoffice = "papirus"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Green")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Green"
-
-	def on_radio_adapta_green_nokto_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir +
-											  "/img/adapta-green-nokto.png")
-			self.folder = "green"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Green-Nokto")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Green-Nokto"
-
-	def on_radio_adapta_brown_toggled(self, widget):
-		if widget.get_active():
-			self.preview_adapta.set_from_file(sdir + "/img/adapta-brown.png")
-			self.folder = "brown"
-			self.windows_decor = "Adapta"
-			self.icons = "Papirus-Adapta"
-			self.iconslibreoffice = "papirus"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Brown")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Brown"
-
-	def on_radio_adapta_brown_nokto_toggled(self, widget):
-		if widget.get_active():
-			self.folder = "brown"
-			self.windows_decor = "Adapta"
-			self.preview_adapta.set_from_file(sdir +
-											  "/img/adapta-brown-nokto.png")
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Brown-Nokto")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Brown-Nokto"
-
-	def on_radio_adapta_nokto_toggled(self, widget):
-		if widget.get_active():
-			self.windows_decor = "Adapta-Nokto"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_adapta.set_from_file(sdir + "/img/adapta-nokto.png")
-			self.folder = "cyan"
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-			self.theme_name.set_label("Adapta-Nokto")
-			self.plank_theme = "geox-dark"
-			self.theme = "Adapta-Nokto"
-
-	def on_radio_greybird_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Greybird"
-			self.windows_decor = "Greybird"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.folder = "blue"
-			self.theme_name.set_label("Greybird")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc"
-			self.windows_decor = "Arc"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.preview_arc.set_from_file(sdir + "/img/arc.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Arc")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_red_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Red"
-			self.windows_decor = "Arc-Red"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.preview_arc.set_from_file(sdir + "/img/arc-red.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Red")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_cherry_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Cherry"
-			self.windows_decor = "Arc-Cherry"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.preview_arc.set_from_file(sdir + "/img/arc-cherry.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Cherry")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_dark_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Dark"
-			self.windows_decor = "Arc-Dark"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-dark.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Arc-Dark")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_dark_red_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Red-Dark "
-			self.windows_decor = "Arc-Red-Dark"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-red-dark.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Red-Dark")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_darker_red_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Red-Darker "
-			self.windows_decor = "Arc-Red-Darker"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-red-darker.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Red-Darker")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_dark_cherry_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Cherry-Dark "
-			self.windows_decor = "Arc-Cherry-Dark"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-cherry-dark.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Cherry-Dark")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_darker_cherry_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Cherry-Darker "
-			self.windows_decor = "Arc-Cherry-Darker"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-cherry-darker.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Cherry-Darker")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_dark_green_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Green-Dark "
-			self.windows_decor = "Arc-Green-Dark"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-green-dark.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Green-Dark")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_darker_green_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Green-Darker "
-			self.windows_decor = "Arc-Green-Darker"
-			self.icons = "Papirus-Dark"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_arc.set_from_file(sdir + "/img/arc-green-darker.png")
-			self.folder = "red"
-			self.theme_name.set_label("Arc-Green-Darker")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_arc_darker_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Arc-Darker"
-			self.windows_decor = "Arc-Darker"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.preview_arc.set_from_file(sdir + "/img/arc-darker.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Arc-Darker")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_clearlooks_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Clearlooks"
-			self.windows_decor = "Default"
-			self.icons = "Papirus-Light"
-			self.iconslibreoffice = "papirus"
-			self.folder = "blue"
-			self.plank_theme = "geox-light"
-			self.theme_name.set_label("Clearlooks")
-			self.bar_theme.show()
-
-	def on_radio_qogir_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Qogir"
-			self.windows_decor = "Qogir"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Qogir")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_qogir_light_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Qogir-light"
-			self.windows_decor = "Qogir-light"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.preview_qogir.set_from_file(sdir + "/img/qogir-light.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Qogir-light")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_qogir_dark_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Qogir-dark"
-			self.windows_decor = "Qogir-dark"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_qogir.set_from_file(sdir + "/img/qogir-dark.png")
-			self.folder = "blue"
-			self.theme_name.set_label("qogir-dark")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_materia_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Materia"
-			self.windows_decor = "Materia"
-			self.icons = "Papirus-Light"
-			self.iconslibreoffice = "papirus"
-			self.preview_materia.set_from_file(sdir + "/img/materia.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Materia")
-			self.plank_theme = "geox-light"
-			self.bar_theme.show()
-
-	def on_radio_materia_dark_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Materia-dark"
-			self.windows_decor = "Materia-dark"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_materia.set_from_file(sdir + "/img/materia-dark.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Materia-dark")
-			self.plank_theme = "geox-dark"
-			self.bar_theme.show()
-
-	def on_radio_materia_light_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Materia-light"
-			self.windows_decor = "Materia-light"
-			self.icons = "Papirus-Light"
-			self.iconslibreoffice = "papirus"
-			self.preview_materia.set_from_file(sdir + "/img/materia-light.png")
-			self.folder = "blue"
-			self.theme_name.set_label("Materia-light")
-			self.plank_theme = "geox-light"
-			self.bar_theme.show()
-
-	def on_radio_macos_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "McOS-MJV-XFCE-Edition"
-			self.windows_decor = "McOS-MJV-XFCE-Edition"
-			self.icons = "Papirus-Light"
-			self.iconslibreoffice = "papirus"
-			self.preview_macos.set_from_file(sdir + "/img/macos.png")
-			self.folder = "cyan"
-			self.theme_name.set_label("McOS-MJV-XFCE-Edition")
-			self.plank_theme = "geox-light"
-			self.bar_theme.show()
-
-	# !Pas d'affichage
-	def on_radio_prodark_toggled(self, widget):
-	    if widget.get_active():
-	        self.theme = "PRO-dark-XFCE-edition-II-1"
-	        self.windows_decor = "PRO-dark-XFCE-edition-II-1"
-	        self.icons = "Papirus"
-	        self.iconslibreoffice = "papirus"
-	        self.folder = "bluegrey"
-	        self.theme_name.set_label("PRO-dark-XFCE-edition-II-1")
-	        self.bar_theme.show()
-
-	def on_radio_macos_dark_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "McOS-MJV-Dark-XFCE-Edition-2.3"
-			self.windows_decor = "McOS-MJV-Dark-XFCE-Edition-2.3"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_macos.set_from_file(sdir + "/img/macos-dark.png")
-			self.folder = "cyan"
-			self.plank_theme = "geox-dark"
-			self.theme_name.set_label("MacOS Dark")
-			self.bar_theme.show()
-
-	def on_radio_adwaita_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Adwaita"
-			self.windows_decor = "Adwaita-xfwm4"
-			self.icons = "Papirus-Light"
-			self.iconslibreoffice = "papirus"
-			self.preview_adwaita.set_from_file(sdir + "/img/adwaita.png")
-			self.folder = "blue"
-			self.plank_theme = "geox-light"
-			self.theme_name.set_label("Adwaita")
-			self.bar_theme.show()
-
-	def on_radio_adwaita_dark_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Adwaita-dark"
-			self.windows_decor = "Adwaita-dark-compact-xfwm4"
-			self.icons = "Papirus-Adapta-Nokto"
-			self.iconslibreoffice = "papirus_dark"
-			self.preview_adwaita.set_from_file(sdir + "/img/adwaita-dark.png")
-			self.folder = "blue"
-			self.plank_theme = "geox-dark"
-			self.theme_name.set_label("Adwaita-dark")
-			self.bar_theme.show()
-
-	def on_radio_numix_toggled(self, widget):
-		if widget.get_active():
-			self.theme = "Numix"
-			self.windows_decor = "Numix"
-			self.icons = "Papirus"
-			self.iconslibreoffice = "papirus"
-			self.folder = "red"
-			self.plank_theme = "geox-dark"
-			self.theme_name.set_label("Numix")
-			self.bar_theme.show()
-
-	# ICON COLOR #############################################
-	# method : change folder color
-	@staticmethod
-	def change_folder_color(folder_color):
-		subprocess.check_call([sdir + "/script/folder-color.sh", folder_color],
-							  shell=False)
-		config.set('Style', 'folder', folder_color)
-		print("new folder color :" + folder_color)
-
-	# ICON color
-	def on_folder_toggled(self, widget):
-		if widget.get_active():
-			folder_color = Gtk.Buildable.get_name(widget)
-			self.change_folder_color(folder_color)
-
-	# pane : "OTHER" ############################################
-
-	def state_settings(self):
-		# utiliser subprocess (plutot que os.system...) pour obtenir STDOUT (la reponse du shell, et non seulement
-		# si oui (0) ou non (1) il y a reponse
-		if subprocess.getoutput(
-				'''xfconf-query -c thunar -p /misc-single-click''') == "true":
-			self.btn_simpleclic_thunar.handler_block_by_func(
-				self.on_btn_simpleclic_thunar_toggled)
-			self.btn_simpleclic_thunar.set_active(True)
-			self.btn_simpleclic_thunar.handler_unblock_by_func(
-				self.on_btn_simpleclic_thunar_toggled)
-
-		if subprocess.getoutput(
-				'''xfconf-query -c thunar -p /misc-folders-first''') == "true":
-			self.btn_folder_file.handler_block_by_func(
-				self.on_btn_folder_file_toggled)
-			self.btn_folder_file.set_active(True)
-			self.btn_folder_file.handler_unblock_by_func(
-				self.on_btn_folder_file_toggled)
-
-		if subprocess.getoutput(
-				'''xfconf-query -c thunar -p /misc-text-beside-icons'''
-		) == "true":
-			self.btn_txt_next_icons.handler_block_by_func(
-				self.on_btn_txt_next_icons_toggled)
-			self.btn_txt_next_icons.set_active(True)
-			self.btn_txt_next_icons.handler_unblock_by_func(
-				self.on_btn_txt_next_icons_toggled)
-
-		if subprocess.getoutput(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click'''
-		) == "true":
-			self.btn_simpleclic_desktop.handler_block_by_func(
-				self.on_btn_simpleclic_desktop_toggled)
-			self.btn_simpleclic_desktop.set_active(True)
-			self.btn_simpleclic_desktop.handler_unblock_by_func(
-				self.on_btn_simpleclic_desktop_toggled)
-
-		if subprocess.getoutput(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash'''
-		) == "true":
-			self.btn_trash_desktop.handler_block_by_func(
-				self.on_btn_trash_desktop_toggled)
-			self.btn_trash_desktop.set_active(True)
-			self.btn_trash_desktop.handler_unblock_by_func(
-				self.on_btn_trash_desktop_toggled)
-
-		if subprocess.getoutput(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home'''
-		) == "true":
-			self.btn_home_desktop.handler_block_by_func(
-				self.on_btn_home_desktop_toggled)
-			self.btn_home_desktop.set_active(True)
-			self.btn_home_desktop.handler_unblock_by_func(
-				self.on_btn_home_desktop_toggled)
-
-		if subprocess.getoutput(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable'''
-		) == "true":
-			self.btn_removable_desktop.handler_block_by_func(
-				self.on_btn_removable_desktop_toggled)
-			self.btn_removable_desktop.set_active(True)
-			self.btn_removable_desktop.handler_unblock_by_func(
-				self.on_btn_removable_desktop_toggled)
-
-	# Buttons  of "Other" pane #####################
-	@staticmethod
-	def on_btn_simpleclic_thunar_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c thunar -p /misc-single-click -s "true" ''')
-		else:
-			os.system(
-				'''xfconf-query -c thunar -p /misc-single-click -s "false" ''')
-
-	@staticmethod
-	def on_btn_folder_file_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c thunar -p /misc-folders-firt -s "true" ''')
-		else:
-			os.system(
-				'''xfconf-query -c thunar -p /misc-folders-firt -s "false" ''')
-
-	@staticmethod
-	def on_btn_txt_next_icons_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c thunar -p /misc-text-beside-icons -s "true" '''
-			)
-		else:
-			os.system(
-				'''xfconf-query -c thunar -p /misc-text-beside-icons -s "false" '''
-			)
-
-	@staticmethod
-	def on_btn_simpleclic_desktop_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click -s "true" '''
-			)
-		else:
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click -s "false" '''
-			)
-
-	@staticmethod
-	def on_btn_trash_desktop_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s "true" '''
-			)
-		else:
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s "false" '''
-			)
-
-	@staticmethod
-	def on_btn_home_desktop_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s "true" '''
-			)
-		else:
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s "false" '''
-			)
-
-	@staticmethod
-	def on_btn_removable_desktop_toggled(widget):
-		if widget.get_active():
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s "true" '''
-			)
-		else:
-			os.system(
-				'''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s "false" '''
-			)
-
-	
-	@staticmethod
-	def on_btn_xfwm4_tweaks_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system("xfwm4_tweaks_settings")
-
-	@staticmethod
-	def on_btn_thunar_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system('''thunar-settings''')
-
-	@staticmethod
-	def on_btn_xfce_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system('''xfce4-settings-manager ''')
-
-	@staticmethod
-	def on_btn_lightdm_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system('''lightdm-gtk-greeter-settings-pkexec''')
-
-	@staticmethod
-	def on_btn_desktop_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system('''xfdesktop-settings ''')
-
-	@staticmethod
-	def on_btn_panel_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system('''xfce4-panel --preferences ''')
-
-	@staticmethod
-	def on_btn_notification_settings_clicked(widget):
-		# TODO > os.subs ?
-		os.system('''xfce4-notifyd-config ''')
+    # Pour que le logiciel quitte proprement
+    def on_main_window_destroy(self, data=None):
+        Gtk.main_quit()
+
+    # Initialisation : chargement du gtk builder lisant le fichier glade ...
+    def __init__(self):
+
+        self.builder = Gtk.Builder()
+        glade_file = os.path.join(sdir, "geox.glade")
+        self.builder.add_from_file(glade_file)
+        self.builder.connect_signals(self)
+
+        go = self.builder.get_object
+
+        # notebook
+        self.notebook = go("notebook")
+
+        # bouton pref
+        self.btn_plank_pref = go("btn_plank_pref")
+        self.btn_xfdashboard_pref = go("btn_xfdashboard_pref")
+        self.btn_conky_pref = go("btn_conky_pref")
+        self.btn_notes_pref = go("btn_notes_pref")
+        self.btn_ddterm_pref = go("btn_ddterm_pref")
+
+        # Toogle Tools
+        self.plank = go("plank")
+        self.xfdashboard = go("xfdashboard")
+        self.synapse = go("synapse")
+        self.conky = go("conky")
+
+        self.ddterm = go("ddterm")
+        self.notes = go("notes")
+
+        # Toggle Help
+        self.btn_plank_help = go("btn_plank_help")
+        self.btn_xfdashboard_help = go("btn_xfdashboard_help")
+        self.btn_synapse_help = go("btn_synapse_help")
+        self.btn_conky_help = go("btn_conky_help")
+        self.btn_notes_help = go("btn_notes_help")
+
+        self.help_txt_zone = go("help_txt_zone")
+        self.defaut_help()
+
+        self.state_app(
+            self
+        )  # /!\ Positionner apres la declaration des btn rapportées aux états
+        # testés ;
+
+        # Layout preview
+        self.geox = go("geox")
+        self.geox.set_from_file(sdir + "/img/pv-geox.png")
+        self.xubuntu = go("xubuntu")
+        self.xubuntu.set_from_file(sdir + "/img/pv-xubuntu.png")
+        self.ubuntu = go("ubuntu")
+        self.ubuntu.set_from_file(sdir + "/img/pv-ubuntu.png")
+        self.W95 = go("W95")
+        self.W95.set_from_file(sdir + "/img/pv-W95.png")
+        self.W7 = go("W7")
+        self.W7.set_from_file(sdir + "/img/pv-W7.png")
+        self.budgie = go("budgie")
+        self.budgie.set_from_file(sdir + "/img/pv-budgie.png")
+        self.mate = go("mate")
+        self.mate.set_from_file(sdir + "/img/pv-mate.png")
+        self.mxlinux = go("mxlinux")
+        self.mxlinux.set_from_file(sdir + "/img/pv-mxlinux.png")
+
+        # self.cb_adapta = go("cb_adapta")
+        self.btn_all_theme = go("btn_all_theme")
+        self.btn_widows_decor = go("btn_widows_decor")
+        self.btn_apply = go("btn_apply")
+        self.toggle_adapta_compact = go("toggle_adapta_compact")
+
+        # preview self.theme
+        self.preview_adapta = go("preview_adapta")
+        self.preview_adapta.set_from_file(sdir + "/img/adapta.png")
+        self.preview_arc = go("preview_arc")
+        self.preview_arc.set_from_file(sdir + "/img/arc.png")
+        self.preview_adwaita = go("preview_adwaita")
+        self.preview_adwaita.set_from_file(sdir + "/img/adwaita.png")
+        self.preview_qogir = go("preview_qogir")
+        self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
+        self.preview_macos = go("preview_macos")
+        self.preview_macos.set_from_file(sdir + "/img/macos.png")
+        self.preview_materia = go("preview_materia")
+        self.preview_materia.set_from_file(sdir + "/img/materia.png")
+        self.preview_greybird = go("preview_greybird")
+        self.preview_greybird.set_from_file(sdir + "/img/greybird.png")
+        self.preview_numix = go("preview_numix")
+        self.preview_numix.set_from_file(sdir + "/img/numix.png")
+        self.preview_clearlooks = go("preview_clearlooks")
+        self.preview_clearlooks.set_from_file(sdir + "/img/clearlooks.png")
+        self.preview_prodark = go("preview_prodark")
+        self.preview_prodark.set_from_file(sdir + "/img/pro-dark-xfce.png")
+
+        self.bar_theme = go("bar_theme")
+        self.bar_theme.hide()
+
+        # Icon color
+        self.folder = ""
+
+        self.icon_black = go("icon_black")
+        self.icon_black.set_from_file(sdir + "/img/black.svg")
+        self.icon_cyan = go("icon_cyan")
+        self.icon_cyan.set_from_file(sdir + "/img/cyan.svg")
+        self.icon_green = go("icon_green")
+        self.icon_green.set_from_file(sdir + "/img/green.svg")
+        self.icon_blue = go("icon_blue")
+        self.icon_blue.set_from_file(sdir + "/img/blue.svg")
+        self.icon_bluegrey = go("icon_bluegrey")
+        self.icon_bluegrey.set_from_file(sdir + "/img/bluegrey.svg")
+        self.icon_brown = go("icon_brown")
+        self.icon_brown.set_from_file(sdir + "/img/brown.svg")
+        self.icon_teal = go("icon_teal")
+        self.icon_teal.set_from_file(sdir + "/img/teal.svg")
+        self.icon_orange = go("icon_orange")
+        self.icon_orange.set_from_file(sdir + "/img/orange.svg")
+        self.icon_red = go("icon_red")
+        self.icon_red.set_from_file(sdir + "/img/red.svg")
+        self.icon_violet = go("icon_violet")
+        self.icon_violet.set_from_file(sdir + "/img/violet.svg")
+        self.icon_yellow = go("icon_yellow")
+        self.icon_yellow.set_from_file(sdir + "/img/yellow.svg")
+        self.icon_grey = go("icon_grey")
+        self.icon_grey.set_from_file(sdir + "/img/grey.svg")
+
+        # ID des label du fichier de configuration activ.conf (> modifié par "config.")
+        self.var_theme = ""
+        self.theme = ""
+        self.windows_decor = ""
+        self.icons = ""
+        self.layout = ""
+
+        ##
+        self.iconslibreoffice = ""
+        self.theme_name = go("theme_name")
+        self.chk_folder_color = go("chk_folder_color")
+        self.plank_theme = plank_theme
+
+        # Onglet "Other"
+        self.btn_simpleclic_thunar = go("btn_simpleclic_thunar")
+        self.btn_simpleclic_desktop = go("btn_simpleclic_desktop")
+        self.btn_txt_next_icons = go("btn_txt_next_icons")
+        self.btn_folder_file = go("btn_folder_file")
+        self.btn_removable_desktop = go("btn_removable_desktop")
+        self.btn_trash_desktop = go("btn_trash_desktop")
+        self.btn_allhome_desktop = go("btn_allhome_desktop")
+        self.btn_home_desktop = go("btn_home_desktop")
+        self.btn_xfce_settings = go("btn_xfce_settings")
+        self.btn_lightdm_settings = go("btn_lightdm_settings")
+        self.btn_xfwm4_tweaks_settings = go("btn_xfwm4_tweaks_settings")
+        self.btn_notification_settings = go("btn_notification_settings")
+        self.btn_panel_settings = go("btn_panel_settings")
+        self.btn_desktop_settings = go("btn_desktop_settings")
+        self.btn_thunar_settings = go("btn_thunar_settings")
+
+        self.state_settings(
+        )  # /!\ Positionner apres la declaration des btn rapportées aux états testés
+
+        # affichage de la fenetre
+        self.window = go("main_window")
+        self.window.show()
+
+    @staticmethod
+    def on_btn_quit_clicked(widget):
+        Gtk.main_quit()
+
+    def defaut_help(self):
+        defaut = ""
+        self.help_txt_zone.get_buffer().set_text(defaut)
+
+    # Panel TOOLS # Bouton Toggle # TODO > dependances : app & conkytoggle.sh;)
+    @staticmethod
+    def app_activ(widget, xf, xd, ck, nt):
+        # s'execture quand app est/sont activé, avec les arguments définis dans on_app_toggled, permettant de s'adapter aux specificité d'exectution/extinction des app
+        app = Gtk.Buildable.get_name(widget)
+        # TODO > os.subs ?os.
+        args = nt + app + ck + xd + "&"
+        subprocess.check_call(args, shell=True)
+
+        os.system('''
+            find $HOME/.config/autostart -iname '*''' + app + '''*' -exec sed -i 's/Hidden=true.*/\Hidden=false/' {} \;'''
+            )
+        os.system('''
+            find $HOME/.config/autostart -iname '*''' + app + '''*' -exec sed -i 's/X-GNOME-Autostart-enabled=false.*/\X-GNOME-Autostart-enabled=true/' {} \;'''
+            )
+        widget.set_label("actif")
+
+    @staticmethod
+    def app_inactiv(widget, xf, xq, pkill, nt):
+        # s'execture quand app est/sont activé...
+        app = Gtk.Buildable.get_name(widget)
+        args = pkill + nt + app + xq + "&"
+        subprocess.check_call(args, shell=True)
+
+        os.system('''
+            find $HOME/.config/autostart -iname '*''' + app + '''*' -exec sed -i 's/Hidden=false.*/\Hidden=true/' {} \;'''
+            )
+        os.system('''
+            find $HOME/.config/autostart -iname '*''' + app + '''*' -exec sed -i 's/X-GNOME-Autostart-enabled=true.*/\X-GNOME-Autostart-enabled=false/' {} \;'''
+            )
+        widget.set_label("activer")
+
+    def on_app_toggled(self, widget):
+        # Variable permettant d'envoyer les commandes d'execution et
+        # d'extinction spécifique aux logiciels (notamment conky, lancer par
+        # le script conkytoggle.sh, et xfdashboard lancer en mode démo
+        
+        app=Gtk.Buildable.get_name(widget)
+        ck=xf=xq=xd=nt=""
+        pkill="pkill "
+
+        if widget.get_active():
+
+            if app == "conky":
+                ck="toggle.sh"  # conky est lancé par conkytoggle.sh
+                self.btn_conky_pref.show()
+                self.app_activ(widget, xf, xd, ck, nt)
+
+            elif app == "xfdashboard":
+                xf="-autostart"
+                xd=" -d"
+                self.btn_xfdashboard_pref.show()
+                self.app_activ(widget, xf, xd, ck, nt)
+
+            elif app == "notes":
+                xf="-autostart"
+                nt="xfce4-"
+                self.btn_notes_pref.show()
+                self.app_activ(widget, xf, xd, ck, nt)
+
+            else:
+                app=Gtk.Buildable.get_name(widget)
+                self.app_activ(widget, xf, xd, ck, nt)
+                if app == "plank":
+                    self.btn_plank_pref.show()
+
+        else:
+
+            if app == "conky":
+                # ck = "toggle.sh" # conky est lancé par conkytoggle.sh
+                self.btn_conky_pref.hide()
+                self.app_inactiv(widget, xf, xq, pkill, nt)
+
+            elif app == "xfdashboard":
+                xf="-autostart"
+                xq=" -q"
+                pkill=""
+                self.btn_xfdashboard_pref.hide()
+                self.app_inactiv(widget, xf, xq, pkill, nt)
+
+            elif app == "notes":
+                xf="-autostart"
+                nt="xfce4-"
+                self.btn_notes_pref.hide()
+                self.app_inactiv(widget, xf, xq, pkill, nt)
+
+            else:
+                app=Gtk.Buildable.get_name(widget)
+                self.app_inactiv(widget, xf, xq, pkill, nt)
+                if app == "plank":
+                    self.btn_plank_pref.hide()
+
+    def on_ddterm_toggled(self, widget):
+        # TODO > xfconf query command & state app fct.
+        if widget.get_active():
+            os.system(
+                '''xfce4-terminal --drop-down --hide-menubar --hide-toolbar''')
+            self.btn_ddterm_pref.show()
+        else:
+            self.btn_ddterm_pref.hide()
+
+    # Bouton préférences #####################################################
+    @staticmethod
+    def on_btn_plank_pref_clicked(widget):
+        # TODO > os.subs ?
+        os.system(''' plank --preferences ''')
+
+    @staticmethod
+    def on_btn_xfdashboard_pref_clicked(widget):
+        # TODO > os.subs ?
+        os.system(''' xfdashboard-settings ''')
+
+    @staticmethod
+    def on_btn_conky_pref_clicked(widget):
+        # TODO > os.subs ?
+        os.system(''' conky-manager ''')
+
+    @staticmethod
+    def on_btn_ddterm_pref_clicked(widget):
+        # TODO > os.subs ?
+        os.system("xfce4-notes-settings")
+
+    @staticmethod
+    def on_btn_notes_pref_clicked(widget):
+        # TODO > os.subs ?
+        os.system(''' xfce4-notes-settings ''')
+
+    # Bouton Toggle HELP ##################################################
+    def on_btn_plank_help_clicked(self, widget):
+        help_txt=_("PLANK est une barre de lancement d'application.")
+        self.help_txt_zone.get_buffer().set_text(help_txt)
+
+    def on_btn_synapse_help_clicked(self, widget):
+        help_txt=_("Synapse permet lancer des \n "
+                     "applications mais aussi de trouver et d'accéder rapidement aux documents et"
+                     "fichiers désirés (en utilisant le moteur Zeitgeist)."
+                     "Pour l'utiliser, appuyez sur les touches Ctrl+Espace, commencez à taper ce que vous cherchez"
+                     "puis appuyez sur la touche Entrer pour ouvrir l'application ou le fichier sélectionné")
+        self.help_txt_zone.get_buffer().set_text(help_txt)
+
+    def on_btn_xfdashboard_help_clicked(self, widget):
+        help_txt=_("Xfdashboard permet d'exposer les logiciels en cours d'execution \
+        sous forme de miniature, à la manière de gnome 3. \
+         Pointez votre curseur au coin en haut à gauche de l'écran pour l'activer")
+
+        self.help_txt_zone.get_buffer().set_text(help_txt)
+
+    def on_btn_conky_help_clicked(self, widget):
+        help_txt=_(
+            "Conky affiche des informations sur votre bureau (date, heure, CPU, RAM...")
+        self.help_txt_zone.get_buffer().set_text(help_txt)
+
+    def on_btn_ddterm_help_clicked(self, widget):
+        help_txt=_(
+            "Permet d'afficher un terminal déroulant en haut de l'écran.")
+        self.help_txt_zone.get_buffer().set_text(help_txt)
+
+    def on_btn_notes_help_clicked(self, widget):
+        help_txt=_("Xfce4-notes permet d'écrire de petites notes et d'y acceder facilement \
+         depuis la zone de notification")
+
+        self.help_txt_zone.get_buffer().set_text(help_txt)
+
+    # Verification de l'etat des logiciels (actif ou pas) #####################
+    def state_app(self, widget):
+        apps={
+            "synapse": self.synapse,
+            "plank": self.plank,
+            "xfdashboard": self.xfdashboard,
+            "conky": self.conky,
+            "xfce4-notes": self.notes
+        }  # dictinnaire des app a verifier
+        prefapps={
+            "plank": self.btn_plank_pref,
+            "xfdashboard": self.btn_xfdashboard_pref,
+            "conky": self.btn_conky_pref,
+            "xfce4-notes": self.btn_notes_pref
+        }
+        appactive=bool
+
+        for app in apps.keys():
+            selfapp=apps[app]
+            if os.system("pidof " + app +
+                         " >/dev/null 2>&1"):  # /!\ Renvoie True si non-actif
+                self.app_state(selfapp, appactive(True))
+
+            else:
+                self.app_state(selfapp, appactive(False))
+
+        for prefapp in prefapps.keys():
+            selfprefapp=prefapps[prefapp]
+            if os.system("pidof " + prefapp + " >/dev/null 2>&1"):
+                self.state_btn_pref(selfprefapp, appactive(True))
+
+            else:
+                self.state_btn_pref(selfprefapp, appactive(False))
+
+    def app_state(self, selfapp, appactive):
+
+        if appactive:
+            selfapp.handler_block_by_func(self.on_app_toggled)
+            selfapp.set_active(False)
+            selfapp.handler_unblock_by_func(self.on_app_toggled)
+            selfapp.set_label("activer")
+
+        else:
+            selfapp.handler_block_by_func(self.on_app_toggled)
+            state=selfapp.get_active()
+            selfapp.set_active(not state)
+            selfapp.handler_unblock_by_func(self.on_app_toggled)
+            selfapp.set_label("actif")
+
+    @staticmethod
+    def state_btn_pref(selfprefapp, appactive):
+
+        if appactive:
+            selfprefapp.hide()
+
+        else:
+            selfprefapp.show()
+
+    # ###################################################################
+    # Panel layout  ####### TODO  autre configuration : theme xfdashboard ? &
+    # path des fichiers de conf !!
+    # TODO > config dockbarx : /home/geo/.gconf/apps/dockbarx/%gconf.xml
+    @staticmethod
+    def radio_layout_toggled(layout):
+        args='''xfce4-panel --quit; pkill xfconfd; rm -Rf ~/.config/xfce4/panel; \
+         cp -Rf ''' + sdir + '''/panel/''' + layout + '''/.config/xfce4/panel ~/.config/xfce4/panel; \
+                    cp -f ''' + sdir + '''/panel/''' + layout + '''/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
+                    ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
+                    sleep 1; xfce4-panel &'''
+
+        subprocess.check_call(args, shell=True)
+        config.set('Style', 'layout', layout)
+        config.write(open('activ.conf', 'w'))
+
+    def plank_config(self, pinned, offset, position, theme):
+        args="gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ pinned-only " + pinned + " ; \
+                gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ offset " + offset + " ; \
+                gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ position " + position + " ; \
+                gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme " + theme + " ;"
+        subprocess.Popen(args, shell=True)
+        config.set('Style', 'plank_theme', theme)
+        config.write(open('activ.conf', 'w'))
+
+    # Todo > theming consistent with xfce theme (ok ?)
+    def dockbarx_config(self, launcher, theme, the_me):
+        args0="pkill -f dockbarx-plug "
+        args1='''gconftool-2 --type list --list-type string --set /apps/dockbarx/launchers "''' + \
+            launcher + '''" '''
+        args2='''gconftool-2 --type string --set /apps/dockbarx/theme "''' + theme + '''" '''
+        args3=''' gconftool-2 --type string --set /apps/dockbarx/themes/''' + \
+            the_me + '''/popup_style_file Magic_trans.tar.gz '''
+        subprocess.Popen(args0, shell=True)
+        subprocess.check_call(args1, shell=True)
+        subprocess.check_call(args2, shell=True)
+        subprocess.check_call(args3, shell=True)
+
+    # TODO > if css exist but not line !!
+    def pulseaudio_config(self, size):
+        gtkcss=os.path.expanduser('~/.config/gtk-3.0/gtk.css')
+        args1="sed -i s'/{-gtk-icon-transform: scale(.*);}/{-gtk-icon-transform: scale(" + \
+            size + ");}'/ $HOME/.config/gtk-3.0/gtk.css"
+
+        if not os.path.isfile(gtkcss):
+            # open(gtkcss, 'a')
+            file=open(gtkcss, 'w')
+            file.write(
+                "#pulseaudio-button * {-gtk-icon-transform: scale(" + size + ");} \
+                # xfce4-notification-plugin * {-gtk-icon-transform: scale(" + size + ");} \
+                # xfce4-power-manager-plugin * {-gtk-icon-transform: scale(" + size + ");}"
+                )
+
+        else:
+            subprocess.check_call(args1, shell=True)
+
+    def on_radio_geox_toggled(self, widget):
+        if widget.get_active():
+            self.plank_config(pinned="true",
+                              offset="100",
+                              position="bottom",
+                              theme=self.plank_theme)
+            self.plank.set_active(True)
+            self.pulseaudio_config(size="0.6")
+            self.dockbarx_config(
+                launcher="[]", theme="Unite Faenza", the_me="Unite_Faenza")
+            self.radio_layout_toggled(layout="geox")
+            self.xfdashboard.set_active(True)
+
+    def on_radio_mx_toggled(self, widget):
+        if widget.get_active():
+            self.pulseaudio_config(size="0.6")
+            self.radio_layout_toggled(layout="mxlinux")
+            self.plank_config("true", "100", "bottom", theme=self.plank_theme)
+            self.plank.set_active(False)
+            self.xfdashboard.set_active(False)
+
+    def on_radio_win95_toggled(self, widget):
+        if widget.get_active():
+            self.pulseaudio_config(size="1")
+            self.radio_layout_toggled(layout="win95")
+            self.plank_config("true", "0", "top", theme=self.plank_theme)
+            self.plank.set_active(False)
+            self.xfdashboard.set_active(False)
+
+    def on_radio_win7_toggled(self, widget):
+        if widget.get_active():
+            self.dockbarx_config(
+                launcher="[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
+                theme="Gaia",
+                the_me="Gaia"
+            )
+            self.pulseaudio_config(size="0.6")
+            self.plank.set_active(False)
+            self.radio_layout_toggled(layout="win7")
+            self.xfdashboard.set_active(False)
+            self.plank_config("true", "0", "right", theme=self.plank_theme)
+
+    def on_radio_ubuntu_toggled(self, widget):
+        if widget.get_active():
+            self.pulseaudio_config(size="1")
+            self.plank.set_active(False)
+            self.dockbarx_config(
+                launcher="[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
+                theme="Unite Faenza",
+                the_me="Unite_Faenza")
+            self.radio_layout_toggled(layout="ubuntu", )
+            self.plank_config("true", "100", "bottom", theme=self.plank_theme)
+            self.xfdashboard.set_active(True)
+
+    def on_radio_mate_toggled(self, widget):
+        if widget.get_active():
+            self.pulseaudio_config(size="1")
+            self.radio_layout_toggled(layout="mate")
+            self.plank.set_active(False)
+            self.xfdashboard.set_active(False)
+            self.plank_config("true", "0", "left", theme=self.plank_theme)
+
+    def on_radio_xubuntu_toggled(self, widget):
+        if widget.get_active():
+            self.pulseaudio_config(size="1")
+            self.radio_layout_toggled(layout="xubuntu")
+            self.plank_config("true", "0", "bottom", theme=self.plank_theme)
+            self.plank.set_active(True)
+            self.xfdashboard.set_active(False)
+
+    def on_radio_budgie_toggled(self, widget):
+        if widget.get_active():
+            self.pulseaudio_config(size="1")
+            self.plank.set_active(False)
+            self.dockbarx_config(
+                launcher="[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
+                theme="Deep",
+                the_me="Deep")
+            self.radio_layout_toggled(layout="budgie")
+            self.plank_config("true", "100", "left", theme=self.plank_theme)
+            self.xfdashboard.set_active(False)
+
+    # Pane : "Window theme" ##################################################
+    # Bouton additonnel pointant vers les outils de parametrage xfce natifs
+    @staticmethod
+    def on_btn_widows_decor_clicked(widget):
+        os.system("xfwm4-settings")
+
+    @staticmethod
+    def on_btn_all_theme_clicked(widget):
+        os.system("xfce4-appearance-settings")
+
+    def on_toggle_adapta_compact_toggled(self, widget):
+        if widget.get_active():
+            self.var_theme="-Eta"
+        else:
+            self.var_theme=""
+
+    # theme # Button : Apply selected theme ################
+    def on_btn_apply_clicked(self, widget):
+        print(config.get('Style', 'icons'))
+        if self.icons != config.get('Style', 'icons'):
+            subprocess.Popen(
+                '''xfconf-query -c xsettings -p /Net/IconThemeName -s ''' +
+                self.icons + "",
+                shell=True)
+            print("new icon theme : " + self.icons)
+        subprocess.Popen(
+            '''xfconf-query -c xfwm4 -p /general/theme -s ''' +
+            self.windows_decor + "&",
+            shell=True)  # Decoration pour le compositeur xfwm4 (et compton?)
+        print("new windows decorator theme : " + self.windows_decor)
+        if "Adapta" in self.theme:
+            theme=self.theme + self.var_theme
+        else:
+            theme=self.theme
+        subprocess.Popen(
+            '''xfconf-query -c xsettings -p /Net/ThemeName -s ''' +
+            theme + " &",
+            shell=True)
+        print("new theme : " + theme)
+        subprocess.Popen(
+            '''sed -i s'#"SymbolStyle" oor:op="fuse"><value>.*</value></prop></item>#"SymbolStyle" oor:op="fuse"><value>'''
+            + self.iconslibreoffice +
+            '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ;
+            sed -i s'#papirus</item>#''' + self.iconslibreoffice +
+            '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ''',
+            shell=True)
+        print("libreoffice : " + self.iconslibreoffice)
+        if self.chk_folder_color.get_active():
+            if config.get('Style', 'folder') != self.folder:
+                self.change_folder_color(folder_color=self.folder)
+
+        if config.get('Style', 'plank_theme') != self.plank_theme:
+            subprocess.check_call(
+                "gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme "
+                + self.plank_theme + " ;",
+                shell=True)
+
+        # inscription dans le fichier activ.conf des options selectionnees
+        # config. fonction pour les fichiers structurés comme les fichier .ini
+        config.set('Style', 'theme', theme)
+        config.set('Style', 'icons', self.icons)
+        config.set('Style', 'windows_decor', self.windows_decor)
+        config.set('Style', 'plank_theme', self.plank_theme)
+        config.write(open('activ.conf', 'w'))
+
+    def on_radio_adapta_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir + "/img/adapta.png")
+            self.folder="cyan"
+            self.windows_decor="Adapta"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta"
+
+    def on_radio_adapta_bluegrey_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir +
+                                              "/img/adapta-bluegrey.png")
+            self.folder="bluegrey"
+            self.windows_decor="Adapta"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-BlueGrey")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-BlueGrey"
+
+    def on_radio_adapta_bluegrey_nokto_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir +
+                                              "/img/adapta-bluegrey-nokto.png")
+            self.folder="bluegrey"
+            self.windows_decor="Adapta"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-BlueGrey-Nokto")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-BlueGrey-Nokto"
+
+    def on_radio_adapta_pink_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir + "/img/adapta-pink.png")
+            self.folder="red"
+            self.windows_decor="Adapta"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Pink")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Pink"
+
+    def on_radio_adapta_pink_nokto_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir +
+                                              "/img/adapta-pink-nokto.png")
+            self.folder="red"
+            self.windows_decor="Adapta"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Pink-Nokto")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Pink-Nokto"
+
+    def on_radio_adapta_deeppurple_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir +
+                                              "/img/adapta-deeppurple.png")
+            self.folder="violet"
+            self.windows_decor="Adapta"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-DeepPurple")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-DeepPurple"
+
+    def on_radio_adapta_deeppurple_nokto_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(
+                sdir + "/img/adapta-deeppurple-nokto.png")
+            self.folder="violet"
+            self.windows_decor="Adapta"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-DeepPurple-Nokto")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-DeepPurple-Nokto"
+
+    def on_radio_adapta_green_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir + "/img/adapta-green.png")
+            self.folder="green"
+            self.windows_decor="Adapta"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Green")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Green"
+
+    def on_radio_adapta_green_nokto_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir +
+                                              "/img/adapta-green-nokto.png")
+            self.folder="green"
+            self.windows_decor="Adapta"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Green-Nokto")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Green-Nokto"
+
+    def on_radio_adapta_brown_toggled(self, widget):
+        if widget.get_active():
+            self.preview_adapta.set_from_file(sdir + "/img/adapta-brown.png")
+            self.folder="brown"
+            self.windows_decor="Adapta"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Brown")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Brown"
+
+    def on_radio_adapta_brown_nokto_toggled(self, widget):
+        if widget.get_active():
+            self.folder="brown"
+            self.windows_decor="Adapta"
+            self.preview_adapta.set_from_file(sdir +
+                                              "/img/adapta-brown-nokto.png")
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Brown-Nokto")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Brown-Nokto"
+
+    def on_radio_adapta_nokto_toggled(self, widget):
+        if widget.get_active():
+            self.windows_decor="Adapta-Nokto"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_adapta.set_from_file(sdir + "/img/adapta-nokto.png")
+            self.folder="cyan"
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+            self.theme_name.set_label("Adapta-Nokto")
+            self.plank_theme="geox-dark"
+            self.theme="Adapta-Nokto"
+
+    def on_radio_greybird_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Greybird"
+            self.windows_decor="Greybird"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.folder="blue"
+            self.theme_name.set_label("Greybird")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc"
+            self.windows_decor="Arc"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.preview_arc.set_from_file(sdir + "/img/arc.png")
+            self.folder="blue"
+            self.theme_name.set_label("Arc")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_red_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Red"
+            self.windows_decor="Arc-Red"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.preview_arc.set_from_file(sdir + "/img/arc-red.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Red")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_cherry_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Cherry"
+            self.windows_decor="Arc-Cherry"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.preview_arc.set_from_file(sdir + "/img/arc-cherry.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Cherry")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_dark_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Dark"
+            self.windows_decor="Arc-Dark"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-dark.png")
+            self.folder="blue"
+            self.theme_name.set_label("Arc-Dark")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_dark_red_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Red-Dark "
+            self.windows_decor="Arc-Red-Dark"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-red-dark.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Red-Dark")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_darker_red_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Red-Darker "
+            self.windows_decor="Arc-Red-Darker"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-red-darker.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Red-Darker")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_dark_cherry_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Cherry-Dark "
+            self.windows_decor="Arc-Cherry-Dark"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-cherry-dark.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Cherry-Dark")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_darker_cherry_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Cherry-Darker "
+            self.windows_decor="Arc-Cherry-Darker"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-cherry-darker.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Cherry-Darker")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_dark_green_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Green-Dark "
+            self.windows_decor="Arc-Green-Dark"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-green-dark.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Green-Dark")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_darker_green_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Green-Darker "
+            self.windows_decor="Arc-Green-Darker"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_arc.set_from_file(sdir + "/img/arc-green-darker.png")
+            self.folder="red"
+            self.theme_name.set_label("Arc-Green-Darker")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_arc_darker_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Arc-Darker"
+            self.windows_decor="Arc-Darker"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.preview_arc.set_from_file(sdir + "/img/arc-darker.png")
+            self.folder="blue"
+            self.theme_name.set_label("Arc-Darker")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_clearlooks_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Clearlooks"
+            self.windows_decor="Default"
+            self.icons="Papirus-Light"
+            self.iconslibreoffice="papirus"
+            self.folder="blue"
+            self.plank_theme="geox-light"
+            self.theme_name.set_label("Clearlooks")
+            self.bar_theme.show()
+
+    def on_radio_qogir_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Qogir"
+            self.windows_decor="Qogir"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
+            self.folder="blue"
+            self.theme_name.set_label("Qogir")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_qogir_light_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Qogir-light"
+            self.windows_decor="Qogir-light"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-light.png")
+            self.folder="blue"
+            self.theme_name.set_label("Qogir-light")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_qogir_dark_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Qogir-dark"
+            self.windows_decor="Qogir-dark"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-dark.png")
+            self.folder="blue"
+            self.theme_name.set_label("qogir-dark")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_materia_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Materia"
+            self.windows_decor="Materia"
+            self.icons="Papirus-Light"
+            self.iconslibreoffice="papirus"
+            self.preview_materia.set_from_file(sdir + "/img/materia.png")
+            self.folder="blue"
+            self.theme_name.set_label("Materia")
+            self.plank_theme="geox-light"
+            self.bar_theme.show()
+
+    def on_radio_materia_dark_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Materia-dark"
+            self.windows_decor="Materia-dark"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_materia.set_from_file(sdir + "/img/materia-dark.png")
+            self.folder="blue"
+            self.theme_name.set_label("Materia-dark")
+            self.plank_theme="geox-dark"
+            self.bar_theme.show()
+
+    def on_radio_materia_light_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Materia-light"
+            self.windows_decor="Materia-light"
+            self.icons="Papirus-Light"
+            self.iconslibreoffice="papirus"
+            self.preview_materia.set_from_file(sdir + "/img/materia-light.png")
+            self.folder="blue"
+            self.theme_name.set_label("Materia-light")
+            self.plank_theme="geox-light"
+            self.bar_theme.show()
+
+    def on_radio_macos_toggled(self, widget):
+        if widget.get_active():
+            self.theme="McOS-MJV-XFCE-Edition"
+            self.windows_decor="McOS-MJV-XFCE-Edition"
+            self.icons="Papirus-Light"
+            self.iconslibreoffice="papirus"
+            self.preview_macos.set_from_file(sdir + "/img/macos.png")
+            self.folder="cyan"
+            self.theme_name.set_label("McOS-MJV-XFCE-Edition")
+            self.plank_theme="geox-light"
+            self.bar_theme.show()
+
+    # !Pas d'affichage
+    def on_radio_prodark_toggled(self, widget):
+        if widget.get_active():
+            self.theme="PRO-dark-XFCE-edition-II-1"
+            self.windows_decor="PRO-dark-XFCE-edition-II-1"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.folder="bluegrey"
+            self.theme_name.set_label("PRO-dark-XFCE-edition-II-1")
+            self.bar_theme.show()
+
+    def on_radio_macos_dark_toggled(self, widget):
+        if widget.get_active():
+            self.theme="McOS-MJV-Dark-XFCE-Edition-2.3"
+            self.windows_decor="McOS-MJV-Dark-XFCE-Edition-2.3"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_macos.set_from_file(sdir + "/img/macos-dark.png")
+            self.folder="cyan"
+            self.plank_theme="geox-dark"
+            self.theme_name.set_label("MacOS Dark")
+            self.bar_theme.show()
+
+    def on_radio_adwaita_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Adwaita"
+            self.windows_decor="Adwaita-xfwm4"
+            self.icons="Papirus-Light"
+            self.iconslibreoffice="papirus"
+            self.preview_adwaita.set_from_file(sdir + "/img/adwaita.png")
+            self.folder="blue"
+            self.plank_theme="geox-light"
+            self.theme_name.set_label("Adwaita")
+            self.bar_theme.show()
+
+    def on_radio_adwaita_dark_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Adwaita-dark"
+            self.windows_decor="Adwaita-dark-compact-xfwm4"
+            self.icons="Papirus-Dark"
+            self.iconslibreoffice="papirus_dark"
+            self.preview_adwaita.set_from_file(sdir + "/img/adwaita-dark.png")
+            self.folder="blue"
+            self.plank_theme="geox-dark"
+            self.theme_name.set_label("Adwaita-dark")
+            self.bar_theme.show()
+
+    def on_radio_numix_toggled(self, widget):
+        if widget.get_active():
+            self.theme="Numix"
+            self.windows_decor="Numix"
+            self.icons="Papirus"
+            self.iconslibreoffice="papirus"
+            self.folder="red"
+            self.plank_theme="geox-dark"
+            self.theme_name.set_label("Numix")
+            self.bar_theme.show()
+
+    # ICON COLOR #############################################
+    # method : change folder color
+    @staticmethod
+    def change_folder_color(folder_color):
+        subprocess.check_call([sdir + "/script/folder-color.sh", folder_color],
+                              shell=False)
+        config.set('Style', 'folder', folder_color)
+        print("new folder color :" + folder_color)
+
+    # ICON color
+    def on_folder_toggled(self, widget):
+        if widget.get_active():
+            folder_color=Gtk.Buildable.get_name(widget)
+            self.change_folder_color(folder_color)
+
+    # pane : "OTHER" ############################################
+
+    def state_settings(self):
+        # utiliser subprocess (plutot que os.system...) pour obtenir STDOUT (la reponse du shell, et non seulement
+        # si oui (0) ou non (1) il y a reponse
+        if subprocess.getoutput(
+                '''xfconf-query -c thunar -p /misc-single-click''') == "true":
+            self.btn_simpleclic_thunar.handler_block_by_func(
+                self.on_btn_simpleclic_thunar_toggled)
+            self.btn_simpleclic_thunar.set_active(True)
+            self.btn_simpleclic_thunar.handler_unblock_by_func(
+                self.on_btn_simpleclic_thunar_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c thunar -p /misc-folders-first''') == "true":
+            self.btn_folder_file.handler_block_by_func(
+                self.on_btn_folder_file_toggled)
+            self.btn_folder_file.set_active(True)
+            self.btn_folder_file.handler_unblock_by_func(
+                self.on_btn_folder_file_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c thunar -p /misc-text-beside-icons'''
+        ) == "true":
+            self.btn_txt_next_icons.handler_block_by_func(
+                self.on_btn_txt_next_icons_toggled)
+            self.btn_txt_next_icons.set_active(True)
+            self.btn_txt_next_icons.handler_unblock_by_func(
+                self.on_btn_txt_next_icons_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click'''
+        ) == "true":
+            self.btn_simpleclic_desktop.handler_block_by_func(
+                self.on_btn_simpleclic_desktop_toggled)
+            self.btn_simpleclic_desktop.set_active(True)
+            self.btn_simpleclic_desktop.handler_unblock_by_func(
+                self.on_btn_simpleclic_desktop_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash'''
+        ) == "true":
+            self.btn_trash_desktop.handler_block_by_func(
+                self.on_btn_trash_desktop_toggled)
+            self.btn_trash_desktop.set_active(True)
+            self.btn_trash_desktop.handler_unblock_by_func(
+                self.on_btn_trash_desktop_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home'''
+        ) == "true":
+            self.btn_home_desktop.handler_block_by_func(
+                self.on_btn_home_desktop_toggled)
+            self.btn_home_desktop.set_active(True)
+            self.btn_home_desktop.handler_unblock_by_func(
+                self.on_btn_home_desktop_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable'''
+        ) == "true":
+            self.btn_removable_desktop.handler_block_by_func(
+                self.on_btn_removable_desktop_toggled)
+            self.btn_removable_desktop.set_active(True)
+            self.btn_removable_desktop.handler_unblock_by_func(
+                self.on_btn_removable_desktop_toggled)
+
+    # Buttons  of "Other" pane #####################
+    @staticmethod
+    def on_btn_simpleclic_thunar_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c thunar -p /misc-single-click -s "true" ''')
+        else:
+            os.system(
+                '''xfconf-query -c thunar -p /misc-single-click -s "false" ''')
+
+    @staticmethod
+    def on_btn_folder_file_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c thunar -p /misc-folders-firt -s "true" ''')
+        else:
+            os.system(
+                '''xfconf-query -c thunar -p /misc-folders-firt -s "false" ''')
+
+    @staticmethod
+    def on_btn_txt_next_icons_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c thunar -p /misc-text-beside-icons -s "true" '''
+            )
+        else:
+            os.system(
+                '''xfconf-query -c thunar -p /misc-text-beside-icons -s "false" '''
+            )
+
+    @staticmethod
+    def on_btn_simpleclic_desktop_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click -s "true" '''
+            )
+        else:
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click -s "false" '''
+            )
+
+    @staticmethod
+    def on_btn_trash_desktop_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s "true" '''
+            )
+        else:
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash -s "false" '''
+            )
+
+    @staticmethod
+    def on_btn_home_desktop_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s "true" '''
+            )
+        else:
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home -s "false" '''
+            )
+
+    @staticmethod
+    def on_btn_removable_desktop_toggled(widget):
+        if widget.get_active():
+            os.system(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s "true" '''
+            )
+        else:
+            os.system(
+            '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable -s "false" '''
+            )
+
+
+
+    @staticmethod
+    def on_btn_xfwm4_tweaks_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system("xfwm4_tweaks_settings")
+
+    @staticmethod
+    def on_btn_thunar_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system('''thunar-settings''')
+
+    @staticmethod
+    def on_btn_xfce_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system('''xfce4-settings-manager ''')
+
+    @staticmethod
+    def on_btn_lightdm_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system('''lightdm-gtk-greeter-settings-pkexec''')
+
+    @staticmethod
+    def on_btn_desktop_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system('''xfdesktop-settings ''')
+
+    @staticmethod
+    def on_btn_panel_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system('''xfce4-panel --preferences ''')
+
+    @staticmethod
+    def on_btn_notification_settings_clicked(widget):
+        # TODO > os.subs ?
+        os.system('''xfce4-notifyd-config ''')
 
 
 ########################
 
 if __name__ == "__main__":
-	main = Geox()
-	Gtk.main()
+    main=Geox()
+    Gtk.main()

@@ -2823,7 +2823,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="btn_folder_file">
-                                <property name="label" translatable="yes">Trier les dossiers avant les fichiers</property>
+                                <property name="label" translatable="yes">Sort folders before files</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -2838,7 +2838,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="btn_txt_next_icons">
-                                <property name="label" translatable="yes">Texte à coté des icones</property>
+                                <property name="label" translatable="yes">Text beside icons</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
