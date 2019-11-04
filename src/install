@@ -8,9 +8,6 @@
 # You can modify the path at your conveniance : change "/usr/share" of path_base by your prefered directory.
 ##################################
 
-
-### Copie des fichiers de Geox-Tweak
-
 path_base="/usr/share"
 
 mkdir $path_base/geox-tweak
@@ -31,8 +28,7 @@ chmod 666 $path_base/geox-tweak/activ.conf
 cp -v ./geox-tweak/geox.glade $path_base/geox-tweak
 
 cp -v ./geox-tweak/geox-tweak $path_base/geox-tweak
-chmod +x $path_base/geox-tweak/GeoX-Tweak.desktop
-chmod +x $path_base/geox-tweak/geox-tweak
+chmod +x $path_base/geox-tweak
 
 cp -v ./geox-tweak/GeoX-Tweak.desktop $path_base/applications
 chmod +x $path_base/applications/GeoX-Tweak.desktop
@@ -40,78 +36,11 @@ chmod +x $path_base/applications/GeoX-Tweak.desktop
 cp -v ./geox-tweak/script/geox-tweak /usr/bin
 chmod +x /usr/bin/geox-tweak
 
-
-
-### Dépendance et logiciels tiers ###
-
-#papirus icons theme & libreoffice papirus
-
-##for mx
-sudo sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu bionic main' > /etc/apt/sources.list.d/papirus-ppa.list"
-
-sudo apt-get install dirmngr
-sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com E58A9D36647CAE7F
-sudo apt-get update
-sudo apt-get install papirus-icon-theme
-
-##for ubuntu and derivative
-sudo add-apt-repository ppa:papirus/papirus
-sudo apt-get update
-sudo apt-get install papirus-icon-theme
-sudo apt-get install libreoffice-style-papirus
-
-##Other distrib
-wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
-
-#
-sudo apt-get install -y plank
-sudo apt-get install -y synapse
-sudo apt-get install -y xfdashboard
-sudo apt-get install -y conky-all
-sudo apt -y install conky-manager # not in linuxmint repos !
-
-	
-# sudo apt-get install -y redshift    
-
-#dockbarx
-#for mx 19
-if $distrib=MX19 ; then
-sudo sh -c "echo 'deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' > /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
-
-sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd 
-
-sudo apt update
-sudo apt install xfce4-dockbarx-plugin
-sudo apt install dockbarx-themes-extra 
-	notify-send -i system-software-update "Installation du theme d'icones papyrus" -t 5000
-
-elif $distrib=MX18 ; then
-sudo apt install xfce4-dockbarx-plugin
-sudo apt install dockbarx-themes-extra 
-
-#for ubuntu and derivative
-
-elif $os=Ubuntu ; then
-sudo add-apt-repository ppa:xuzhen666/dockbarx
-sudo apt-get update
-sudo apt install xfce4-dockbarx-plugin
-sudo apt install dockbarx-themes-extra 
-
-elif $os=LinuxMint ; then
-sudo add-apt-repository ppa:xuzhen666/dockbarx
-sudo apt-get update
-sudo apt install xfce4-dockbarx-plugin
-sudo apt install dockbarx-themes-extra 
-
-fi
-
 ### Theme ###
-
 cp -v -R ./geox-tweak/theme/dockbarx/* ~/.gconf/apps
 cp -v -R ./geox-tweak/theme/plank/* /usr/share/plank
 cp -v ./geox-tweak/theme/xfdashboard/xfdashboard.xml ~/.config/xfce4/xfconf/
 cp -v -Rf ./geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock/* /usr/share/themes/xfdashboard-dark-nodock
-cp -v -Rf ./geox-tweak/theme/conky/* $HOME/.conky
 cp -v ./geox-tweak/theme/synapse/config.json ~/.config/synapse
 tar -jxvf $share/$gt/themes.tar.bz2 -C $share/themes/
 
@@ -119,7 +48,7 @@ tar -jxvf $share/$gt/themes.tar.bz2 -C $share/themes/
 path_panel=$path_base/geox-tweak/panel
 find $HOME/.config/xfce4/panel/ -name "whisker*" -exec cp -f -r -v {} $path_panel/whiskermenu-20.rc \;
 find $path_panel/*/.config/xfce4/panel/  -maxdepth 0 -exec cp -f -v $path_panel/whiskermenu-20.rc {} \;
-sh /use/share/geox-tweak/script/papirus-folders-master/install.sh
+sh share/gt/script/papirus-folders-master/install.sh
 
 
 
