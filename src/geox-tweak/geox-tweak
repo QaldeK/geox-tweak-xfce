@@ -416,8 +416,8 @@ class Geox:
     @staticmethod
     def radio_layout_toggled(layout):
         args='''xfce4-panel --quit; pkill xfconfd; rm -Rf ~/.config/xfce4/panel; \
-         cp -Rf ''' + sdir + '''/panel/''' + layout + '''/.config/xfce4/panel ~/.config/xfce4/panel; \
-                    cp -f ''' + sdir + '''/panel/''' + layout + '''/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
+         cp -Rf ''' + sdir + '''/panel/''' + layout + '''/xfce4/panel ~/.config/xfce4/panel; \
+                    cp -f ''' + sdir + '''/panel/''' + layout + '''/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
                     ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
                     sleep 1; xfce4-panel &'''
 

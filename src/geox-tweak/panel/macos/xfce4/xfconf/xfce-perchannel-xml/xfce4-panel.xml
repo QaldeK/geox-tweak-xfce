@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="clipman" type="empty">
+    <property name="tweaks" type="empty">
+      <property name="never-confirm-history-clear" type="bool" value="false"/>
+    </property>
+  </property>
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="panel-1" type="empty">
+      <property name="background-alpha" type="uint" value="80"/>
+      <property name="background-color" type="array">
+        <value type="uint" value="4065"/>
+        <value type="uint" value="5962"/>
+        <value type="uint" value="9045"/>
+        <value type="uint" value="65535"/>
+      </property>
+      <property name="background-style" type="int" value="0"/>
+      <property name="disable-struts" type="bool" value="false"/>
+      <property name="leave-opacity" type="uint" value="100"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="mode" type="uint" value="0"/>
+      <property name="nrows" type="uint" value="1"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="20"/>
+        <value type="int" value="8"/>
+        <value type="int" value="3"/>
+        <value type="int" value="15"/>
+        <value type="int" value="1"/>
+        <value type="int" value="6"/>
+        <value type="int" value="7"/>
+        <value type="int" value="16"/>
+        <value type="int" value="2"/>
+      </property>
+      <property name="position" type="string" value="p=5;x=0;y=0"/>
+      <property name="position-locked" type="bool" value="false"/>
+      <property name="size" type="uint" value="29"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="notes" type="empty">
+      <property name="global" type="empty">
+        <property name="font-description" type="string" value="Sans 10"/>
+        <property name="skip-taskbar-hint" type="bool" value="true"/>
+        <property name="tabs-position" type="int" value="4"/>
+      </property>
+      <property name="new-window" type="empty">
+        <property name="height" type="int" value="375"/>
+        <property name="sticky" type="bool" value="false"/>
+        <property name="width" type="int" value="300"/>
+      </property>
+    </property>
+    <property name="plugin-1" type="string" value="xfce4-orageclock-plugin"/>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-16" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-20" type="string" value="whiskermenu"/>
+    <property name="plugin-6" type="string" value="systray">
+      <property name="names-hidden" type="array">
+      </property>
+      <property name="names-visible" type="array">
+        <value type="string" value="thunar"/>
+        <value type="string" value="vlc"/>
+        <value type="string" value="caffeine-indicator"/>
+        <value type="string" value="redshift-gtk"/>
+        <value type="string" value="cryptkeeper"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="cmst - connman system tray"/>
+        <value type="string" value="volumeicon"/>
+        <value type="string" value="clipit"/>
+        <value type="string" value="qbittorrent"/>
+        <value type="string" value="synapse"/>
+        <value type="string" value="keepassxc"/>
+        <value type="string" value="clementine"/>
+        <value type="string" value="xfce terminal"/>
+        <value type="string" value="applet networkmanager"/>
+        <value type="string" value="clipman"/>
+        <value type="string" value="gestionnaire de tâches"/>
+        <value type="string" value="xfce4-power-manager"/>
+        <value type="string" value="fbxkb"/>
+        <value type="string" value="yad"/>
+        <value type="string" value="apt-notifier.py"/>
+        <value type="string" value="blueman-applet"/>
+        <value type="string" value="scp-dbus-service.py"/>
+        <value type="string" value="notes"/>
+        <value type="string" value="gmusicbrowser"/>
+        <value type="string" value="veracrypt"/>
+        <value type="string" value="hp-systray"/>
+      </property>
+      <property name="show-frame" type="bool" value="true"/>
+      <property name="size-max" type="uint" value="22"/>
+    </property>
+    <property name="plugin-8" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-7" type="string" value="notification-plugin"/>
+    <property name="plugin-2" type="string" value="wckbuttons"/>
+    <property name="plugin-3" type="string" value="windowck-plugin"/>
+  </property>
+</channel>
