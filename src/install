@@ -2,10 +2,10 @@
 
 ###################################
 # Install script for geox-tweak.
-# For install geox-tweak : open a terminal in the "install" script directory, and enter "sudo ./install"
+# For install geox-tweak : open a terminal in the "install" script directory, 
+# and enter "sudo ./install"
 # For uninstall : "sudo ./uninstall"
 #
-# You can modify the path at your conveniance : change "/usr/share" of path_base by your prefered directory.
 ##################################
 
 path_base="/usr/share"
@@ -35,6 +35,8 @@ chmod +x $path_base/applications/GeoX-Tweak.desktop
 
 cp -v ./geox-tweak/script/geox-tweak /usr/bin
 chmod +x /usr/bin/geox-tweak
+
+
 
 ### Theme ###
 cp -v -R ./geox-tweak/theme/dockbarx/* ~/.gconf/apps
