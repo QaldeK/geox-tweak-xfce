@@ -10,3 +10,7 @@ src/geox-tweak/trad txt
 deb/bug
 version.sh
 src/geox-tweak/script/wget-log
+deb/geox-tweak-mx18
+deb/geox-tweak-mx18
+src/geox-tweak
+deb/geox-tweak-ubuntu18/
