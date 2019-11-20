@@ -15,12 +15,14 @@ mkdir $path_base/geox-tweak/img
 mkdir $path_base/geox-tweak/panel
 mkdir $path_base/geox-tweak/script
 
+mkdir -v ~/.config/geox-tweak-xfce
+
 cp -v -R ./geox-tweak/img/* $path_base/geox-tweak/img
 
 cp -v -R ./geox-tweak/panel/* $path_base/geox-tweak/panel
 
 cp -v -R ./geox-tweak/script/* $path_base/geox-tweak/script
-chmod +x $path_base/geox-tweak/script/*
+chmod 555 $path_base/geox-tweak/script/*
 
 cp -v ./geox-tweak/activ.conf $path_base/geox-tweak
 chmod 666 $path_base/geox-tweak/activ.conf
@@ -28,13 +30,13 @@ chmod 666 $path_base/geox-tweak/activ.conf
 cp -v ./geox-tweak/geox.glade $path_base/geox-tweak
 
 cp -v ./geox-tweak/geox-tweak $path_base/geox-tweak
-chmod +x $path_base/geox-tweak
+chmod 555 $path_base/geox-tweak
 
 cp -v ./geox-tweak/GeoX-Tweak.desktop $path_base/applications
-chmod +x $path_base/applications/GeoX-Tweak.desktop
+chmod 555 $path_base/applications/GeoX-Tweak.desktop
 
 cp -v ./geox-tweak/script/geox-tweak /usr/bin
-chmod +x /usr/bin/geox-tweak
+chmod 555 /usr/bin/geox-tweak
 
 
 
@@ -44,13 +46,17 @@ cp -v -R ./geox-tweak/theme/plank/* /usr/share/plank
 cp -v ./geox-tweak/theme/xfdashboard/xfdashboard.xml ~/.config/xfce4/xfconf/
 cp -v -Rf ./geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock/* /usr/share/themes/xfdashboard-dark-nodock
 cp -v ./geox-tweak/theme/synapse/config.json ~/.config/synapse
-tar -jxvf $share/$gt/themes.tar.bz2 -C $share/themes/
+tar -jxvf $path_base/$gt/themes.tar.bz2 -C $path_base/themes/
+
+cp -v $path_base/geox-tweak/activ.conf $HOME/.config/geox-tweak-xfce
+#FIXIT : creer le fichier dans root
+
 
 #preserve whiskermenu config.
 path_panel=$path_base/geox-tweak/panel
 find $HOME/.config/xfce4/panel/ -name "whisker*" -exec cp -f -r -v {} $path_panel/whiskermenu-20.rc \;
 find $path_panel/*/.config/xfce4/panel/  -maxdepth 0 -exec cp -f -v $path_panel/whiskermenu-20.rc {} \;
-sh share/gt/script/papirus-folders-master/install.sh
+# sh $path_base/geox-tweak/script/papirus-folders-master/install.sh
 
 
 

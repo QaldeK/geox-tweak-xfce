@@ -8,3 +8,5 @@ src-to-deb.sh
 src/geox-tweak/geox.glade~
 src/geox-tweak/trad txt
 deb/bug
+version.sh
+src/geox-tweak/script/wget-log

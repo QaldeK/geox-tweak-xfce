@@ -4,17 +4,28 @@ import configparser  # traiter les fichiers de configuration
 import os
 from os import path
 import os.path
+from os.path import expanduser
 import subprocess  # os et subprocess : executer des commandes et script bash
 import gi  # nécessaire pour utiliser le fichier glade
-from gi.repository import Gtk  # nécessaire pour utiliser le fichier glade/ GObject?
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk  # nécessaire pour utiliser le fichier glade/ GObject?
 
-#FIXIT : config have to be in home user !
-sdir = os.path.dirname(os.path.abspath(__file__))
+
+sdir = os.path.dirname(os.path.abspath(__file__))  # path du script py
+home = expanduser("~")  # path home de l'user
 config = configparser.ConfigParser()
-config.read(sdir + '/activ.conf')  # script directory
+gtconf = home + '/.config/geox-tweak-xfce/geox-tweak.conf'
+# config.read(sdir + '/geox-tweak.conf')
 
-plank_theme = config.get("Style", "plank_theme")
+# Verifier le fichier de configuration
+args = '''if [ ! -e $HOME/.config/geox-tweak-xfce/geox-tweak.conf ]
+then mkdir $HOME/.config/geox-tweak-xfce/ ;
+cp -f /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/geox-tweak.conf ;
+fi '''
+subprocess.check_call(args, shell=True)
+config.read(home + '/.config/geox-tweak-xfce/geox-tweak.conf')
+
+first_run = config.get("AppInstall", "firstrun")
 
 
 class Geox:
@@ -61,9 +72,8 @@ class Geox:
         self.help_txt_zone = go("help_txt_zone")
         self.defaut_help()
 
-        self.state_app(
-            self
-        )  # /!\ Positionner apres la declaration des btn rapportées aux états
+        # /!\ Positionner apres la declaration des btn rapportées aux états
+        self.state_app(self)
         # testés ;
 
         # Layout preview
@@ -143,7 +153,7 @@ class Geox:
         self.icon_grey = go("icon_grey")
         self.icon_grey.set_from_file(sdir + "/img/grey.svg")
 
-        # ID des label du fichier de configuration activ.conf (> modifié par "config.")
+        # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
         self.var_theme = ""
         self.theme = ""
         self.windows_decor = ""
@@ -154,6 +164,8 @@ class Geox:
         self.iconslibreoffice = ""
         self.theme_name = go("theme_name")
         self.chk_folder_color = go("chk_folder_color")
+       
+        plank_theme = config.get("Style", "plank_theme")
         self.plank_theme = plank_theme
 
         # Onglet "Other"
@@ -186,20 +198,30 @@ class Geox:
     def on_btn_quit_clicked(widget):
         Gtk.main_quit()
 
+    # def firstrun(self)
+
     def defaut_help(self):
         defaut = ""
         self.help_txt_zone.get_buffer().set_text(defaut)
 
-    # FIXIT 
+    # FIXIT
     def app_control(self):
-        if config.get('AppInstall', 'sxcdp') != "ok":
-           
-            args ='''sh /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/geoxtweak-appdep.sh &'''
 
-            subprocess.check_call(args, shell=True)
+        if config.get('AppInstall', 'FirstRun') != "no":
+            arg1 = sdir + '''/script/firstrun.sh'''
+            subprocess.check_call(arg1, shell=True)
+            print("firstrun !")
+
+        if config.get('AppInstall', 'sxcdp') != "ok":
+            arg2 = sdir + "/script/geoxtweak-appdep.sh &"
+            subprocess.check_call(arg2, shell=True)
             print("not ok")
         else:
             print("ok")
+
+        # TODO : verif logiciel par logiciel ; griser les layout impossible et proposer installation
+        # if config.get('AppInstall', 'synapse') != "ok"
+        #     arg3 ="bash " "
 
     # Panel TOOLS # Bouton Toggle # TODO > dependances : app & conkytoggle.sh;)
     @staticmethod
@@ -438,7 +460,7 @@ class Geox:
 
         subprocess.check_call(args, shell=True)
         config.set('Style', 'layout', layout)
-        config.write(open('activ.conf', 'w'))
+        config.write(open(gtconf, 'w'))
 
     def plank_config(self, pinned, offset, position, theme):
         args = "gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ pinned-only " + pinned + " ; \
@@ -447,7 +469,7 @@ class Geox:
                 gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme " + theme + " ;"
         subprocess.Popen(args, shell=True)
         config.set('Style', 'plank_theme', theme)
-        config.write(open('activ.conf', 'w'))
+        config.write(open(gtconf, 'w'))
 
     # Todo > theming consistent with xfce theme (ok ?)
     def dockbarx_config(self, launcher, theme, the_me):
@@ -621,13 +643,13 @@ class Geox:
                 + self.plank_theme + " ;",
                 shell=True)
 
-        # inscription dans le fichier activ.conf des options selectionnees
+        # inscription dans le fichier geox-tweak.conf des options selectionnees
         # config. fonction pour les fichiers structurés comme les fichier .ini
         config.set('Style', 'theme', theme)
         config.set('Style', 'icons', self.icons)
         config.set('Style', 'windows_decor', self.windows_decor)
         config.set('Style', 'plank_theme', self.plank_theme)
-        config.write(open('activ.conf', 'w'))
+        config.write(open('geox-tweak.conf', 'w'))
 
     def on_radio_adapta_toggled(self, widget):
         if widget.get_active():
@@ -1172,10 +1194,10 @@ class Geox:
     def on_btn_folder_file_toggled(widget):
         if widget.get_active():
             os.system(
-                '''xfconf-query -c thunar -p /misc-folders-firt -s "true" ''')
+                '''xfconf-query -c thunar -p /misc-folders-first -s "true" ''')
         else:
             os.system(
-                '''xfconf-query -c thunar -p /misc-folders-firt -s "false" ''')
+                '''xfconf-query -c thunar -p /misc-folders-first -s "false" ''')
 
     @staticmethod
     def on_btn_txt_next_icons_toggled(widget):

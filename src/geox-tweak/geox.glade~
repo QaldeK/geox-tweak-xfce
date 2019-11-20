@@ -2871,6 +2871,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
                             <property name="label" translatable="yes">Thunar File Manager</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
