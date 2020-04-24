@@ -1,6 +1,6 @@
 ##################
 Author : QaldeK - aldek@vivaldi.net
-Version : 0.1.1
+Version : 0.2
 License : GPL
 Depends: python3, synapse, xfdashboard, plank,xfce4-notes, conky-all, conky-manager, xfce4-dockbarx-plugin, 				dockbarx-themes-extra, papirus-icon-theme 
 Git : https://github.com/QaldeK/geox-tweak
@@ -16,8 +16,8 @@ It also makes it possible and easy to change the color of the folder icons (with
 
 # Screenshots
 
-![Alt text](src/geox-tweak/img/screenshots1.png?raw=true "Desktop Layout")
+![Alt text](geox-tweak/img/screenshots1.png?raw=true "Desktop Layout")
 
-![Alt text](src/geox-tweak/img/screenshots2.png?raw=true "Windows theme")
+![Alt text](geox-tweak/img/screenshots2.png?raw=true "Windows theme")
 
-![Alt text](src/geox-tweak/img/screenshots3.png?raw=true "Folders icons")
+![Alt text](geox-tweak/img/screenshots3.png?raw=true "Folders icons")

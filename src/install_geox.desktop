@@ -1,6 +1,0 @@
-[Desktop Entry]
-Version=0.1
-Type=Application
-Name=install-geox
-Exec=xfce4-terminal -e  ./install-script
-Icon=install
