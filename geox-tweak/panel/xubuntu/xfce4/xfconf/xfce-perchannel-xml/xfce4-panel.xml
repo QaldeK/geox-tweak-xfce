@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=683;y=15"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="28"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="20"/>
+        <value type="int" value="2"/>
+        <value type="int" value="12"/>
+        <value type="int" value="3"/>
+        <value type="int" value="15"/>
+        <value type="int" value="4"/>
+        <value type="int" value="8"/>
+        <value type="int" value="10"/>
+        <value type="int" value="11"/>
+        <value type="int" value="6"/>
+        <value type="int" value="1"/>
+        <value type="int" value="7"/>
+        <value type="int" value="9"/>
+      </property>
+      <property name="background-style" type="int" value="0"/>
+      <property name="background-color" type="array">
+        <value type="uint" value="4065"/>
+        <value type="uint" value="5962"/>
+        <value type="uint" value="9045"/>
+        <value type="uint" value="65535"/>
+      </property>
+      <property name="mode" type="int" value="0"/>
+      <property name="disable-struts" type="bool" value="false"/>
+      <property name="nrows" type="uint" value="1"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-3" type="string" value="tasklist">
+      <property name="show-labels" type="bool" value="true"/>
+      <property name="include-all-workspaces" type="bool" value="false"/>
+      <property name="flat-buttons" type="bool" value="true"/>
+      <property name="show-handle" type="bool" value="false"/>
+      <property name="sort-order" type="int" value="1"/>
+      <property name="window-scrolling" type="bool" value="false"/>
+      <property name="include-all-monitors" type="bool" value="true"/>
+      <property name="middle-click" type="int" value="1"/>
+      <property name="show-wireframes" type="bool" value="false"/>
+    </property>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-4" type="string" value="pager">
+      <property name="rows" type="uint" value="1"/>
+      <property name="miniature-view" type="bool" value="true"/>
+    </property>
+    <property name="plugin-6" type="string" value="systray">
+      <property name="names-visible" type="array">
+      </property>
+      <property name="show-frame" type="bool" value="false"/>
+      <property name="names-hidden" type="array">
+      </property>
+      <property name="size-max" type="uint" value="22"/>
+      <property name="names-ordered" type="array">
+        <value type="string" value="thunar"/>
+        <value type="string" value="apt-notifier.py"/>
+        <value type="string" value="applet networkmanager"/>
+        <value type="string" value="terminal déroulant"/>
+        <value type="string" value="yad"/>
+        <value type="string" value="redshift-gtk"/>
+        <value type="string" value="clipit"/>
+        <value type="string" value="notes"/>
+      </property>
+    </property>
+    <property name="plugin-12" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="notes" type="empty">
+      <property name="global" type="empty">
+        <property name="tabs-position" type="int" value="4"/>
+        <property name="skip-taskbar-hint" type="bool" value="true"/>
+      </property>
+      <property name="new-window" type="empty">
+        <property name="sticky" type="bool" value="false"/>
+        <property name="width" type="int" value="300"/>
+        <property name="height" type="int" value="375"/>
+      </property>
+    </property>
+    <property name="plugin-2" type="string" value="showdesktop"/>
+    <property name="plugin-20" type="string" value="whiskermenu"/>
+    <property name="plugin-7" type="string" value="datetime"/>
+    <property name="plugin-8" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+    </property>
+    <property name="plugin-9" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-1" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-10" type="string" value="power-manager-plugin"/>
+    <property name="plugin-11" type="string" value="notification-plugin"/>
+  </property>
+  <property name="clipman" type="empty">
+    <property name="tweaks" type="empty">
+      <property name="never-confirm-history-clear" type="bool" value="false"/>
+    </property>
+  </property>
+</channel>

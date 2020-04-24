@@ -1,0 +1,30 @@
+[Desktop Entry]
+Version=1.0
+Name=Firefox Web Browser
+Name[fr]=Navigateur Web Firefox
+Comment=Browse the World Wide Web
+Comment[fr]=Naviguer sur le Web
+GenericName=Web Browser
+GenericName[fr]=Navigateur Web
+Keywords=Internet;WWW;Browser;Web;Explorer
+Keywords[fr]=Internet;WWW;Browser;Web;Explorer;Fureteur;Surfer;Navigateur
+Exec=firefox %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
+StartupNotify=true
+Actions=new-window;new-private-window;
+X-XFCE-Source=file:///usr/share/applications/firefox.desktop
+
+[Desktop Action new-window]
+Name=Open a New Window
+Name[fr]=Ouvrir une nouvelle fenêtre
+Exec=firefox -new-window
+
+[Desktop Action new-private-window]
+Name=Open a New Private Window
+Name[fr]=Ouvrir une nouvelle fenêtre de navigation privée
+Exec=firefox -private-window

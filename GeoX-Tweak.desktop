@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=0.2
+Type=Application
+Name=GeoX-Tweak-Xfce
+Comment=Customize Xfce appearance !
+Categories=Utility;Settings;DesktopSettings
+Exec=bash -c 'cd $(dirname %k) && python3 ./geox-tweak/gtx_gui.py'
+Icon=preferences-desktop-theme
+Keywords=appearance, theme, panel, xfce, tweak
+GenericName=geox-tweak-xfce
+Name[fr_FR.UTF-8]=GeoX-Tweak-Xfce

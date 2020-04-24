@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=gmusicbrowser
+Comment=Jukebox for large collections of mp3/ogg/flac/mpc
+Exec=gmusicbrowser %F
+Type=Application
+Icon=gmusicbrowser
+Categories=Audio;AudioVideo;
+StartupNotify=true
+X-XFCE-Source=file:///usr/share/applications/gmusicbrowser.desktop

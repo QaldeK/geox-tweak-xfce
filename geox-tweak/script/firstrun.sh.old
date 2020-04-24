@@ -1,0 +1,29 @@
+#!/bin/bash
+	
+share="/usr/share"
+gt=geox-tweak
+
+_configure() 
+	{
+		cp -v -R $share/geox-tweak/theme/dockbarx/* ~/.gconf/apps/
+		cp -v -f $share/geox-tweak/theme/xfdashboard/xfdashboard.xml ~/.config/xfce4/xfconf/
+		cp -v -f $share/geox-tweak/theme/synapse/config.json $HOME/.config/synapse/
+		cp -v -Rf $share/geox-tweak/theme/conky/* ~/.conky/
+
+		# mkdir $HOME/.config/geox-tweak-xfce
+		mkdir $HOME/.config/geox-tweak-xfce/panel
+		cp -R /usr/share/geox-tweak/panel/* $HOME/.config/geox-tweak-xfce/panel
+
+		#preserve whiskermenu config.
+		find $HOME/.config/xfce4/panel/ -name "*whisker*" -exec cp -f -r -v {} $HOME/.config/geox-tweak-xfce/panel/whiskermenu-20.rc \;
+		find $HOME/.config/geox-tweak-xfce/panel/*/xfce4/panel/  -maxdepth 0 -exec cp -f -v $HOME/.config/geox-tweak-xfce/panel/whiskermenu-20.rc {} \;
+	}
+
+_firstrunOk()
+	{ 	# change firstrun value
+	sed -i 's/firstrun.*/firstrun = no/' $HOME/.config/geox-tweak-xfce/geox-tweak.conf
+}
+
+_configure ; _firstrunOk 
+
+exit

@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Xfdashboard
+Name[fr]=activité
+Comment=Maybe a Gnome shell like dashboard for Xfce
+Comment[fr]=Peut-être un shell GNOME comme un tableau de bord pour Xfce
+GenericName=Xfdashboard
+TryExec=/usr/bin/xfdashboard
+Exec=xfdashboard
+Icon=xfdashboard
+Categories=System;
+NotShowIn=GNOME;KDE;Unity;
+Terminal=false
+StartupNotify=false
+X-XFCE-Source=file:///usr/share/applications/xfdashboard.desktop
+Path=
