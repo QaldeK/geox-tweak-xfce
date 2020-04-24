@@ -1,0 +1,247 @@
+#!/bin/bash
+
+##################################################################################
+# Install script for geox-tweak.
+#-------------------------------- 
+#
+#	For install geox-tweak-xfce : open a terminal in the "install-script.sh" directory, 
+# 	and enter "./install"
+# 	For uninstall : "sudo ./uninstall"
+#
+##################################################################################
+
+
+echo "---------------------------------------------------------------------------------------"
+echo "This script will install geox-tweak-xfce and all dependancies.
+
+:'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' 
+'gconf2' 'gir1.2-gtk-3.0' 'yad' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'
+ 
+ 
+ It also install other packages witch work with geox-tweak-xfce.
+ :'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'dockbarx' 
+ 'dockbarx-themes-extra' 'xfce4-dockbarx-plugin' 'conky-all' 'papirus-folders'
+ 'papirus-icon-theme'
+ 
+ Network connection is require ! 
+ 
+ Are you ok to procced  ? Tap enter for yes, tap ctrl+c or close terminal for no"
+read
+echo "----------------------------------------------"
+read -sp 'User password is require: ' pw
+
+mainFunction () {
+	command="${1}"
+	log="/tmp/$(date +%s)"
+	${command} 2> "${log}" 
+	checkErrorLog "${log}"
+}
+
+checkErrorLog () {
+    log="${1}"
+    error=$(cat "${log}")
+    rm "${log}"
+
+    if [ "${error}" != "" ]; then
+    	echo "---------------------"
+    	echo "Error during process :"
+    	echo
+        echo "${error}"
+        echo "---------------------"
+        echo
+		echo "press enter for exit"
+		read    
+        exit 1
+    
+    else 
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/sxcdp.*/\sxcdp = ok/' {} \; )
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/synapse.*/\synapse = ok/' {} \; )
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/plank.*/\plank = ok/' {} \; )
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/xfdashboard.*/\xfdashboard = ok/' {} \; )
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/conky.*/\conky = ok/' {} \; )
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/conkymanager.*/\conkymanager = ok/' {} \; )
+    	(find $HOME/.config/geox-tweak-xfce/ -iname '*conf*' -exec sed -i 's/dockbarx.*/\dockbarx = ok/' {} \; )
+
+    	echo "----------------------------------------------"
+		echo "Process completed, press enter for exit"
+		echo "----------------------------------------------"
+		read    
+	fi
+}
+
+_installation()	{
+	echo " "
+	echo "----------------------------------------------"
+	echo "Process to geox-tweak-xfce installation."
+	echo "----------------------------------------------"
+	echo $pw | sudo -S mkdir /usr/share/geox-tweak
+	echo $pw | sudo -S mkdir /usr/share/geox-tweak/theme
+	echo $pw | sudo -S mkdir /usr/share/geox-tweak/img
+	echo $pw | sudo -S mkdir /usr/share/geox-tweak/panel
+	echo $pw | sudo -S mkdir /usr/share/geox-tweak/script
+
+	echo $pw | sudo -S cp -R ./geox-tweak /usr/share/
+	echo $pw | sudo -S chmod -R 555 /usr/share/geox-tweak/script
+	echo $pw | sudo -S chmod 555 /usr/share/geox-tweak
+
+	echo $pw | sudo -S cp ./geox-tweak/GeoX-Tweak.desktop /usr/share/applications
+	echo $pw | sudo -S chmod 555 /usr/share/applications/GeoX-Tweak.desktop
+
+	echo $pw | sudo -S cp ./geox-tweak/script/geox-tweak /usr/bin
+	echo $pw | sudo -S chmod 555 /usr/bin/geox-tweak
+
+	echo $pw | sudo -S cp -R ./geox-tweak/doc /usr/share/doc
+	echo "----------------------------------------------"
+	echo "Install Gtk themes, be patient..."
+	echo "----------------------------------------------"
+	echo $pw | sudo -S tar -xzf /usr/share/geox-tweak/theme/themes.tar.gz -C /usr/share/themes --skip-old-files
+	cp -ru /usr/share/geox-tweak/panel $HOME/.config/geox-tweak-xfce
+
+
+	echo "----------------------------------------------"
+	echo "Install dependances"
+	echo "----------------------------------------------"
+
+	#fixit debian post inst
+	for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' \
+			'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf' 
+		do
+			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+			then
+				echo $app installation ... &
+				$echo $pw | sudo -S $app
+
+			else
+				echo $app is installed
+		fi	
+	done
+
+	_installationDep
+}
+	
+_installationDep() 
+	{ 
+		if [ -f /etc/lsb-release ]; then
+		    # For some versions of Debian/Ubuntu without lsb_release command
+		    . /etc/lsb-release
+		    os=$DISTRIB_ID
+		    ver=$DISTRIB_RELEASE
+		    echo " "
+		    echo "for" $os $ver
+		    echo " "
+		fi
+
+		distrib=$os$ver
+		
+		if [ $os = "MX" ] || [ $os = "Debian" ]; then
+			_installationMX
+		elif [ $os = "Ubuntu" ] || [ $os = "LinuxMint" ] ; then
+			_installationUnbuntu
+		fi
+	}
+
+_repoUbuntu()
+	{
+		echo $pw | sudo -S add-apt-repository -y ppa:ricotz/docky
+		echo $pw | sudo add-apt-repository ppa:xubuntu-dev/extras
+		echo $pw | sudo -S add-apt-repository -y ppa:xuzhen666/dockbarx
+		echo $pw | sudo -S add-apt-repository -y ppa:papirus/papirus
+		echo $pw | sudo add-apt-repository ppa:synapse-core/testing
+		echo $pw | sudo apt-get update
+	}
+
+_reposMX()
+	{
+		echo $pw | sudo -S sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
+#		if [ $distrib == "MX19" ] ; then
+#			echo $pw | sudo -S sh -c "echo '
+#			deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
+#			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
+#		fi
+		echo $pw | sudo -S apt-get update
+	}
+
+_installationUnbuntu()
+	{
+		_repoUbuntu
+
+		for app in 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'dockbarx' 'dockbarx-common' 'xfce4-dockbarx-plugin' 'conky-all'
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					echo $app installation ...
+					echo $pw | sudo -S $app #FIXIT
+
+				else
+					echo $app is installed
+
+			fi	
+		done
+
+		if [ $(dpkg-query -W -f='${Status}' conky-manager 2>/dev/null | grep -c "ok installed") -eq 0 ];
+		then
+			wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
+			wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
+			echo $pw | sudo -S dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
+		else 
+			echo conky-manager installed
+		fi
+
+		if [ ! -d "/usr/share/icons/Papirus"  ] ; then
+			echo papirus-icon-theme installation ...
+			echo $pw | sudo -S papirus-icon-theme
+			echo $pw | sudo -S libreoffice-style-papirus
+		else
+			echo papirus-icon-theme is installed
+		fi
+		
+		if [ ! -e "/usr/bin/papirus-folders" ]; then
+			echo  papirus-folders installation...
+			$echo $pw | sudo -S papirus-folders
+		else
+			echo papirus-folders is installed
+		fi
+
+
+	}
+
+_installationMX()
+	{
+		_reposMX
+		for app in 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'dockbarx' 'dockbarx-common' 'xfce4-dockbarx-plugin' 'conky-all' 'conky-manager' 'qogir-gtk-theme' 'qogir-dark-theme' 'materia-gtk-theme' 'adapta-gtk-theme'
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					echo $app installation ...
+					echo $pw | sudo -S apt-get install -y $app
+
+				else
+					echo $app is installed
+			fi	
+		done
+
+	if [ ! -d "/usr/share/icons/Papirus"  ]
+		# Install : Papirus-icon-theme
+		then
+			echo papirus-icon-theme installation ...
+			echo $pw | sudo -S apt-get install -y papirus-icon-theme
+			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
+		else
+			echo papirus-icon-theme is installed
+	fi		
+	
+	if [ ! -e "/usr/bin/papirus-folders" ]
+		#Install : papirus-folders
+		then 
+			echo papirus-folders installation ...
+			echo $pw | sudo -S apt-get install -y papirus-folders
+		else
+			echo papirus-folders is installed
+	fi
+
+	echo $pw | sudo -S sed -i 's/.* test/#/'  /etc/apt/sources.list.d/mx.list
+	
+	
+}
+
+mainFunction _installation

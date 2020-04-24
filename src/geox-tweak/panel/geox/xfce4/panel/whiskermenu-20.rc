@@ -1,5 +1,5 @@
 favorites=xfce4-run.desktop,firefox.desktop,shotwell.desktop,libreoffice-startcenter.desktop,conky-toggle.desktop,mx-tools.desktop,mx-packageinstaller.desktop,Help.desktop,xfce4-taskmanager.desktop,xfce4-terminal.desktop
-recent=mx-tools.desktop,conky-toggle.desktop,mx-packageinstaller.desktop,Help.desktop,xfce-mouse-settings.desktop,xfpanel-switch.desktop,redshift-gtk.desktop,lightdm-gtk-greeter-settings.desktop,Thunar.desktop,synapse.desktop
+recent=synaptic.desktop,gitahead.desktop,mx-tools.desktop,conky-toggle.desktop,mx-packageinstaller.desktop,Help.desktop,xfce-mouse-settings.desktop,redshift-gtk.desktop,lightdm-gtk-greeter-settings.desktop,Thunar.desktop
 button-title=Applications Menu
 button-icon=/usr/local/share/icons/mxfcelogo-rounded.png
 button-single-row=false

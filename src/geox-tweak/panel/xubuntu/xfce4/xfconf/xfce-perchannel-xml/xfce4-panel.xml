@@ -17,6 +17,8 @@
         <value type="int" value="15"/>
         <value type="int" value="4"/>
         <value type="int" value="8"/>
+        <value type="int" value="10"/>
+        <value type="int" value="11"/>
         <value type="int" value="6"/>
         <value type="int" value="1"/>
         <value type="int" value="7"/>
@@ -98,6 +100,8 @@
     <property name="plugin-1" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
+    <property name="plugin-10" type="string" value="power-manager-plugin"/>
+    <property name="plugin-11" type="string" value="notification-plugin"/>
   </property>
   <property name="clipman" type="empty">
     <property name="tweaks" type="empty">

@@ -20,6 +20,7 @@
         <value type="int" value="9"/>
         <value type="int" value="6"/>
         <value type="int" value="1"/>
+        <value type="int" value="13"/>
         <value type="int" value="7"/>
         <value type="int" value="16"/>
         <value type="int" value="4"/>
@@ -102,6 +103,16 @@
       <property name="names-hidden" type="array">
       </property>
       <property name="show-frame" type="bool" value="false"/>
+      <property name="names-ordered" type="array">
+        <value type="string" value="thunar"/>
+        <value type="string" value="apt-notifier.py"/>
+        <value type="string" value="redshift-gtk"/>
+        <value type="string" value="terminal déroulant"/>
+        <value type="string" value="clipit"/>
+        <value type="string" value="yad"/>
+        <value type="string" value="applet networkmanager"/>
+        <value type="string" value="notes"/>
+      </property>
     </property>
     <property name="plugin-9" type="string" value="launcher">
       <property name="items" type="array">
@@ -113,6 +124,7 @@
         <value type="string" value="15639237182.desktop"/>
       </property>
     </property>
+    <property name="plugin-13" type="string" value="power-manager-plugin"/>
   </property>
   <property name="clipman" type="empty">
     <property name="tweaks" type="empty">

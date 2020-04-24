@@ -15,15 +15,16 @@ fi
 distrib=$os$ver
 echo $os $ver
 
-which yad > /dev/null
-if [ $? = 1 ];
-then
-	echo "Install yad"
-	x-terminal-emulator -e "echo Install yad \
-			sudo apt-get install -y yad"
-else
-	echo "yad OK"
-fi
+# which yad > /dev/null
+# if [ $? = 1 ];
+# then
+# 	echo "Install yad"
+# 	x-terminal-emulator -e "echo Install yad ; \
+# 			sudo apt-get install -y yad"
+# else
+# 	echo "yad OK"
+# fi
+
 
 
 
@@ -51,9 +52,6 @@ checkErrorLog () {
     log="${1}"
     error=$(cat "${log}")
     rm "${log}"
-    dirconf="/usr/share/geox-tweak/"
-    find $dirconf -iname '*activ*' -exec sed -i 's/sxcdp = .*/\sxcdp = ok/' {} \;
-
 
     if [ "${error}" != "" ]; then
         echo "${error}" >&2
@@ -71,176 +69,111 @@ checkErrorLog () {
 errorWindow () {
     error="${1}"
     config="--center --button=OK:1"
+    find $HOME/.config/geox-tweak-xfce -iname 'geox-tweak.conf' -exec sed -i 's/sxcdp.*/\sxcdp = error/' {} \;
 
     yad ${config} --title="Error" --text="${error}"  --width 800 --height 500
 }
 
+_installConf()
+{
+	share="/usr/share"
+	gt=geox-tweak	
+	echo "Install Plank, synapse, conky and xfdashboard extra theme and config file"
+	mkdir -p $HOME/.gconf/apps/
+	cp -v -Rf $share/geox-tweak/theme/dockbarx/* $HOME/.gconf/apps/
+	echo $pw | sudo -S cp -v -Rf $share/geox-tweak/theme/plank/* $share/plank/
+	echo $pw | sudo -S cp -v -Rf $share/geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock/* $share/themes/xfdashboard-dark-nodock/
+	cp -v -f $share/geox-tweak/theme/xfdashboard/xfdashboard.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml 
+
+	mkdir -p $HOME/.config/synapse/
+	cp -v -f $share/geox-tweak/theme/synapse/* $HOME/.config/synapse/
+	cp -v -Rf $share/geox-tweak/theme/conky/* $HOME/.conky/
+	cp -v $share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce
+}
 
 installation() 
 	{ 
-	
-	if [ -f /etc/lsb-release ]; then
-    # For some versions of Debian/Ubuntu without lsb_release command
-    . /etc/lsb-release
-    os=$DISTRIB_ID
-    ver=$DISTRIB_RELEASE
-	fi
-
-	distrib=$os$ver
-
-
-
-
-		#update
-		#echo $pw | sudo -S apt-get update	
 		
-		#plank
-		which plank > /dev/null
-		if [ $? = 1 ]
-		then
-			if [ $distrib = "MX19" ] || [ $distrib = "MX18" ]  ; then
-			echo $pw | sudo -S apt-get install -y plank 
-
-			elif [ $os = "LinuxMint" ] || [ $os = "Ubuntu" ]; then
-			echo $pw | sudo -S add-apt-repository -y ppa:ricotz/docky
-			echo $pw | sudo -S apt-get update
-			echo $pw | sudo -S apt-get install -y plank
-			fi
+		if [ $os = "MX" ] || [ os = "Debian" ]; then
+			_installationMX
+		elif [ $os = "Ubuntu" ] || [ $os = "LinuxMint" ] ; then
+			_installationUnbuntu
 		fi
 
-		#Xfdashboard
-		which xfdashboard > /dev/null
-		if [ $? = 1 ]
-		then
-			if [ $distrib = "MX19" ] ; then
-			echo $pw | sudo -S sed -e "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list^C
-			echo $pw | sudo -S apt-get update ; apt-get install -y xfdashboard
-			echo $pw | sudo -S apt-get install -y xfdashboard-plugins
-			echo $pw | sudo -S sed -i 's/.* test/#&/'  /etc/apt/sources.list.d/mx.list
-			elif [ $distrib = "MX18" ] ; then
-			echo $pw | sudo -S apt-get install -y xfdashboard
-			echo $pw | sudo -S apt-get install -y xfdashboard-plugins
-			elif [ $os = "LinuxMint" ] || [ $os = "Ubuntu" ] ; then
-			sudo add-apt-repository ppa:xubuntu-dev/extras
-			sudo apt-get update
-			echo $pw | sudo -S apt-get install -y xfdashboard
-			echo $pw | sudo -S apt-get install -y xfdashboard-plugins	
+		echo $pw | sudo -S tar -xf /usr/share/geox-tweak/themes.tar.gz -C /usr/share/themes/ --skip-old-files
+
+		_installConf
+
+	}
+
+_repoUbuntu()
+	{
+		echo $pw | sudo -S add-apt-repository -y ppa:ricotz/docky
+		echo $pw | sudo add-apt-repository ppa:xubuntu-dev/extras
+		echo $pw | sudo -S add-apt-repository -y ppa:xuzhen666/dockbarx
+		echo $pw | sudo -S add-apt-repository -y ppa:papirus/papirus
+		echo $pw | sudo add-apt-repository ppa:synapse-core/
+		echo $pw | sudo apt-get update
+	}
+
+_reposMX()
+	{
+		echo $pw | sudo -S sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
+		if [ $distrib == "MX19" ] ; then
+		echo $pw | sudo -S sh -c "echo 'deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' > /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
+		echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
+		fi
+		echo $pw | sudo -S apt-get update
+	}
+
+_installationUnbuntu()
+	{
+		installApp="echo $pw | sudo -S apt-get install -y "
+
+		_repoUbuntu
+
+		wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
+		wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
+		echo $pw | sudo -S dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
+
+		for app in 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'dockbarx' 'dockbarx-themes-extra' 'xfce4-dockbarx-plugin' 'conky-all' 'conky-manager'
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					echo $app installation ...
+					$installApp $app
+
+				else
+					echo $app installed
 			fi	
-		fi		
+		done
 
-
-		#Synapse
-		which synapse > /dev/null
-		if [ $? = 1 ]
-		then
-			echo $pw | sudo -S apt-get install -y synapse
-			# sudo add-apt-repository ppa:synapse-core/testing
+		if [ ! -d "/usr/share/icons/Papirus"  ] ; then
+			$installAPP papirus-icon-theme
 		fi
-		
-		
+		if [ ! -e "/usr/bin/papirus-folders" ]; then
+			$installApp papirus-folders
+			$installApp libreoffice-style-papirus
+		fi
 
-		#Conky
-		which conky > /dev/null
-		if [ $? = 1 ]
-		then
 
-			if [ $os == "MX" ] ; then
-				echo $pw | sudo -S apt-get install -y conky-all
-				echo $pw | sudo -S apt-get install -y conky-manager
+	}
 
-			elif [ $os == "Ubuntu" ] || [ $os == "LinuxMint" ]; then
-				wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
-				wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
-				sudo dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
-				sudo apt -f install
-
-				# sudo add-apt-repository -y ppa:mark-pcnetspec/conky-manager-pm9
-				# sudo apt-get update
-				# echo $pw | sudo -S apt-get install -y conky-manager
-		fi 
-		
-		#Dockbarx & xfce4-dockbarx-plugin
-		which dockx >/dev/null
-		if [ $? = 1 ] ;
-		then
-			#for mx 19
-			if [ $distrib == "MX19" ] ; then
-			echo $pw | sudo -S sh -c "echo 'deb
-			http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >
-			/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
-			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd 
-			echo $pw | sudo -S apt-get update
-			# echo $pw | sudo -S apt-get install -y dockbarx
-			echo $pw | sudo -S apt-get install -y xfce4-dockbarx-plugin
-			echo $pw | sudo -S apt-get install -y dockbarx-themes-extra 
-			echo $pw | sudo -S sed -i 's/.* /#&/' /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list
-		
-			elif [ $distrib == "MX18" ] ; then
-			# echo $pw | sudo -S apt-get install -y dockbarx
-			echo $pw | sudo -S apt-get install -y xfce4-dockbarx-plugin
-			echo $pw | sudo -S apt-get install -y dockbarx-themes-extra 
-
-			#for ubuntu and derivative
-			elif [ $os == "Ubuntu" ] || [ $os = "LinuxMint" ]; then
-			echo $pw | sudo -S add-apt-repository -y ppa:xuzhen666/dockbarx
-			echo $pw | sudo -S apt-get update
-			# echo $pw | sudo -S apt-get install -y dockbarx
-			echo $pw | sudo -S apt-get install -y xfce4-dockbarx-plugin
-			echo $pw | sudo -S apt-get install -y dockbarx-themes-extra 
+_installationMX()
+	{
+		installApp="echo $pw | sudo -S apt-get install -y "
+		_reposMX
+		for app in 'plank'  'synapse' 'zeitgeist' 'dockbarx' 'dockbarx-themes-extra' \
+				 'xfce4-dockbarx-plugin' 'papirus-icon-theme' 'libreoffice-style-papirus' \
+				 'papirus-folders' 'conky-all' 'conky-manager' 'xfdashboard' 'xfdashboard-plugins'
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					$installApp $app
 			fi	
-		fi
-	### THEME ###
-	# Arc
-	#echo $pw | sudo -S apt-get install -y arc-theme arc-theme-hdpi arc-theme-xhdpi arc-grey-theme
-	# Adapta
-	#echo $pw | sudo -S apt-get install -y adapta-gtk-theme adapta-gtk-theme-colorpack
-	
-	
-		# Papirus icon
-
-		if [ ! -d "/usr/share/icons/Papirus"  ]
-			# Install : Papirus-icon-theme
-			then
-				if [ $os = "MX" ] ; then
-					echo $pw | sudo -S apt-get install -y papirus-icon-theme
-				elif [ $os = "LinuxMint" ] || [ $os = "Ubuntu" ] ; then
-					 echo $pw | sudo -S add-apt-repository -y ppa:papirus/papirus ; $pw | sudo -S apt-get update ; $pw | sudo -S apt-get install -y papirus-icon-theme
-				else echo $pw | sudo -S wget -qO- https://git.io/papirus-icon-theme-install | sh
-				fi
-		fi		
-		
-		#test -e "/usr/bin/papirus-folders"
-		#if [ $? = 1 ] ; 
-		if [ ! -e "/usr/bin/papirus-folders" ]
-			#Install : papirus-folders
-			then 
-				if [ $os = "MX" ] ; then
-					echo $pw | sudo -S apt-get install -y papirus-folders
-				elif [ $os = "Ubuntu" ] || [ $os = "LinuxMint" ]; then
-					echo $pw | sudo -S add-apt-repository -y ppa:papirus/papirus
-					apt-get update 
-					sudo apt-get install -y papirus-folders
-				else 
-					echo $pw | sudo -S wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-folders/master/install.sh | sh
-				fi
-		fi
-
-	# Copie des fichier de configuration des logiciels tiers et geox	
-		share="/usr/share"
-		gt=geox-tweak	
-			
-		echo $pw | sudo -S cp -v -Rf $share/geox-tweak/theme/dockbarx/* $HOME/.gconf/apps/
-		echo $pw | sudo -S cp -v -Rf $share/geox-tweak/theme/plank/* $share/plank/
-		echo $pw | sudo -S cp -v -f $share/geox-tweak/theme/xfdashboard/xfdashboard.xml $HOME/.config/xfce4/xfconf/
-		echo $pw | sudo -S cp -v -Rf $share/geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock/* $share/themes/xfdashboard-dark-nodock/
-		echo $pw | sudo -S cp -v -f $share/geox-tweak/theme/synapse/config.json $HOME/.config/synapse/
-		echo $pw | sudo -S cp -v -Rf $share/geox-tweak/theme/conky/* $HOME/.conky/
-		
-		
-			### Theme of synapse, plank & dockbarx ###
-
-		# copie des themes
-		echo $pw | sudo -S tar -jxvf /usr/share/geox-tweak/themes.tar.bz2 -C /usr/share/themes/  --skip-old-files    
+		done
+		echo $pw | sudo -S sed -i 's/.* test/#&/'  /etc/apt/sources.list.d/mx.list
+		wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
 	}
 
 
@@ -255,8 +188,9 @@ yadgui() {
 	else [[ $? == 0 ]]
 	mainFunction "Installation" installation
 	fi
-	
 }
+
+
 
 yadgui && exit
 
