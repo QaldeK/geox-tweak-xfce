@@ -49,10 +49,11 @@ def dark_light():
 def menu():
     menu = Gtk.Menu()
 
-    item_day_night = Gtk.CheckMenuItem.new_with_label('Day/Night : Automatic mode')
-    item_day_night.connect('activate', toggle_day_night_cb)  
+    # item_day_night = Gtk.CheckMenuItem.new_with_label('Day/Night : Automatic mode')
+    # item_day_night.connect('activate', toggle_day_night_cb)  
     # menu.append(item_day_night)
 
+  
     item_dark_mode = Gtk.CheckMenuItem.new_with_label(
         'Dark Theme')
 
@@ -65,16 +66,17 @@ def menu():
     menu.append(item_dark_mode)
 
     # Add Desktop Layout submenu
-    layout_menu_item = Gtk.MenuItem.new_with_label("Desktop Layout")
-    layout_menu = Gtk.Menu()
-    for layout in ['Geox', 'Ubuntu']:
-        layout_item = Gtk.MenuItem.new_with_label(layout)
-        layout_item.connect('activate', layout_cb, layout)
-        layout_menu.append(layout_item)
-    layout_menu_item.set_submenu(layout_menu)
+    # layout_menu_item = Gtk.MenuItem.new_with_label("Desktop Layout")
+    # layout_menu = Gtk.Menu()
+    # for layout in ['Geox', 'Ubuntu']:
+    #     layout_item = Gtk.MenuItem.new_with_label(layout)
+    #     layout_item.connect('activate', layout_cb, layout)
+    #     layout_menu.append(layout_item)
+    # layout_menu_item.set_submenu(layout_menu)
     # menu.append(layout_menu_item)
 
 
+  
     # Add Conky option submenu 
     conky_menu_item = Gtk.MenuItem.new_with_label(
         "Show on desktop (Conky)")
@@ -103,10 +105,14 @@ def menu():
     
     menu.append(conky_menu_item)
 
+   
+
     # Add Geox-tweak-xfce launcher item
     geox_item = Gtk.MenuItem.new_with_label('GeoX Tweak Xfce')
     geox_item.connect('activate', geox_cb)
     menu.append(geox_item)
+
+  
 
     # Add quit action
     quit_item = Gtk.MenuItem.new_with_label("Quit")

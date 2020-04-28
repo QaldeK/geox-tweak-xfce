@@ -7,9 +7,9 @@ import os.path
 from os import path
 import os
 import configparser  # traiter les fichiers de configuration
-from gi.repository import Gtk  # nécessaire pour utiliser le fichier glade/ GObject?
 import gi  # nécessaire pour utiliser le fichier glade
-gi.require_version('Gtk', '3.0')
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk  # nécessaire pour utiliser le fichier glade/ GObject?
 
 home = expanduser("~")  # path home de l'user
 sdir = os.path.dirname(os.path.abspath(__file__))  # path du script py
@@ -33,7 +33,6 @@ class Geox:
         self.builder.connect_signals(self)
 
         go = self.builder.get_object
-
         self.gtweak = GeoxTweak()
 
         # bouton pref
@@ -50,6 +49,7 @@ class Geox:
         self.conky = go("conky")
         self.ddterm = go("ddterm")
         self.notes = go("notes")
+        self.gtxi = go("gtxi")
 
         # Toggle Help TODO A traduire avant d'activer ?
         self.btn_plank_help = go("btn_plank_help")
@@ -58,16 +58,14 @@ class Geox:
         self.btn_conky_help = go("btn_conky_help")
         self.btn_notes_help = go("btn_notes_help")
 
-        self.warning_app_miss = go("warning_app_miss")
-
         self.help_txt_zone = go("help_txt_zone")
         self.defaut_help()
 
-        # /!\ Positionner apres la declaration des btn rapportées aux états
-        self.state_app(self)
-        # testés ;
+        self.warning_app_miss = go("warning_app_miss")
+        self.warning_app_miss.hide()
 
-        # Layout preview
+
+        # @ Layout preview
         self.geox = go("geox")
         self.geox.set_from_file(sdir + "/img/pv-geox.png")
         self.xubuntu = go("xubuntu")
@@ -91,7 +89,34 @@ class Geox:
         self.btn_apply = go("btn_apply")
         self.toggle_adapta_compact = go("toggle_adapta_compact")
 
-        # preview self.theme
+        # @ Onglet "Other"
+        self.btn_simpleclic_thunar = go("btn_simpleclic_thunar")
+        self.btn_simpleclic_desktop = go("btn_simpleclic_desktop")
+        self.btn_txt_next_icons = go("btn_txt_next_icons")
+        self.btn_folder_file = go("btn_folder_file")
+        self.btn_removable_desktop = go("btn_removable_desktop")
+        self.btn_trash_desktop = go("btn_trash_desktop")
+        self.btn_allhome_desktop = go("btn_allhome_desktop")
+        self.btn_home_desktop = go("btn_home_desktop")
+        self.btn_xfce_settings = go("btn_xfce_settings")
+        self.btn_lightdm_settings = go("btn_lightdm_settings")
+        self.btn_xfwm4_tweaks_settings = go("btn_xfwm4_tweaks_settings")
+        self.btn_notification_settings = go("btn_notification_settings")
+        self.btn_panel_settings = go("btn_panel_settings")
+        self.btn_desktop_settings = go("btn_desktop_settings")
+        self.btn_thunar_settings = go("btn_thunar_settings")
+
+
+
+
+
+        # @ POPOVER windows decor
+        # self.popover_wd = go("popover_wd")
+        # self.preview_wd_arc_light = go('preview_wd_arc_light')
+        # self.preview_wd_arc_light.set_from_file(sdir + '/img/wd_arc_light.png')
+
+
+        # @ preview self.theme
         self.preview_adapta = go("preview_adapta")
         self.preview_adapta.set_from_file(sdir + "/img/adapta.png")
         self.preview_arc = go("preview_arc")
@@ -146,6 +171,20 @@ class Geox:
         self.icon_grey = go("icon_grey")
         self.icon_grey.set_from_file(sdir + "/img/grey.svg")
 
+        # Configuration xfce actuelle
+        self.state_settings()
+        # Application tierce installé > .conf
+        self.status_plank = ""
+        self.status_synapse = ""
+        self.status_xfdashboard = ""
+        self.status_conky = ""
+        self.status_dockbarx = ""
+
+        # /!\ Positionner apres la declaration des btn rapportées aux états
+        # testés ;
+        self.state_app(self)
+        self.state_gtxi()
+
         # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
         self.var_theme = ""
         self.theme = ""
@@ -158,47 +197,18 @@ class Geox:
 
         self.chk_folder_color = go("chk_folder_color")
 
+
+        # @ affichage de la fenetre
+        self.window = go("main_window")
+        self.window.show()
+        
+        self.firstrun_warning()     # Verifie si FirstRun et dépendances
+
+
+
         config.read(gtconf)
         plank_theme = config.get("Style", "plank_theme")
         self.plank_theme = plank_theme
-
-        # Onglet "Other"
-        self.btn_simpleclic_thunar = go("btn_simpleclic_thunar")
-        self.btn_simpleclic_desktop = go("btn_simpleclic_desktop")
-        self.btn_txt_next_icons = go("btn_txt_next_icons")
-        self.btn_folder_file = go("btn_folder_file")
-        self.btn_removable_desktop = go("btn_removable_desktop")
-        self.btn_trash_desktop = go("btn_trash_desktop")
-        self.btn_allhome_desktop = go("btn_allhome_desktop")
-        self.btn_home_desktop = go("btn_home_desktop")
-        self.btn_xfce_settings = go("btn_xfce_settings")
-        self.btn_lightdm_settings = go("btn_lightdm_settings")
-        self.btn_xfwm4_tweaks_settings = go("btn_xfwm4_tweaks_settings")
-        self.btn_notification_settings = go("btn_notification_settings")
-        self.btn_panel_settings = go("btn_panel_settings")
-        self.btn_desktop_settings = go("btn_desktop_settings")
-        self.btn_thunar_settings = go("btn_thunar_settings")
-
-        # Configuration xfce actuelle
-        self.state_settings()
-        # Application tierce installé > .conf
-        self.status_plank = ""
-        self.status_synapse = ""
-        self.status_xfdashboard = ""
-        self.status_conky = ""
-        self.status_dockbarx = ""
-
-        self.txt_app_miss = go("txt_app_miss")
-        self.warning_app_miss = go("warning_app_miss")
-        self.warning_app_miss.hide()
-
-        self.status_app_dep()
-
-
-
-        # affichage de la fenetre
-        self.window = go("main_window")
-        self.window.show()
 
     @staticmethod
     def on_btn_quit_clicked(widget):
@@ -207,6 +217,47 @@ class Geox:
     def defaut_help(self):
         defaut = ""
         self.help_txt_zone.get_buffer().set_text(defaut)
+
+
+    def firstrun_warning(self):
+        """ Verifie si c'est le premier lancement de geox-tweak-xfce
+        Si oui, lance  le script firstrun.
+        Et verifie l'installation des logiciels tiers (synapse, xfdashboard, plank, dockbarx)
+        et des dépendances (python..., gconftool, etc. """
+
+        # TODO : verif logiciel par logiciel ; griser les layout impossible et proposer installation
+        # if config.get('AppInstall', 'synapse') != "ok"
+        #     arg3 ="bash " "
+
+        # Verifier le fichier de configuration
+        args = '''if [ ! -e $HOME/.config/geox-tweak-xfce/geox-tweak.conf ]
+        then mkdir $HOME/.config/geox-tweak-xfce/ ;
+        cp -f /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/geox-tweak.conf ;
+        fi '''
+        subprocess.run(args, shell=True)
+
+        config.read(gtconf)     # Lire la configuration tel que loggué
+        
+        if config.get('AppInstall', 'FirstRun') != "no":
+
+            dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.WARNING,
+                                       Gtk.ButtonsType.OK_CANCEL, "Some packages are required by geox-tweak-xfce, procced to installation ?")
+            response = dialog.run()
+            if response == Gtk.ResponseType.OK:
+                self.firstrun()
+
+            dialog.destroy()
+
+            # dialog.connect("destroy", Gtk.main_quit)
+            # dialog.show_all()
+
+    def firstrun(self):
+
+        arg = '''sed -i 's/firstrun.*/firstrun = no/' $HOME/.config/geox-tweak-xfce/geox-tweak.conf'''
+        subprocess.Popen(arg, shell=True)
+
+        script = sdir + '/script/firstrun.sh'
+        subprocess.run("xfce4-terminal -e " + script, shell=True)
 
 
     def status_app_dep(self):
@@ -219,26 +270,26 @@ class Geox:
         else:
             self.status_plank = 'ok'
 
-        if subprocess.check_output('''dpkg-query -W -f='${Status}' synapse 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
-            self.status_synapse = 'miss'
-            app_miss += [' synapse ']
+        # if subprocess.check_output('''dpkg-query -W -f='${Status}' synapse 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
+        #     self.status_synapse = 'miss'
+        #     app_miss += [' synapse ']
 
-        else:
-            self.status_synapse = 'ok'
+        # else:
+        #     self.status_synapse = 'ok'
 
-        if subprocess.check_output('''dpkg-query -W -f='${Status}' xfdashboard 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
-            self.status_xfdashboard = 'miss'
-            app_miss += ['xfdashboard']
+        # if subprocess.check_output('''dpkg-query -W -f='${Status}' xfdashboard 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
+        #     self.status_xfdashboard = 'miss'
+        #     app_miss += ['xfdashboard']
 
-        else:
-            self.status_xfdashboard = 'ok'
+        # else:
+        #     self.status_xfdashboard = 'ok'
 
-        if subprocess.check_output('''dpkg-query -W -f='${Status}' conky-all 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
-            self.status_conky = 'miss'
-            app_miss += ['conky-all']
+        # if subprocess.check_output('''dpkg-query -W -f='${Status}' conky-all 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
+        #     self.status_conky = 'miss'
+        #     app_miss += ['conky-all']
 
-        else:
-            self.status_conky = 'ok'
+        # else:
+        #     self.status_conky = 'ok'
 
         if subprocess.check_output('''dpkg-query -W -f='${Status}' xfce4-dockbarx-plugin 2>/dev/null | grep -c "ok installed"''', shell=True) == 1:
             self.status_dockbarx = 'miss'
@@ -247,23 +298,24 @@ class Geox:
         else:
             self.status_dockbarx = 'ok'
 
-
+        print("Some needed sofware are not installed: ")
         print(app_miss)
         
         #Si liste non-vide
         if (app_miss): 
             warning_txt = ('Some software necessary for the use of themes are not installed : ' 
-                + str(app_miss) + '\nPlease try to install them manually ')
+                + str(app_miss) + '\nPlease click on "install it" or try to install them manually ')
                             
 
             self.txt_app_miss.set_label(warning_txt)
             self.warning_app_miss.show()
 
 
+    def on_btn_install_miss_clicked(self):
+        self.firstrun()
 
 
 # @ Parametrage xfce ; volet "Other"
-
     def state_settings(self):
         """ Verifie les parametrage de xfce dans xfconf pour
         que les check_button refletent bien la configuration actuelle """
@@ -329,7 +381,22 @@ class Geox:
                 self.on_btn_removable_desktop_toggled)
 
 # @ TOOLS : Bouton Toggle des App tieres
-# TODO > dependances : app & conkytoggle.sh;)
+    # TODO > dependances : app & conkytoggle.sh;)
+
+
+    def on_gtxi_toggled(self, widget):
+        if widget.get_active():
+            subprocess.Popen('python3 /usr/share/geox-tweak/gtx_indicator.py', shell=True)
+            widget.set_label("on")
+            subprocess.Popen('''
+                sed -i 's/Hidden=true.*/\Hidden=false/' /$HOME/.config/autostart/gtx-indicator.desktop''', shell=True)
+
+        else:
+            subprocess.Popen('pkill -f gtx_indicator.py', shell=True)
+            widget.set_label("off")
+            subprocess.Popen('''
+                sed -i 's/Hidden=false.*/\Hidden=true/' /$HOME/.config/autostart/gtx-indicator.desktop''', shell=True)
+                              
 
     def on_app_toggled(self, widget):
         """ Fonction permettant d'envoyer les commandes d'execution et
@@ -387,7 +454,7 @@ class Geox:
         else:
             self.btn_ddterm_pref.hide()
 
-# Bouton préférences #########
+    # Bouton préférences #########
     @staticmethod
     def on_btn_plank_pref_clicked(widget):
         os.system(''' plank --preferences ''')
@@ -408,8 +475,8 @@ class Geox:
     def on_btn_notes_pref_clicked(widget):
         os.system(''' xfce4-notes-settings ''')
 
-# Bouton Toggle HELP ############
-# TODO Trad et rendre de nouveau visible
+    # Bouton Toggle HELP ############
+    # TODO Trad et rendre de nouveau visible
     def on_btn_plank_help_clicked(self, widget):
         help_txt = _("PLANK est une barre de lancement d'application.")
         self.help_txt_zone.get_buffer().set_text(help_txt)
@@ -445,7 +512,21 @@ class Geox:
 
         self.help_txt_zone.get_buffer().set_text(help_txt)
 
-#@ Verification de l'etat des logiciels (actif ou pas) #####################
+# @ Verification de l'etat des logiciels (actif ou pas) 
+    def state_gtxi(self):
+        arg = '''pgrep -f "gtx_indicator.py" &>/dev/null'''
+        test_gtxi = subprocess.run(arg, shell=True, stdout=subprocess.PIPE)
+        if not test_gtxi.stdout:
+            self.gtxi.handler_block_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_active(False)
+            self.gtxi.handler_unblock_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_label("off")
+        else:
+            self.gtxi.handler_block_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_active(True)
+            self.gtxi.handler_unblock_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_label("on")
+
     def state_app(self, widget):
         # dictinnaire des app a verifier
         apps = {
@@ -453,7 +534,7 @@ class Geox:
             "plank": self.plank,
             "xfdashboard": self.xfdashboard,
             "conky": self.conky,
-            "xfce4-notes": self.notes
+            "xfce4-notes": self.notes,
         }
 
         prefapps = {
@@ -468,6 +549,7 @@ class Geox:
         # Verifie si le logiciel est actif
         for app in apps.keys():
             selfapp = apps[app]
+      
             if os.system("pidof " + app +
                          " >/dev/null 2>&1"):  # /!\ Renvoie True si non-actif
                 self.app_state(selfapp, appactive(True))
@@ -510,10 +592,11 @@ class Geox:
         else:
             selfprefapp.show()
 
-# @ theme installé et non installé
+# @ theme installé et non installé 
+    #TODO
 
     def installed_themes(self):
-        """ check if themes are installed or not (geox-tweak.conf verification) """
+        """ check if themes are installed or not (geox-tweak.conf verification OR real check before change ??)  """
 
         themes = ('qogir', 'qogir-dark', 'materia', 'numix', 'arc',
                   'arc_red', 'arc_cherry', 'macos', 'macos_dark',
@@ -524,8 +607,8 @@ class Geox:
             if config.get('ThemeInstall', theme) == 'no':
                 pass  # TODO
 
-#@ Panel layout  #######
-# TODO  autre configuration : theme xfdashboard ? &
+# @ Panel layout  
+    # TODO  autre configuration : theme xfdashboard ? &
 
     def on_radio_geox_toggled(self, widget):
         if widget.get_active():
@@ -618,8 +701,8 @@ class Geox:
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
 
-#@ Onglet : "Window theme" #########
-    # Bouton additonnel pointant vers les outils de parametrage xfce natifs
+# @ Onglet : "Window theme" 
+    # @ Bouton additonnel pointant vers les outils de parametrage xfce natifs
     @staticmethod
     def on_btn_widows_decor_clicked(widget):
         os.system("xfwm4-settings")
@@ -646,15 +729,22 @@ class Geox:
         else:
             self.gtweak.theme_var(var_arc="")
 
-#@ theme # Button : Apply selected theme ################
+
+    # @ theme # Button : Apply selected theme 
     def on_btn_apply_clicked(self, widget):
         if self.chk_folder_color.get_active():
             self.gtweak.change_theme(change_folder=True)
         else:
             self.gtweak.change_theme(change_folder=False)
 
-# @ Preparation de la Modification des themes en fonction de la selection (radio btn)
-    # What ? Obliger de faire une fonction par objet glade ...?
+    # # @ theme # PopOver windows decorator
+    # def on_btn_wd_clicked(self, widget):
+    #     self.popover_wd.show_all()
+    #     self.popover_wd.popup()
+
+
+    # @ Preparation de la Modification des themes en fonction de la selection (radio btn)
+        # What ? Obliger de faire une fonction par objet glade ...?
         # TODO Add plano matcha...
 
     def on_radio_greybird_toggled(self, widget):
@@ -724,7 +814,6 @@ class Geox:
             self.theme_name.set_label('Adapta-Pink-Nokto')
             self.bar_theme.show()
 
-#Fixit : theme manquant
     def on_radio_adapta_deeppurple_toggled(self, widget):
         if widget.get_active():
             self.preview_adapta.set_from_file(sdir +
@@ -939,13 +1028,6 @@ class Geox:
                 libreoffice_icons='papirus-dark',
             )
 
-    # FIXIT
-    def on_radio_arc_darker_red_toggled(self, widget):
-        if widget.get_active():
-            self.preview_arc.set_from_file(sdir + "/img/arc-red-darker.png")
-            self.theme_name.set_label("Arc-Red-Darker")
-            themename = self.theme_name.get_label()
-            self.bar_theme.show()
 
     def on_radio_arc_dark_cherry_toggled(self, widget):
         if widget.get_active():
@@ -958,51 +1040,6 @@ class Geox:
                 windows_decor=themename,
             )
 
-    # Fixit ?
-    def on_radio_arc_darker_cherry_toggled(self, widget):
-        if widget.get_active():
-            self.preview_arc.set_from_file(sdir + "/img/arc-cherry-darker.png")
-            self.theme_name.set_label("Arc-Cherry-Darker")
-            themename = self.theme_name.get_label()
-            self.bar_theme.show()
-
-    def on_radio_arc_dark_green_toggled(self, widget):
-        if widget.get_active():
-            self.preview_arc.set_from_file(sdir + "/img/arc-green-dark.png")
-            self.theme_name.set_label("Arc-Green-Dark")
-            themename = self.theme_name.get_label()
-            self.bar_theme.show()
-            self.gtweak.select_theme(
-                theme=themename,
-                windows_decor=themename,
-                icons_name='Papirus-Dark',
-                libreoffice_icons='papirus-dark',
-            )
-
-    # Fixit ?
-    def on_radio_arc_darker_green_toggled(self, widget):
-        if widget.get_active():
-            self.preview_arc.set_from_file(sdir + "/img/arc-green-darker.png")
-            self.theme_name.set_label("Arc-Green-Darker")
-            themename = self.theme_name.get_label()
-            self.bar_theme.show()
-            self.gtweak.select_theme(
-                theme=themename,
-                windows_decor=themename,
-            )
-
-    # Fixit ?
-    def on_radio_arc_darker_toggled(self, widget):
-        if widget.get_active():
-            self.theme = "Arc-Darker"
-            self.windows_decor = "Arc-Darker"
-            self.icons = "Papirus"
-            self.libreoffice_icons = "papirus"
-            self.preview_arc.set_from_file(sdir + "/img/arc-darker.png")
-            self.folder = "blue"
-            self.theme_name.set_label("Arc-Darker")
-            themename = self.theme_name.get_label()
-            self.bar_theme.show()
 
     def on_radio_clearlooks_toggled(self, widget):
         if widget.get_active():
@@ -1101,7 +1138,7 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
-                icons_names='Papirus-Light'
+                icons_name='Papirus-Light'
             )
 
     # !Pas d'affichage
@@ -1159,17 +1196,16 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
-                folder_color='red'  # TODO Another color ?
+                folder_color='orange'
             )
-
-  # ICON color
+    # ICON color
 
     def on_folder_toggled(self, widget):
         if widget.get_active():
             folder_color = Gtk.Buildable.get_name(widget)
             self.gtweak.on_folderc(folder_color)
 
-#@ pane : "OTHER" ############################################
+# @ pane : "OTHER" 
 
     # Buttons  of "Other" pane #####################
 

@@ -23,34 +23,6 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
   </object>
-  <object class="GtkImage" id="icon_bluegrey1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkImage" id="icon_bluegrey2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkImage" id="icon_bluegrey3">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkImage" id="icon_bluegrey4">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkImage" id="icon_bluegrey5">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkImage" id="icon_bluegrey6">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkImage" id="icon_bluegrey7">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
   <object class="GtkImage" id="icon_brown">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -122,6 +94,10 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
   </object>
+  <object class="GtkImage" id="preview_wd_arc_light">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+  </object>
   <object class="GtkRadioButton" id="radio_default_theme">
     <property name="label" translatable="yes">radiobutton</property>
     <property name="visible">True</property>
@@ -153,8 +129,8 @@
               <object class="GtkNotebook" id="notebook">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="margin_top">1</property>
-                <property name="margin_bottom">1</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -192,7 +168,18 @@
                                         <property name="spacing">6</property>
                                         <property name="layout_style">end</property>
                                         <child>
-                                          <placeholder/>
+                                          <object class="GtkButton" id="btn_install_miss">
+                                            <property name="label" translatable="yes">Install it !</property>
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="receives_default">True</property>
+                                            <signal name="clicked" handler="on_btn_install_miss_clicked" swapped="no"/>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
                                         </child>
                                       </object>
                                       <packing>
@@ -896,7 +883,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">5</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -907,7 +894,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">5</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -916,7 +903,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">2</property>
-                                                <property name="top_attach">5</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -928,7 +915,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">3</property>
-                                                <property name="top_attach">5</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -942,7 +929,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">5</property>
-                                                <property name="top_attach">5</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -953,7 +940,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">7</property>
+                                                <property name="top_attach">8</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -967,7 +954,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">7</property>
+                                                <property name="top_attach">8</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -977,7 +964,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">2</property>
-                                                <property name="top_attach">7</property>
+                                                <property name="top_attach">8</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -990,7 +977,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">3</property>
-                                                <property name="top_attach">7</property>
+                                                <property name="top_attach">8</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1004,7 +991,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">4</property>
-                                                <property name="top_attach">7</property>
+                                                <property name="top_attach">8</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1019,7 +1006,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">5</property>
-                                                <property name="top_attach">7</property>
+                                                <property name="top_attach">8</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1034,7 +1021,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">4</property>
-                                                <property name="top_attach">6</property>
+                                                <property name="top_attach">7</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1047,7 +1034,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">3</property>
-                                                <property name="top_attach">6</property>
+                                                <property name="top_attach">7</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1057,7 +1044,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">2</property>
-                                                <property name="top_attach">6</property>
+                                                <property name="top_attach">7</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1071,7 +1058,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">6</property>
+                                                <property name="top_attach">7</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1082,7 +1069,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">6</property>
+                                                <property name="top_attach">7</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1094,7 +1081,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">5</property>
-                                                <property name="top_attach">6</property>
+                                                <property name="top_attach">7</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1108,7 +1095,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">4</property>
-                                                <property name="top_attach">5</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1120,9 +1107,65 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">4</property>
+                                                <property name="top_attach">5</property>
                                                 <property name="width">6</property>
                                               </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="stock">gtk-execute</property>
+                                                <property name="icon_size">3</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="tooltip_text" translatable="yes">Affichage des applications et fenetres ouvertes</property>
+                                                <property name="label" translatable="yes">Gtx-Indicator</property>
+                                                <attributes>
+                                                  <attribute name="weight" value="semibold"/>
+                                                </attributes>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkArrow">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkToggleButton" id="gtxi">
+                                                <property name="label" translatable="yes">activer</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="toggled" handler="on_gtxi_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">3</property>
+                                                <property name="top_attach">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
                                             </child>
                                             <child>
                                               <placeholder/>
@@ -1250,7 +1293,12 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                   <object class="GtkLabel" id="page_theme">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">3</property>
+                    <property name="margin_right">4</property>
                     <property name="label" translatable="yes">Desktop Layout</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="tab_fill">False</property>
@@ -1283,19 +1331,6 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="column_homogeneous">True</property>
-                                    <child>
-                                      <object class="GtkImage" id="preview_adapta">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="margin_top">6</property>
-                                        <property name="margin_bottom">6</property>
-                                        <property name="resource">img/adapta.png</property>
-                                      </object>
-                                      <packing>
-                                        <property name="left_attach">0</property>
-                                        <property name="top_attach">2</property>
-                                      </packing>
-                                    </child>
                                     <child>
                                       <object class="GtkImage" id="preview_arc">
                                         <property name="visible">True</property>
@@ -1441,48 +1476,6 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkRadioButton" id="radio_arc_red">
-                                                <property name="label" translatable="yes">Arc Red</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_red_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">0</property>
-                                                <property name="top_attach">1</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_darker">
-                                                <property name="label" translatable="yes">Arc Darker</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_darker_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_darker_red">
-                                                <property name="label" translatable="yes">Arc Darker Red</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_darker_red_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">1</property>
-                                              </packing>
-                                            </child>
-                                            <child>
                                               <object class="GtkRadioButton" id="radio_arc_dark">
                                                 <property name="label" translatable="yes">Arc Dark</property>
                                                 <property name="visible">True</property>
@@ -1498,101 +1491,19 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkRadioButton" id="radio_arc_dark_red">
-                                                <property name="label" translatable="yes">Arc Dark Red</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_dark_red_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">1</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_darker_green">
-                                                <property name="label" translatable="yes">Arc Darker Green</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_darker_green_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">3</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_dark_green">
-                                                <property name="label" translatable="yes">Arc Dark Green</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_dark_green_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">3</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_cherry">
-                                                <property name="label" translatable="yes">Arc Cherry</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_cherry_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">0</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_darker_cherry">
-                                                <property name="label" translatable="yes">Arc Darker Cherry</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_darker_cherry_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_arc_dark_cherry">
-                                                <property name="label" translatable="yes">Arc Dark Cherry</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">True</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_arc_dark_cherry_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
                                               <object class="GtkCheckButton" id="toggle_arc_hdpi">
                                                 <property name="label" translatable="yes">hdpi</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
+                                                <property name="margin_top">15</property>
+                                                <property name="margin_bottom">5</property>
                                                 <property name="draw_indicator">True</property>
                                                 <signal name="toggled" handler="on_toggle_arc_hdpi_toggled" swapped="no"/>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">4</property>
+                                                <property name="top_attach">1</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1601,12 +1512,14 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="receives_default">False</property>
+                                                <property name="margin_top">15</property>
+                                                <property name="margin_bottom">5</property>
                                                 <property name="draw_indicator">True</property>
                                                 <signal name="toggled" handler="on_toggle_arc_xhdpi_toggled" swapped="no"/>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">2</property>
-                                                <property name="top_attach">4</property>
+                                                <property name="top_attach">1</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -1850,7 +1763,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                                 <property name="receives_default">False</property>
                                                 <property name="tooltip_text" translatable="yes">Utiliser une variante plus compacte du thème.</property>
                                                 <property name="halign">end</property>
-                                                <property name="margin_top">5</property>
+                                                <property name="margin_top">15</property>
                                                 <property name="margin_bottom">5</property>
                                                 <property name="draw_indicator">True</property>
                                                 <signal name="toggled" handler="on_toggle_adapta_compact_toggled" swapped="no"/>
@@ -2514,6 +2427,19 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                         <property name="width">2</property>
                                       </packing>
                                     </child>
+                                    <child>
+                                      <object class="GtkImage" id="preview_adapta">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">6</property>
+                                        <property name="resource">img/adapta.png</property>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">0</property>
+                                        <property name="top_attach">2</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                   <packing>
                                     <property name="expand">True</property>
@@ -2638,7 +2564,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                             <property name="layout_style">end</property>
                             <child>
                               <object class="GtkCheckButton" id="chk_folder_color">
-                                <property name="label" translatable="yes">change folder color</property>
+                                <property name="label" translatable="yes">change folder color (password required)</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -2712,7 +2638,16 @@ In this case, consider choosing an icons theme that is consistent with the chose
                               </packing>
                             </child>
                             <child>
-                              <placeholder/>
+                              <object class="GtkButton" id="btn_wd">
+                                <property name="label" translatable="yes">Windows Decorator</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
                             </child>
                           </object>
                           <packing>
@@ -2737,7 +2672,11 @@ In this case, consider choosing an icons theme that is consistent with the chose
                   <object class="GtkLabel" id="page_theme2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_right">3</property>
                     <property name="label" translatable="yes">Windows Theme</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -2785,7 +2724,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="label" translatable="yes">Select the icon color for the folders
-(only works if the "papirus" icon theme is active)</property>
+(only works if the "papirus" icon theme is active ; password required)</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -3043,7 +2982,11 @@ In this case, consider choosing an icons theme that is consistent with the chose
                   <object class="GtkLabel" id="page_theme3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_right">3</property>
                     <property name="label" translatable="yes">Icons Colors</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="position">2</property>
@@ -3088,7 +3031,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="btn_folder_file">
-                                <property name="label" translatable="yes">Trier les dossiers avant les fichiers</property>
+                                <property name="label" translatable="yes">Folders before files</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -3103,7 +3046,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                             </child>
                             <child>
                               <object class="GtkCheckButton" id="btn_txt_next_icons">
-                                <property name="label" translatable="yes">Texte à coté des icones</property>
+                                <property name="label" translatable="yes">Text beside icons</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -3393,7 +3336,11 @@ In this case, consider choosing an icons theme that is consistent with the chose
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_right">3</property>
                     <property name="label" translatable="yes">Other </property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="position">3</property>
@@ -3442,6 +3389,193 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkRadioButton" id="wd_defaut">
+    <property name="label" translatable="yes">radiobutton</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">False</property>
+    <property name="active">True</property>
+    <property name="draw_indicator">True</property>
+  </object>
+  <object class="GtkPopover" id="popover_wd">
+    <property name="can_focus">False</property>
+    <property name="relative_to">btn_wd</property>
+    <child>
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkRadioButton" id="wd_adpata">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="active">True</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_adpata1">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_arc_dark">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_adpata3">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_adpata4">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_materia_dark">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_adpata6">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_adpata7">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_arc_light">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="image">preview_wd_arc_light</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_materia_dark1">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">1</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_materia_light">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkRadioButton" id="wd_materia_dark3">
+            <property name="label" translatable="yes">radiobutton</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="draw_indicator">True</property>
+            <property name="group">wd_defaut</property>
+          </object>
+          <packing>
+            <property name="left_attach">2</property>
+            <property name="top_attach">3</property>
           </packing>
         </child>
       </object>

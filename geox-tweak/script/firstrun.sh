@@ -33,13 +33,27 @@ _installConf()
 	mkdir -p $HOME/.config/synapse/
 	cp -f /usr/share/geox-tweak/theme/synapse/* $HOME/.config/synapse/
 	# Conky
+	mkdir -p $HOME/.conky
 	tar -xf /usr/share/geox-tweak/theme/conky.tar.gz -C $HOME/.conky
 	sudo cp -f /usr/share/geox-tweak/script/conkytoggle.sh	/usr/bin/conkytoggle.sh
 	# Autostart
-	cp -f /usr/share/geox-tweak/script/autostart/* $HOME/.config/autostart/
+	mkdir -p $HOME/.config/autostart/
+	cp -n /usr/share/geox-tweak/script/autostart/* $HOME/.config/autostart/
 	# Geox-Tweak-Xfce
 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce
-	cp -ru /usr/share/geox-tweak/panel $HOME/.config/geox-tweak-xfce
+	cp -ru /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce
+
+
+	echo '''#pulseaudio-button * {-gtk-icon-transform: scale(1);}
+#xfce4-notification-plugin * {-gtk-icon-transform: scale(1);}
+#xfce4-power-manager-plugin * {-gtk-icon-transform: scale(1);}''' >> $HOME/.config/gtk-3.0/gtk.css
+
+	# configure plank
+	xfconf-query -cv xfwm4 -p /general/show_dock_shadow -s "false"
+	cp -Rfv /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
+	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items " ['thunar.dockitem', 'firefox.dockitem', thunderbird.dockitem', 'org.xfce.Catfish.dockitem', 'libreoffice-startcenter.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem'] "
+
+
 }
 
 installation() 
@@ -62,7 +76,6 @@ installation()
 		# change firstrun value
 		_installConf
 
-		sed -i 's/firstrun.*/firstrun = no/' $HOME/.config/geox-tweak-xfce/geox-tweak.conf
 
 		echo "----------------------------------------------"
 		echo "Procces terminate, press enter for quit"
@@ -74,12 +87,22 @@ installation()
 
 _repoUbuntu()
 	{
-		sudo add-apt-repository -y ppa:ricotz/docky
-		sudo add-apt-repository ppa:xubuntu-dev/extras
-		sudo add-apt-repository -y ppa:xuzhen666/dockbarx
-		sudo add-apt-repository -y ppa:papirus/papirus
-		sudo add-apt-repository ppa:synapse-core/
-		sudo apt-get update
+#FIXIT > autre distrib concerné !?
+
+        if [ $distrib = "LinuxMint19.3" ]; then
+            echo $pw | sudo -S sh -c "echo '
+		deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
+			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
+            echo $pw | sudo -S apt update
+            echo $pw | sudo -S apt install dockbarx xfce4-dockbarx-plugin  
+        else            
+		    echo $pw | sudo -S add_ppa:ricotz/docky
+		    echo $pw | sudo -S add_ppa:xubuntu-dev/extras
+		    echo $pw | sudo -S add_ppa:xuzhen666/dockbarx
+		    echo $pw | sudo -S add_ppa:papirus/papirus
+		    echo $pw | sudo -S add_ppa:synapse-core/testing
+		    echo $pw | sudo -S apt-get update
+	fi
 	}
 
 _reposMX()
@@ -94,12 +117,9 @@ _installationUnbuntu()
 
 		_repoUbuntu
 
-		wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
-		wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
-		sudo dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
 
 		for app in 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist'\
-		 'dockbarx' 'xfce4-dockbarx-plugin' 'conky-all' 'conky-manager'
+		 'dockbarx' 'dockbarx-themes-extra' 'xfce4-dockbarx-plugin' 'conky-all' 
 			do
 				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
 				then
@@ -113,6 +133,13 @@ _installationUnbuntu()
 		#
 
 		done
+
+
+		wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
+		wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
+		sudo dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
+		rm $HOME/realpath_8.26-3ubuntu4_all.deb
+		rm $HOME/conky-manager-v2.4-amd64.deb
 
 		if [ ! -d "/usr/share/icons/Papirus"  ] ; then
 			$installApp papirus-icon-theme
@@ -151,7 +178,18 @@ _installationMX()
 
 	}
 
-
+add_ppa() {
+      for i in "$@"; do
+        grep -h "^deb.*$i" /etc/apt/sources.list.d/* > /dev/null 2>&1
+        if [ $? -ne 0 ]
+        then
+          echo "Adding ppa:$i"
+          sudo add-apt-repository -y ppa:$i
+        else
+          echo "ppa:$i already exists"
+        fi
+      done
+    }
 
 installation && exit
 

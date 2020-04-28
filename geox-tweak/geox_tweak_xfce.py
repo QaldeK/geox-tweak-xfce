@@ -14,6 +14,7 @@ gi.require_version('Gtk', '3.0')
 
 home = expanduser("~")  # path home de l'user
 sdir = os.path.dirname(os.path.abspath(__file__))  # path du script py
+
 paneldir = home + '/.config/geox-tweak-xfce/panel/'
 config = configparser.ConfigParser()
 gtconf = home + '/.config/geox-tweak-xfce/geox-tweak.conf'
@@ -24,50 +25,14 @@ class GeoxTweak:
     def __init__(self):
 
         # TODO :  copier def
-        self.firstrun_warning()     # Verifie si FirstRun et dépendances
         self.var_adapta = ""
         self.var_arc = ""
         # config.read(gtconf)     # Lire la configuration tel que loggué
-
+        config.read(gtconf)
         self.conf_actual()
 
-    # @ FirstRun, dependance et logiciel tiers
-    # FIXIT
 
-    def firstrun_warning(self):
-        """ Verifie si c'est le premier lancement de geox-tweak-xfce
-        Si oui, lance  le script firstrun.
-        Et verifie l'installation des logiciels tiers (synapse, xfdashboard, plank, dockbarx)
-        et des dépendances (python..., gconftool, etc. #What ? : 2? script différent ?"""
 
-        # TODO : verif logiciel par logiciel ; griser les layout impossible et proposer installation
-        # if config.get('AppInstall', 'synapse') != "ok"
-        #     arg3 ="bash " "
-
-        # Verifier le fichier de configuration
-        args = '''if [ ! -e $HOME/.config/geox-tweak-xfce/geox-tweak.conf ]
-        then mkdir $HOME/.config/geox-tweak-xfce/ ;
-        cp -f /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/geox-tweak.conf ;
-        fi '''
-        subprocess.check_call(args, shell=True)
-        config.read(gtconf)     # Lire la configuration tel que loggué
-        if config.get('AppInstall', 'FirstRun') != "no":
-
-            dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.WARNING,
-                                       Gtk.ButtonsType.OK_CANCEL, "Some packages are required by geox-tweak-xfce, procced to installation ?")
-            response = dialog.run()
-            if response == Gtk.ResponseType.OK:
-                self.firstrun()
-
-            dialog.destroy()
-
-            # dialog.connect("destroy", Gtk.main_quit)
-            # dialog.show_all()
-
-    def firstrun(self):
-
-        script = sdir + '/script/firstrun.sh'
-        subprocess.call("xfce4-terminal -e " + script, shell=True)
 
     def conf_actual(self):
 
@@ -87,13 +52,13 @@ class GeoxTweak:
         config.set('Style', 'windows_decor', self.windows_decor)
         config.set('Style', 'icons', self.icons)
 
-        if '-dark' in self.theme:  # :   #FIXIT ?
+        if '-dark' in self.theme:
             config.set('Style', 'dark_theme', 'yes')
 
-        elif'Nokto' in self.theme:  # :   #FIXIT ?
+        elif'Nokto' in self.theme:
             config.set('Style', 'dark_theme', 'yes')
 
-        elif'-Dark' in self.theme:  # :   #FIXIT ?
+        elif'-Dark' in self.theme:
             config.set('Style', 'dark_theme', 'yes')
 
         else:
@@ -101,11 +66,10 @@ class GeoxTweak:
 
         config.write(open(gtconf, 'w'))
 
-#@ GTK/icon/libreofficeicons/plank Theme_________________
+# @ GTK/icon/libreofficeicons/plank Theme_________________
 
     def change_theme(self, change_folder=True):
 
-        # if self.icons != config.get('Style', 'icons'):  #Fixit
         subprocess.Popen(
             '''xfconf-query -c xsettings -p /Net/IconThemeName -s ''' +
             self.icons + "",
@@ -133,14 +97,22 @@ class GeoxTweak:
             shell=True)
         print("new theme : " + theme)
 
-        # TODO comparer a .conf et ajouter donné a celuici
-        subprocess.Popen(
-            '''sed -i s'#"SymbolStyle" oor:op="fuse"><value>.*</value></prop></item>#"SymbolStyle" oor:op="fuse"><value>'''
-            + self.libreoffice_icons +
-            '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ;
-            sed -i s'#papirus</item>#''' + self.libreoffice_icons +
-            '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ''',
-            shell=True)
+        if config.get('Style', 'libreoffice_icons') != self.libreoffice_icons:
+
+            subprocess.Popen('''
+                if [ ! -e "$HOME/.config/libreoffice/4/user/registrymodifications.xcu ]; then
+
+                sed -i s'#"SymbolStyle" oor:op="fuse"><value>.*</value></prop></item>#"SymbolStyle" oor:op="fuse"><value>'''
+                + self.libreoffice_icons +
+                '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ;
+                sed -i s'#papirus</item>#''' + self.libreoffice_icons +
+                '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu 
+
+                fi 
+                ''', shell=True)
+
+            config.set('Style', 'libreoffice_icons', self.libreoffice_icons)
+            
         print("libreoffice icon style : " + self.libreoffice_icons)
 
         if change_folder:
@@ -162,13 +134,13 @@ class GeoxTweak:
         config.set('Style', 'windows_decor', self.windows_decor)
         config.set('Style', 'icons', self.icons)
 
-        if '-dark' in self.theme:  # :   #FIXIT ?
+        if '-dark' in self.theme:
             config.set('Style', 'dark_theme', 'yes')
 
-        elif'Nokto' in self.theme:  # :   #FIXIT ?
+        elif'Nokto' in self.theme:
             config.set('Style', 'dark_theme', 'yes')
 
-        elif'-Dark' in self.theme:  # :   #FIXIT ?
+        elif'-Dark' in self.theme:
             config.set('Style', 'dark_theme', 'yes')
 
         else:
@@ -208,10 +180,8 @@ class GeoxTweak:
         # import pdb; pdb.set_trace()
         script = '''#!/bin/bash
 Theme=$(xfconf-query -c xsettings -p /Net/IconThemeName)
-#xfce4-terminal -e ""
-sudo papirus-folders -t $Theme -C ''' + cfolder + ''' 
- '''
-        # subprocess.Popen([sdir + "/script/folder-color.sh", cfolder], shell=False)
+xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
+
         subprocess.Popen(script, shell=True)
 
         config.set('Style', 'folder', cfolder)
@@ -241,7 +211,7 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''
                 libreoffice_icons="papirus-dark",
             )
             self.change_theme()
-# FIXIT : papirus icon don't  match for feather pad and other..
+
         elif 'Arc' in self.theme:
             darktheme = self.theme + '-Dark'
             print(darktheme)
@@ -354,7 +324,6 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''
         config.set('Style', 'layout', layout)
         config.write(open(gtconf, 'w'))
 
-    # Fixit : App close if gtx quit/bug >> Popen ? or sublime build pb ?
 
     def plank_config(self, pinned, offset, position, theme):
         args = "gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ pinned-only " + pinned + " ; \
@@ -437,7 +406,7 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''
 
         if app == "conky":
                 ck = "toggle.sh"  
-                #FIXIT: dép:  conky est lancé par conkytoggle.sh 
+                #FIXIT : dép:  conky est lancé par conkytoggle.sh >> OK ?
                 self.app_activ(app, xf, xd, ck, nt)
 
         elif app == "xfdashboard":
@@ -476,6 +445,8 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''
             self.app_inactiv(app, pkill, xf, xq, nt)
 
     def conky_remove(self, conky):
+        ''' gtx-indicator function for hide conky'''
+
         ckdir = '''conky -c "$HOME/.conky/Geox/'''
         ckremove = ckdir + conky
         ckstart = home + '''/.conky/conky-startup.sh'''
@@ -495,6 +466,8 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''
         subprocess.run(sdir + "/script/conkyaddrm.sh")
 
     def conky_add(self, conky):
+        ''' gtx-indicator function for show conky'''
+
         ckdir = '''\nconky -c "$HOME/.conky/Geox/'''
         ckadd = ckdir + conky
         ckstart = home + '''/.conky/conky-startup.sh'''

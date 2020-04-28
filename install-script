@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##################################################################################
-# Install script for geox-tweak.
+# Install script for geox-tweak on Debian system (MXlinux, xubuntu, linux-mint)
 #-------------------------------- 
 #
 #	For install geox-tweak-xfce : open a terminal in the "install-script.sh" directory, 
@@ -79,29 +79,41 @@ _installation()	{
 	echo $pw | sudo -S cp ./geox-tweak/GeoX-Tweak.desktop /usr/share/applications
 	echo $pw | sudo -S chmod 555 /usr/share/applications/GeoX-Tweak.desktop
 
+	# script /USR/BIN/
 	echo $pw | sudo -S cp ./geox-tweak/script/geox-tweak /usr/bin
-	echo $pw | sudo -S chmod 555 /usr/bin/geox-tweak
+	echo $pw | sudo -S cp ./geox-tweak/script/gtx-indicator /usr/bin
+	echo $pw | sudo -S chmod 555 /usr/bin/geox-tweak /usr/bin/gtx-indicator
+	echo $pw | sudo -S cp ./geox-tweak/script/conkytoggle.sh /usr/bin
+	echo $pw | sudo -S chmod 555 /usr/bin/conkytoggle.sh
 
 	echo $pw | sudo -S cp -R ./geox-tweak/doc /usr/share/doc
+
+	#preserve whiskermenu config.
+	path_panel= /usr/share/geox-tweak/panel
+	echo $pw | sudo -S find $HOME/.config/xfce4/panel/ -name "whisker*" -exec cp -f -r -v {} $path_panel/whiskermenu-20.rc \;
+	echo $pw | sudo -S find $path_panel/*/xfce4/panel/  -maxdepth 0 -exec cp -f -v $path_panel/whiskermenu-20.rc {} \;
+
+
 	echo "----------------------------------------------"
-	echo "Install Gtk themes, be patient..."
+	echo "Install Gtk themes..."
 	echo "----------------------------------------------"
 	echo $pw | sudo -S tar -xzf /usr/share/geox-tweak/theme/themes.tar.gz -C /usr/share/themes --skip-old-files
 	cp -ru /usr/share/geox-tweak/panel $HOME/.config/geox-tweak-xfce
+
 
 
 	echo "----------------------------------------------"
 	echo "Install dependances"
 	echo "----------------------------------------------"
 
-	#fixit debian post inst
 	for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' \
-			'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf' 
+			'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf' \
+			
 		do
 			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
 			then
 				echo $app installation ... 
-				echo $pw | sudo -S $app
+				echo $pw | sudo -S apt-get install -y $app
 
 			else
 				echo $app is installed
@@ -129,27 +141,42 @@ _installationDep()
 			_installationMX
 		elif [ $os = "Ubuntu" ] || [ $os = "LinuxMint" ] ; then
 			_installationUnbuntu
+		elif [ $os = "Manjaro" ] ; then
+			_installationManjaro
 		fi
 	}
 
 _repoUbuntu()
 	{
-		echo $pw | sudo -S add-apt-repository -y ppa:ricotz/docky
-		echo $pw | sudo add-apt-repository ppa:xubuntu-dev/extras
-		echo $pw | sudo -S add-apt-repository -y ppa:xuzhen666/dockbarx
-		echo $pw | sudo -S add-apt-repository -y ppa:papirus/papirus
-		echo $pw | sudo add-apt-repository ppa:synapse-core/testing
-		echo $pw | sudo apt-get update
+#FIXIT > autre distrib concerné !?
+
+        if [ $distrib = "LinuxMint19.3" ] || [ $distrib = "Ubuntu18.04"]; then
+            echo $pw | sudo -S sh -c "echo '
+		deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
+			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
+            echo $pw | sudo -S apt update
+            echo $pw | sudo -S apt install dockbarx xfce4-dockbarx-plugin  dockbarx-themes-extra 
+
+        else            
+ 		echo $pw | sudo -S add_ppa:ricotz/docky
+		echo $pw | sudo -S add_ppa:xubuntu-dev/extras
+		echo $pw | sudo -S add_ppa:xuzhen666/dockbarx
+		echo $pw | sudo -S add_ppa:papirus/papirus
+		echo $pw | sudo -S add_ppa:synapse-core/testing
+		echo $pw | sudo -S apt-get update
+	fi
 	}
 
 _reposMX()
 	{
 		echo $pw | sudo -S sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
+
 #		if [ $distrib == "MX19" ] ; then
 #			echo $pw | sudo -S sh -c "echo '
 #			deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
 #			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
 #		fi
+
 		echo $pw | sudo -S apt-get update
 	}
 
@@ -157,12 +184,12 @@ _installationUnbuntu()
 	{
 		_repoUbuntu
 
-		for app in 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'dockbarx' 'dockbarx-common' 'xfce4-dockbarx-plugin' 'conky-all'
+		for app in 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'dockbarx' 'dockbarx-themes-extra ' 'xfce4-dockbarx-plugin' 'conky' 'conky-all'
 			do
 				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
 				then
 					echo $app installation ...
-					echo $pw | sudo -S $app #FIXIT
+					echo $pw | sudo -S apt-get install -y $app
 
 				else
 					echo $app is installed
@@ -175,21 +202,24 @@ _installationUnbuntu()
 			wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
 			wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
 			echo $pw | sudo -S dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
+			rm $HOME/realpath_8.26-3ubuntu4_all.deb
+			rm $HOME/conky-manager-v2.4-amd64.deb
 		else 
 			echo conky-manager installed
 		fi
 
 		if [ ! -d "/usr/share/icons/Papirus"  ] ; then
 			echo papirus-icon-theme installation ...
-			echo $pw | sudo -S papirus-icon-theme
-			echo $pw | sudo -S libreoffice-style-papirus
-		else
+			echo $pw | sudo -S apt-get install -y papirus-icon-theme
+			echo $pw | sudo -S apt-get install -y libreoffice-style-papirus
+ #FIXIT > libreoffice papirus comme dépendance dans mint19.03
+ 		else
 			echo papirus-icon-theme is installed
 		fi
 		
 		if [ ! -e "/usr/bin/papirus-folders" ]; then
 			echo  papirus-folders installation...
-			$echo $pw | sudo -S papirus-folders
+			$echo $pw | sudo -S apt-get install -y papirus-folders
 		else
 			echo papirus-folders is installed
 		fi
@@ -235,5 +265,68 @@ _installationMX()
 	
 	
 }
+
+_installationManjaro()
+	{
+		for app in 'base-devel' 'yaourt' 'plank'  'synapse' 'zeitgeist'   
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					echo $app installation ...
+					echo $pw | sudo -S pacman -S --noconfirm $app
+
+				else
+					echo $app is installed
+			fi	
+		done
+	
+		for app in 'xfdashboard' 'xfdashboard-plugins' 'dockbarx' 'xfce4-dockbarx-plugin' 'conky-lua' 
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					echo $app installation ...
+					yaourt -S --noconfirm $app
+
+				else
+					echo $app is installed
+			fi	
+		done
+
+	if [ ! -d "/usr/share/icons/Papirus"  ]
+		# Install : Papirus-icon-theme
+		then
+			echo papirus-icon-theme installation ...
+			echo $pw | sudo -S sudo pacman -S --noconfirm papirus-icon-theme
+			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
+		else
+			echo papirus-icon-theme is installed
+	fi		
+	
+	if [ ! -e "/usr/bin/papirus-folders" ]
+		#Install : papirus-folders
+		then 
+			echo papirus-folders installation ...
+			wget -qO- https://git.io/papirus-folders-install | sh
+		else
+			echo papirus-folders is installed
+	fi
+
+	
+}
+
+
+
+add_ppa() {
+      for i in "$@"; do
+        grep -h "^deb.*$i" /etc/apt/sources.list.d/* > /dev/null 2>&1
+        if [ $? -ne 0 ]
+        then
+          echo "Adding ppa:$i"
+          sudo add-apt-repository -y ppa:$i
+        else
+          echo "ppa:$i already exists"
+        fi
+      done
+    }
 
 mainFunction _installation
