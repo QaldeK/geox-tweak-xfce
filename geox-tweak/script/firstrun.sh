@@ -53,7 +53,9 @@ _installConf()
 	cp -Rfv /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
 	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items " ['thunar.dockitem', 'firefox.dockitem', thunderbird.dockitem', 'org.xfce.Catfish.dockitem', 'libreoffice-startcenter.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem'] "
 
-
+	# Change gtx launcher after first run
+	echo $pw | sudo -S  sed -i 's/firstrun.*/firstrun = no/' $HOME/.config/geox-tweak-xfce/geox-tweak.conf
+	echo $pw | sudo -S  sed -i s'%./usr/share/geox-tweak/script/firstrun.sh%python3 /usr/share/geox-tweak/gtx_gui.py/'% /usr/share/applications/GeoX-Tweak.desktop
 }
 
 installation() 
@@ -73,7 +75,8 @@ installation()
 
 		sudo tar -xf /usr/share/geox-tweak/theme/themes.tar.gz -C /usr/share/themes/ --skip-old-files
 
-		# change firstrun value
+
+
 		_installConf
 
 
@@ -107,8 +110,8 @@ _repoUbuntu()
 
 _reposMX()
 	{
-		sudo sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
-		sudo apt-get update
+		echo $pw | sudo sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
+		echo $pw | sudo apt-get update
 	}
 
 _installationUnbuntu()
@@ -137,7 +140,7 @@ _installationUnbuntu()
 
 		wget http://launchpadlibrarian.net/340091846/realpath_8.26-3ubuntu4_all.deb
 		wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
-		sudo dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
+		echo $pw | sudo dpkg -i realpath_8.26-3ubuntu4_all.deb conky-manager-v2.4-amd64.deb
 		rm $HOME/realpath_8.26-3ubuntu4_all.deb
 		rm $HOME/conky-manager-v2.4-amd64.deb
 
@@ -171,7 +174,7 @@ _installationMX()
 					echo $app " installed"
 			fi	
 		done
-		sudo sed -i 's/.* test/#&/'  /etc/apt/sources.list.d/mx.list
+		echo $pw | sudo sed -i 's/.* test/#&/'  /etc/apt/sources.list.d/mx.list
 		if [ ! -e '/usr/share/libreoffice/share/config/images_papirus.zip' ]; then
 			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
 		fi

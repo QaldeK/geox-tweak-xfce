@@ -1,6 +1,6 @@
 ##################
 Author : QaldeK - aldek@vivaldi.net
-Version : 0.2
+Version : 0.2.1
 License : GPL
 Depends: python3, synapse, xfdashboard, plank,xfce4-notes, conky-all, conky-manager, xfce4-dockbarx-plugin, 				dockbarx-themes-extra, papirus-icon-theme 
 Git : https://github.com/QaldeK/geox-tweak
