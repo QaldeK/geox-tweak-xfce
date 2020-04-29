@@ -98,6 +98,8 @@
       <property name="show-frame" type="bool" value="false"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="gtx_indicator.py"/>
+        <value type="string" value="synapse"/>
         <value type="string" value="thunar"/>
         <value type="string" value="apt-notifier.py"/>
         <value type="string" value="applet networkmanager"/>
@@ -109,9 +111,6 @@
       </property>
     </property>
     <property name="plugin-2" type="string" value="showdesktop"/>
-    <property name="plugin-5" type="string" value="separator">
-      <property name="expand" type="bool" value="true"/>
-    </property>
     <property name="plugin-7" type="string" value="actions"/>
     <property name="plugin-10" type="string" value="notification-plugin"/>
     <property name="plugin-13" type="string" value="power-manager-plugin"/>
@@ -155,6 +154,10 @@
       </property>
     </property>
     <property name="plugin-1" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-5" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
     </property>
   </property>

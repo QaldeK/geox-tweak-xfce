@@ -28,12 +28,11 @@
         <value type="int" value="2"/>
         <value type="int" value="3"/>
         <value type="int" value="15"/>
-        <value type="int" value="4"/>
-        <value type="int" value="7"/>
         <value type="int" value="6"/>
         <value type="int" value="9"/>
         <value type="int" value="5"/>
         <value type="int" value="8"/>
+        <value type="int" value="4"/>
         <value type="int" value="16"/>
         <value type="int" value="20"/>
       </property>
@@ -76,6 +75,8 @@
       <property name="show-frame" type="bool" value="false"/>
       <property name="size-max" type="uint" value="22"/>
       <property name="names-ordered" type="array">
+        <value type="string" value="synapse"/>
+        <value type="string" value="gtx_indicator.py"/>
         <value type="string" value="apt-notifier.py"/>
         <value type="string" value="clipit"/>
         <value type="string" value="terminal déroulant"/>
@@ -92,9 +93,6 @@
       <property name="block-autohide" type="bool" value="false"/>
     </property>
     <property name="plugin-1" type="string" value="datetime"/>
-    <property name="plugin-7" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-    </property>
     <property name="plugin-8" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
     </property>

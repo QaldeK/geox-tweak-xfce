@@ -8,6 +8,6 @@ echo "----------------------------------------------"
 read -sp 'User password is require: ' pw
 
 echo $pw | sudo -S rm -r /usr/share/geox-tweak
-echo $pw | sudo -S rm /usr/bin/geox-tweak
+echo $pw | sudo -S rm /usr/bin/geox-tweak /usr/bin/gtx-indicator
 echo $pw | sudo -S rm /usr/share/applications/GeoX-Tweak.desktop
-echo $pw | sudo -S rm -r $HOME/.config/geox-tweak
+echo $pw | sudo -S rm -r $HOME/.config/geox-tweak-xfce

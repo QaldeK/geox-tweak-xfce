@@ -4,7 +4,6 @@ from geox_tweak_xfce import GeoxTweak
 import subprocess  # os et subprocess : executer des commandes et script bash
 from os.path import expanduser
 import os.path
-from os import path
 import os
 import configparser  # traiter les fichiers de configuration
 import gi  # nécessaire pour utiliser le fichier glade
@@ -705,11 +704,11 @@ class Geox:
     # @ Bouton additonnel pointant vers les outils de parametrage xfce natifs
     @staticmethod
     def on_btn_widows_decor_clicked(widget):
-        os.system("xfwm4-settings")
+        subprocess.run("xfwm4-settings")
 
     @staticmethod
     def on_btn_all_theme_clicked(widget):
-        os.system("xfce4-appearance-settings")
+        subprocess.run("xfce4-appearance-settings")
 
     def on_toggle_adapta_compact_toggled(self, widget):
         if widget.get_active():
@@ -1155,7 +1154,7 @@ class Geox:
     def on_radio_macos_dark_toggled(self, widget):
         if widget.get_active():
             self.preview_macos.set_from_file(sdir + "/img/macos-dark.png")
-            self.theme_name.set_label("MacOS Dark")
+            self.theme_name.set_label("McOS-MJV-Dark-XFCE-Edition-2.3")
             self.bar_theme.show()
             self.gtweak.select_theme(
                 theme='McOS-MJV-Dark-XFCE-Edition-2.3',

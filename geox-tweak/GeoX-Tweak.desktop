@@ -4,6 +4,6 @@ Type=Application
 Name=GeoX-Tweak-Xfce
 Comment=Customize Xfce appearance !
 Categories=Utility;Settings;DesktopSettings
-Exec=./usr/share/geox-tweak/script/firstrun.sh
+Exec=xfce4-terminal -e /usr/share/geox-tweak/script/firstrun.sh
 Icon=preferences-desktop-theme
 Keywords=appearance, theme, panel, xfce, tweak

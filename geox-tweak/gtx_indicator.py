@@ -137,12 +137,14 @@ def toggle_dark_mode_cb(widget, data=None):
             gtweak.dark_mode()
             print("dark mode enabled")
         else:
+            subprocess.run('''notify-send "Theme is allready Dark"''', shell=True)
             print("allready dark_mode")
     else:
         if config.get('Style', 'dark_theme') == 'yes':
             gtweak.light_mode()
             print('light mode enabled')
         else:
+            subprocess.run('''notify-send "Theme is allready Light"''', shell=True)
             print("allready light_mode")
 
 
