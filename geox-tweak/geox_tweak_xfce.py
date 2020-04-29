@@ -72,7 +72,7 @@ class GeoxTweak:
 
         subprocess.Popen(
             '''xfconf-query -c xsettings -p /Net/IconThemeName -s ''' +
-            self.icons + "",
+            self.icons + "; ",
             shell=True)
         print("new icon theme : " + self.icons)
 
@@ -101,13 +101,11 @@ class GeoxTweak:
 
             subprocess.Popen('''
                 if [ ! -e "$HOME/.config/libreoffice/4/user/registrymodifications.xcu ]; then
-
                 sed -i s'#"SymbolStyle" oor:op="fuse"><value>.*</value></prop></item>#"SymbolStyle" oor:op="fuse"><value>'''
                 + self.libreoffice_icons +
                 '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu ;
                 sed -i s'#papirus</item>#''' + self.libreoffice_icons +
                 '''</value></prop></item>'# $HOME/.config/libreoffice/4/user/registrymodifications.xcu 
-
                 fi 
                 ''', shell=True)
 
@@ -180,7 +178,7 @@ class GeoxTweak:
         # import pdb; pdb.set_trace()
         script = '''#!/bin/bash
 Theme=$(xfconf-query -c xsettings -p /Net/IconThemeName)
-xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
+sudo papirus-folders -t $Theme -C ''' + cfolder + '''  '''
 
         subprocess.Popen(script, shell=True)
 
@@ -210,7 +208,7 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
                 icons_name="Papirus-Dark",
                 libreoffice_icons="papirus-dark",
             )
-            self.change_theme()
+            self.change_theme(change_folder=False)
 
         elif 'Arc' in self.theme:
             darktheme = self.theme + '-Dark'
