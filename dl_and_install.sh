@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 gh_repo="geox-tweak-xfce"
 temp_dir="$(mktemp -d)"
 
