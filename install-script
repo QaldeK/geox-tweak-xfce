@@ -96,8 +96,13 @@ _installation()	{
 	echo $pw | sudo -S chmod -R 555 /usr/share/geox-tweak/script
 	echo $pw | sudo -S chmod 555 /usr/share/geox-tweak
 
+
 	echo $pw | sudo -S cp ./geox-tweak/GeoX-Tweak.desktop /usr/share/applications
 	echo $pw | sudo -S chmod 555 /usr/share/applications/GeoX-Tweak.desktop
+	echo $pw | sudo -S cp ./geox-tweak/gtx-indicator.desktop /usr/share/applications
+	echo $pw | sudo -S chmod 555 /usr/share/applications/GeoX-Tweak.desktop /usr/share/applications/gtx-indicator.desktop
+
+
 
 	# script /USR/BIN/
 	echo $pw | sudo -S cp ./geox-tweak/script/geox-tweak /usr/bin

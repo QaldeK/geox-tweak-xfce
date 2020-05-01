@@ -44,7 +44,7 @@ Uninstall :
 
 
 
-An another way is to download manually the archive on this git, unzip, and 1) launch "install_geox", or 2) open a terminal where the archive had unzid, and tape "./install-script"
+An another way is to download manually the archive on this git, unzip, and 1) launch "install_geox", or 2) open a terminal where the archive had unzip, and tape "./install-script"
 
 
 This potentially works for all Debian-based distributions. If nevertheless certain third-party software cannot be installed by the installation script, Geox-Tweak-Xfce will indicate the software missing, and you can try to install it manually to take advantage of all the layouts.
