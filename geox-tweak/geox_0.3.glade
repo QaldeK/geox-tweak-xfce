@@ -145,6 +145,18 @@ github.com/QaldeK/geox-tweak-xfce</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
   </object>
+  <object class="GtkImage" id="preview_wd_arc_light">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+  </object>
+  <object class="GtkRadioButton" id="radio_default_theme">
+    <property name="label" translatable="yes">radiobutton</property>
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">False</property>
+    <property name="active">True</property>
+    <property name="draw_indicator">True</property>
+  </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">GeoX Tweak Xfce</property>
@@ -1892,15 +1904,6 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                             <child>
                                               <placeholder/>
                                             </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
                                           </object>
                                         </child>
                                         <child type="label">
@@ -2610,6 +2613,36 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </packing>
                                             </child>
                                             <child>
+                                              <object class="GtkRadioButton" id="radio_macos">
+                                                <property name="label" translatable="yes">McOS-MJV</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_macos_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">4</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_macos_dark">
+                                                <property name="label" translatable="yes">McOS-MJV Dark</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_macos_dark_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">4</property>
+                                              </packing>
+                                            </child>
+                                            <child>
                                               <object class="GtkRadioButton" id="radio_prodark">
                                                 <property name="label" translatable="yes">Pro-Dark-Xfce-Edition</property>
                                                 <property name="visible">True</property>
@@ -2621,8 +2654,11 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">2</property>
-                                                <property name="top_attach">0</property>
+                                                <property name="top_attach">4</property>
                                               </packing>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
                                             </child>
                                             <child>
                                               <placeholder/>
@@ -3618,18 +3654,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkImage" id="preview_wd_arc_light">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
-  <object class="GtkRadioButton" id="radio_default_theme">
-    <property name="label" translatable="yes">radiobutton</property>
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="receives_default">False</property>
-    <property name="active">True</property>
-    <property name="draw_indicator">True</property>
   </object>
   <object class="GtkRadioButton" id="wd_defaut">
     <property name="label" translatable="yes">radiobutton</property>

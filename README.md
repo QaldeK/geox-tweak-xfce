@@ -26,11 +26,17 @@ GeoX-TweaK installs with a set of software to improve the appearance of Xfce:
 
 It is by installing and configuring these tools that GeoX-TweaK-Xfce allows you to transform your xfce desktop to make it look like what you want. 
 
+GTX also install papirus-icon-theme if it's not, and work with it. This beautiful and complete icon theme is used by GTX to make the color of icons and themes consistent, including libreoffice.
+
+Finally, GTX comes with gtx-indicators: a small software that fits in the notification bar and that allows you to quickly switch from a light theme to a dark theme, and vice versa.
+
 # Installation
 
 GTX has been tested on the following Linux distributions: Linux Mint Xfce 19.03, Xubuntu 18.04; MX Linux 19.01. It should install and properly install third-party software on which it depends simply by typing in a terminal:
 
-"wget -qO- https://github.com/QaldeK/geox-tweak-xfce/blob/master/dl_and_install.sh | sh"
+
+ 	wget -qO- https://github.com/QaldeK/geox-tweak-xfce/blob/master/dl_and_install.sh | sh 
+
 
 This potentially works for all Debian-based distributions. If nevertheless certain third-party software cannot be installed by the installation script, Geox-Tweak-Xfce will indicate the software missing, and you can try to install it manually to take advantage of all the layouts.
 

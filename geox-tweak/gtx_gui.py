@@ -771,32 +771,6 @@ class Geox:
             self.theme_name.set_label('Adapta-Green-Nokto')
             self.bar_theme.show()
 
-    # TODO ...MAIS pas ajouter comme choix pour le moment!!
-    def on_radio_adapta_brown_toggled(self, widget):
-        if widget.get_active():
-            self.preview_adapta.set_from_file(sdir + "/img/adapta-brown.png")
-            self.folder = "brown"
-            self.windows_decor = "Adapta"
-            self.icons = "Papirus"
-            self.libreoffice_icons = "papirus"
-            self.bar_theme.show()
-            self.theme_name.set_label("Adapta-Brown")
-            self.plank_theme = "geox-dark"
-            self.theme = "Adapta-Brown"
-
-    def on_radio_adapta_brown_nokto_toggled(self, widget):
-        if widget.get_active():
-            self.folder = "brown"
-            self.windows_decor = "Adapta"
-            self.preview_adapta.set_from_file(sdir +
-                                              "/img/adapta-brown-nokto.png")
-            self.icons = "papirus_dark"
-            self.libreoffice_icons = "papirus_dark"
-            self.bar_theme.show()
-            self.theme_name.set_label("Adapta-Brown-Nokto")
-            self.plank_theme = "geox-dark"
-            self.theme = "Adapta-Brown-Nokto"
-
     def on_radio_adapta_nokto_toggled(self, widget):
         if widget.get_active():
             self.preview_adapta.set_from_file(sdir + "/img/adapta-nokto.png")
@@ -1000,7 +974,9 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
-                icons_name='Papirus-Light'
+                icons_name='Papirus-Light',
+                plank_theme="geox-light"
+
             )
 
     # !Pas d'affichage
