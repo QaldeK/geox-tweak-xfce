@@ -262,7 +262,7 @@ _installationUbuntu()
 		echo "__Check ppa: ________________"
 		echo 
 
-        if [ $distrib = "LinuxMint19.3" ] || [ $distrib = "Ubuntu18.04"]; then
+        if [ $distrib = "LinuxMint19.3" ] || [ $distrib = "Ubuntu18.04" ]; then
             echo $pw | sudo -S sh -c "echo '
 		deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
 			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
