@@ -53,7 +53,6 @@ def menu():
     # item_day_night.connect('activate', toggle_day_night_cb)  
     # menu.append(item_day_night)
 
-  
     item_dark_mode = Gtk.CheckMenuItem.new_with_label(
         'Dark Theme')
 
@@ -105,14 +104,10 @@ def menu():
     
     menu.append(conky_menu_item)
 
-   
-
     # Add Geox-tweak-xfce launcher item
     geox_item = Gtk.MenuItem.new_with_label('GeoX Tweak Xfce')
     geox_item.connect('activate', geox_cb)
     menu.append(geox_item)
-
-  
 
     # Add quit action
     quit_item = Gtk.MenuItem.new_with_label("Quit")
@@ -123,10 +118,10 @@ def menu():
     return menu
 
 
-
 def toggle_day_night_cb(widget, data=None):
     """Callback when a request to item day/night automatic mode was made """
     pass
+
 
 def toggle_dark_mode_cb(widget, data=None):
     """Callback when a request to item dark mode was made """
@@ -175,7 +170,7 @@ def geox_cb (widget):
     arg = "geox-tweak"
     subprocess.Popen(arg, shell=True)
 
-           
+         
 def conky_cb_date(widget):
     conky = '''geox-time-date-white" &'''
     print(conky)
@@ -184,7 +179,8 @@ def conky_cb_date(widget):
     else:
         print(conky + 'else')
         gtweak.conky_remove(conky)
-           
+
+        
 def conky_cb_info(widget):
     conky = '''geox-info-white" &'''
     print(conky)
@@ -193,7 +189,8 @@ def conky_cb_info(widget):
     else:
         print(conky)
         gtweak.conky_remove(conky)
-           
+
+       
 def conky_cb_shortcut(widget):
     conky = '''geox-time-date-white" &'''
     print(conky)

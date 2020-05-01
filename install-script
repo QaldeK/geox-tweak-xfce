@@ -15,7 +15,7 @@ echo "--------------------------------------------------------------------------
 echo "This script will install geox-tweak-xfce and all dependancies.
 
 :'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' 
-'gconf2' 'gir1.2-gtk-3.0' 'yad' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'
+'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'
  
  
  It also install other packages witch work with geox-tweak-xfce.
@@ -160,9 +160,8 @@ _installConf()
 	sudo tar -xf /usr/share/geox-tweak/theme/plank.tar.gz -C /usr/share/plank/themes/	
 
 	xfconf-query -cv xfwm4 -p /general/show_dock_shadow --create --type bool -s "false"
-	cp -Rfv /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
-	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items " ['thunar.dockitem', 'firefox.dockitem', thunderbird.dockitem', 'org.xfce.Catfish.dockitem', 'libreoffice-startcenter.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem'] "
-
+	cp -Rf /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
+	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['thunar.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'torbrowser.dockitem', 'org.xfce.Catfish.dockitem', 'gmusicbrowser.dockitem', 'clementine.dockitem', 'shotwell.dockitem', 'libreoffice-startcenter.dockitem', 'mintinstall.dockitem', 'mx-packageinstaller.dockitem', 'org.gnome.Software.dockitem', 'org.keepassxc.KeePassXC.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem']"
 	xfconf-query -c thunar -p /misc-single-click --create --type bool  
 	xfconf-query -c thunar -p /misc-folders-first --create --type bool  
 	xfconf-query -c thunar -p /misc-text-beside-icons --create --type bool  
@@ -173,7 +172,6 @@ _installConf()
 
 
 	# Change gtx launcher after first run
-	echo $pw | sudo -S  sed -i 's/firstrun.*/firstrun = no/' $HOME/.config/geox-tweak-xfce/geox-tweak.conf
 	echo $pw | sudo -S  sed -i s'%xfce4-terminal -e /usr/share/geox-tweak/script/firstrun.sh%python3 /usr/share/geox-tweak/gtx_gui.py'% /usr/share/applications/GeoX-Tweak.desktop
 	
 	sudo tar -xf /usr/share/geox-tweak/theme/themes.tar.gz -C /usr/share/themes/ --skip-old-files
@@ -201,17 +199,64 @@ _installationDep()
 		distrib=$os$ver
 		
 		if [ $os = "MX" ] || [ $os = "Debian" ]; then
-			_installationMX
+			_installationMX 
 		elif [ $os = "Ubuntu" ] || [ $os = "LinuxMint" ] ; then
-			_installationUnbuntu
+			_installationUbuntu 
 		elif [ $os = "ManjaroLinux" ] ; then
 			_installationManjaro
 		fi
 	}
 
-_repoUbuntu()
+_installationDebian()
+	{	
+		echo 
+		echo "__Check depends packages ________________"
+		echo 
+
+				for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' \
+				'xfce4-battery-plugin' 'gconf2' \
+				'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
+				'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
+				'xfce4-datetime-plugin' 'xfce4-battery-plugin' 'xfce4-dockbarx-plugin' \
+				'conky-all' 'conky' 'papirus-icon-theme' 
+			do
+				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+				then
+					echo $app installation ...
+					echo $pw | sudo -S apt-get install -y $app
+
+				else
+					echo $app is installed
+
+			fi	
+		done
+
+		# @ Papirus icon theme
+		if [ ! -d "/usr/share/icons/Papirus"  ]
+			# Install : Papirus-icon-theme
+			then
+				echo papirus-icon-theme installation ...
+				wget -qO- https://git.io/papirus-icon-theme-install | sh
+		fi		
+		
+		if [ ! -e '/usr/share/libreoffice/share/config/images_papirus.zip' ]; then
+			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
+		fi	
+
+		if [ ! -e "/usr/bin/papirus-folders" ]
+			#Install : papirus-folders
+			then 
+				echo papirus-folders installation ...
+				wget -qO- https://git.io/papirus-folders-install | sh
+			else
+				echo papirus-folders is installed
+		fi
+
+	}
+
+_installationUnbuntu()
 	{
-#FIXIT > autre distrib concerné !?
+		#FIXIT > autre distrib concerné !?
 
 		echo 
 		echo "__Check ppa: ________________"
@@ -222,25 +267,33 @@ _repoUbuntu()
 		deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu disco main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list"
 			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
             echo $pw | sudo -S apt update
-            echo $pw | sudo -S apt install dockbarx xfce4-dockbarx-plugin  dockbarx-themes-extra 
+			echo $pw | sudo -S apt install dockbarx xfce4-dockbarx-plugin dockbarx-themes-extra 
+            echo $pw | sudo -S rm /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list
 
         else
-        echo 
-        echo "__Install ppa: ________________"
-        echo 
+	        echo 
+	        echo "__Install ppa: ________________"
+	        echo 
 
-		add_ppa ricotz/docky
-		add_ppa xubuntu-dev/extras
-		add_ppa xuzhen666/dockbarx
+			add_ppa ricotz/docky
+			add_ppa xubuntu-dev/extras
+			add_ppa xuzhen666/dockbarx
+			# add_ppa synapse-core/testing >> present dans ubuntu 18.04
+		fi
+			
 		add_ppa papirus/papirus
-		# add_ppa synapse-core/testing >> present dans ubuntu 18.04
+
 		echo $pw | sudo -S apt-get update
-	fi
+
+
+
+		_installationDebian
+
 	}
 
-_reposMX()
+_installationMX()
 	{
-		echo $pw | sudo -S sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
+	echo $pw | sudo -S sed -i "/^#deb.*test/s/^#//g" /etc/apt/sources.list.d/mx.list
 
 #		if [ $distrib == "MX19" ] ; then
 #			echo $pw | sudo -S sh -c "echo '
@@ -248,101 +301,39 @@ _reposMX()
 #			echo $pw | sudo -S apt-key adv --recv-keys --keyserver keyserver.ubuntu.com  77d026e2eead66bd
 #		fi
 
-		echo $pw | sudo -S apt-get update
-	}
+	echo $pw | sudo -S apt-get update
 
-_installationUnbuntu()
-	{
-		_repoUbuntu
+	if [ $(dpkg-query -W -f='${Status}' conky-manager 2>/dev/null | grep -c "ok installed") -eq 0 ];
+	then
+		echo $app installation ...
+		echo $pw | sudo -S apt-get install -y $app
 
-		echo 
-		echo "__Check depends packages ________________"
-		echo 
+	else
+		echo $app is installed
+	fi	
 
-		for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' \
-			'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
-			 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
-		'xfce4-datetime-plugin' 'xfce4-battery-plugin' 'dockbarx' 'dockbarx-themes-extra ' \
-		'xfce4-dockbarx-plugin' 'conky' 'conky-all' 'papirus-icon-theme' 
-			do
-				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
-				then
-					echo $app installation ...
-					echo $pw | sudo -S apt-get install -y $app
-
-				else
-					echo $app is installed
-
-			fi	
-		done
-
-		if [ ! -e "/usr/bin/papirus-folders" ]; then
-			echo  papirus-folders installation...
-			wget -qO- https://git.io/papirus-folders-install | sh
-		else
-			echo papirus-folders is installed
-		fi
-
-
-	}
-
-_installationMX()
-	{
-		_reposMX
-
-		echo 
-		echo "__Check depends packages ________________"
-		echo 
-
-
-		for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' \
-			'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
-			'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
-		'dockbarx' 'dockbarx-common' 'xfce4-dockbarx-plugin' 'conky-all' 'conky-manager' 
-			do
-				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
-				then
-					echo $app installation ...
-					echo $pw | sudo -S apt-get install -y $app
-
-				else
-					echo $app is installed
-			fi	
-		done
-
-	if [ ! -d "/usr/share/icons/Papirus"  ]
-		# Install : Papirus-icon-theme
-		then
-			echo papirus-icon-theme installation ...
-			echo $pw | sudo -S apt-get install -y papirus-icon-theme
-			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
-		else
-			echo papirus-icon-theme is installed
-	fi		
-	
-	if [ ! -e "/usr/bin/papirus-folders" ]
-		#Install : papirus-folders
-		then 
-			echo papirus-folders installation ...
-			echo $pw | sudo -S apt-get install -y papirus-folders
-		else
-			echo papirus-folders is installed
-	fi
 
 	echo $pw | sudo -S sed -i 's/.* test/#/'  /etc/apt/sources.list.d/mx.list
-	
-	
+
+	_installationDebian
 }
 
 _installationManjaro()
 	{
+
+		echo "Geox-Tweak-Xfce need xfce4-dockbarx-plugin for some layout desktop theme, but this script don't install it. Please try to install xfce4-dockbarx-plugin manually
+
+		Press enter for continue..."
+
+		read
 		
 		echo 
 		echo "__Check depends packages ________________"
 		echo
 
 
-		for app in 'base-devel' 'yay' 'plank'  'synapse' 'zeitgeist'   
+		for app in 'base-devel' 'yay'  'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' \
+			'plank'  'synapse' 'zeitgeist'   
 			do
 				if not pacman -Qs $package > /dev/null
 				then
@@ -354,16 +345,11 @@ _installationManjaro()
 			fi	
 		done
 
-		for app in 'xfdashboard' 'xfdashboard-plugins' 'dockbarx' 'xfce4-dockbarx-plugin' 'conky-lua' 
+		for app in 'xfdashboard' 'xfdashboard-plugins' 'conky-lua' 
 			do
-				then
 					echo $app installation ...
 					yay -S --noconfirm $app
-
-				else
-					echo $app is installed
-			fi	
-		done
+			done
 
 	if [ ! -d "/usr/share/icons/Papirus"  ]
 		# Install : Papirus-icon-theme
@@ -372,11 +358,14 @@ _installationManjaro()
 			echo papirus-icon-theme installation ...
 			echo ".................................."
 			echo $pw | sudo -S sudo pacman -S --noconfirm papirus-icon-theme
-			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
 		else
 			echo papirus-icon-theme is installed
-	fi		
-	
+	fi
+
+	if [ ! -e '/usr/share/libreoffice/share/config/images_papirus.zip' ]; then
+		wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
+	fi	
+
 	if [ ! -e "/usr/bin/papirus-folders" ]
 		#Install : papirus-folders
 		then 
@@ -385,11 +374,8 @@ _installationManjaro()
 		else
 			echo papirus-folders is installed
 	fi
-
 	
 }
-
-
 
 
 mainFunction _installation

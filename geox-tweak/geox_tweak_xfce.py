@@ -353,7 +353,7 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''  '''
         (and other) icon plugins on large panel """
         gtkcss = os.path.expanduser('~/.config/gtk-3.0/gtk.css')
         args1 = "sed -i s'/{-gtk-icon-transform: scale(.*);}/{-gtk-icon-transform: scale(" + \
-            size + ");}'/ $HOME/.config/gtk-3.0/gtk.css"
+            size + ");}'/ $HOME/.config/gtk-3.0/gtk.css "
         gtktransform = '''
  #pulseaudio-button * {-gtk-icon-transform: scale(''' + size + ''');} 
  #xfce4-notification-plugin * {-gtk-icon-transform: scale(''' + size + ''');} 
@@ -363,11 +363,7 @@ sudo papirus-folders -t $Theme -C ''' + cfolder + '''  '''
             file = open(gtkcss, 'w')
             file.write(gtktransform)
         else:
-            with open(gtkcss) as f:
-                if '#pulseaudio-button * {-gtk-icon-transform: scale(' in f.read():
-                    subprocess.check_call(args1, shell=True)
-                else:
-                    f.write(gtktransform)
+              subprocess.call(args1, shell=True)
 
     def app_activ(self, app, xf='', xd='', ck='', nt=''):
         """ s'execture quand les logiciels tiers sont activés, avec les arguments définis

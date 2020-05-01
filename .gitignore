@@ -1,23 +1,9 @@
-deb/geox-tweak
-
 geox-tweak.sublime-project
 geox-tweak.sublime-workspace
 install.sublime-workspace
 setup.py
 src-to-deb.sh
 .idea/
-src/geox-tweak/geox.glade~
-src/geox-tweak/trad txt
-src/geox-tweak/script/wget-log
-src/geox_test.sublime-project
-src/geox_test.sublime-workspace
-<<<<<<< Updated upstream
-deb/geox-tweak-mx18
-deb/geox-tweak-mx18
-src/geox-tweak
-deb/geox-tweak-ubuntu18/
-install.sublime-workspace
-=======
-src/geox_test.sublime-project
-src/geox_test.sublime-workspace
->>>>>>> Stashed changes
+TODO
+geox-tweak/__pycache__
+geox-tweat/.sublime
