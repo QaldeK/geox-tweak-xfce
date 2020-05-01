@@ -178,7 +178,7 @@ class GeoxTweak:
         # import pdb; pdb.set_trace()
         script = '''#!/bin/bash
 Theme=$(xfconf-query -c xsettings -p /Net/IconThemeName)
-xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' ''''
+xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + '''--hold" '''
 
         subprocess.Popen(script, shell=True)
 
