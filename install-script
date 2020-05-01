@@ -162,13 +162,13 @@ _installConf()
 	xfconf-query -cv xfwm4 -p /general/show_dock_shadow --create --type bool -s "false"
 	cp -Rf /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
 	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['thunar.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'torbrowser.dockitem', 'org.xfce.Catfish.dockitem', 'gmusicbrowser.dockitem', 'clementine.dockitem', 'shotwell.dockitem', 'libreoffice-startcenter.dockitem', 'mintinstall.dockitem', 'mx-packageinstaller.dockitem', 'org.gnome.Software.dockitem', 'org.keepassxc.KeePassXC.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem']"
-	xfconf-query -c thunar -p /misc-single-click --create --type bool  
-	xfconf-query -c thunar -p /misc-folders-first --create --type bool  
-	xfconf-query -c thunar -p /misc-text-beside-icons --create --type bool  
-	xfconf-query -c xfce4-desktop -p /desktop-icons/single-click --create --type bool  
-	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash --create --type bool  
-	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home --create --type bool  
-	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable --create --type bool  
+	xfconf-query -c thunar -p /misc-single-click --create --type bool -s false  
+	xfconf-query -c thunar -p /misc-folders-first --create --type bool -s true 
+	xfconf-query -c thunar -p /misc-text-beside-icons --create --type bool -s false 
+	xfconf-query -c xfce4-desktop -p /desktop-icons/single-click --create --type bool -s false 
+	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash --create --type bool -s true 
+	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home --create --type bool -s true 
+	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable --create --type bool -s true 
 
 
 	# Change gtx launcher after first run
@@ -254,7 +254,7 @@ _installationDebian()
 
 	}
 
-_installationUnbuntu()
+_installationUbuntu()
 	{
 		#FIXIT > autre distrib concerné !?
 
