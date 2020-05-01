@@ -1,6 +1,5 @@
 #!/bin/sh
 
-set -e
 
 gh_repo="geox-tweak-xfce"
 temp_dir="$(mktemp -d)"
@@ -13,7 +12,7 @@ tar -xzf "/tmp/$gh_repo.tar.gz" -C "$temp_dir"
 echo "___Launch install-script___"
 cd $temp_dir
 cd geox-tweak-xfce-master
-./install-script
+bash install-script
 
 # echo "___Clearing cache___"
 # rm -rf "/tmp/$temp_dir
