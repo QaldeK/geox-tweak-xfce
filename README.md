@@ -28,12 +28,21 @@ It is by installing and configuring these tools that GeoX-TweaK-Xfce allows you 
 
 # Installation
 
+GTX has been tested on the following Linux distributions: Linux Mint Xfce 19.03, Xubuntu 18.04; MX Linux 19.01. It should install and properly install third-party software on which it depends simply by typing in a terminal:
+
+"wget -qO- https://github.com/QaldeK/geox-tweak-xfce/blob/master/dl_and_install.sh | sh"
+
+This potentially works for all Debian-based distributions. If nevertheless certain third-party software cannot be installed by the installation script, Geox-Tweak-Xfce will indicate the software missing, and you can try to install it manually to take advantage of all the layouts.
+
+For manjaro, it seems difficult to install xfce4-dockbarx-plugin. Consequently, some layouts (Win10; Ubuntu; Budgie ...) do not work.
 
 
 # Screenshots
 
-![Alt text](geox-tweak/img/screenshots1.png?raw=true "Desktop Layout")
+![Alt text](geox-tweak/img/screenshots5.png?raw=true "Desktop Layout")
 
-![Alt text](geox-tweak/img/screenshots2.png?raw=true "Windows theme")
+![Alt text](geox-tweak/img/screenshots6.png?raw=true "Windows theme")
 
-![Alt text](geox-tweak/img/screenshots3.png?raw=true "Folders icons")
+![Alt text](geox-tweak/img/screenshots7.png?raw=true "Folders icons")
+
+![Alt text](geox-tweak/img/screenshots8.png?raw=true "Other")
