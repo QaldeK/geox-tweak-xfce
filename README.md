@@ -37,10 +37,19 @@ GTX has been tested on the following Linux distributions: Linux Mint Xfce 19.03,
 
  	wget -qO- https://github.com/QaldeK/geox-tweak-xfce/blob/master/dl_and_install.sh | sh 
 
+Uninstall :
+ 
+	wget -qO- https://github.com/QaldeK/geox-tweak-xfce/blob/master/uninstall.sh | sh
+
+
+An another way is to download manually the archive on this git, unzip, and 1) launch "install_geox", or 2) open a terminal where the archive had unzid, and tape "./install-script"
+
 
 This potentially works for all Debian-based distributions. If nevertheless certain third-party software cannot be installed by the installation script, Geox-Tweak-Xfce will indicate the software missing, and you can try to install it manually to take advantage of all the layouts.
 
 For manjaro, it seems difficult to install xfce4-dockbarx-plugin. Consequently, some layouts (Win10; Ubuntu; Budgie ...) do not work.
+
+
 
 
 # Screenshots
