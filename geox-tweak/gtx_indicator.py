@@ -31,7 +31,7 @@ def main():
 
     #AppIndicator
     indicator = appindicator.Indicator.new(
-        'Geox-Tweak-Indicator', 'gtk-preferences',
+        'Geox-Tweak-Indicator', 'disper-panel',
         appindicator.IndicatorCategory.APPLICATION_STATUS
         )
     indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
@@ -130,17 +130,13 @@ def toggle_dark_mode_cb(widget, data=None):
     if widget.get_active():
         if config.get('Style', 'dark_theme') == 'no':
             gtweak.dark_mode()
-            print("dark mode enabled")
         else:
             subprocess.run('''notify-send "Theme is allready Dark"''', shell=True)
-            print("allready dark_mode")
     else:
         if config.get('Style', 'dark_theme') == 'yes':
             gtweak.light_mode()
-            print('light mode enabled')
         else:
             subprocess.run('''notify-send "Theme is allready Light"''', shell=True)
-            print("allready light_mode")
 
 
 def layout_cb(widget, layout):
