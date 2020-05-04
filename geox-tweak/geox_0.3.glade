@@ -2102,33 +2102,10 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                                       </packing>
                                                     </child>
                                                     <child>
-                                                      <object class="GtkRadioButton" id="radio_adapta_brown">
-                                                        <property name="label" translatable="yes">Adapta Brown </property>
-                                                        <property name="can_focus">True</property>
-                                                        <property name="receives_default">False</property>
-                                                        <property name="draw_indicator">False</property>
-                                                        <property name="group">radio_default_theme</property>
-                                                        <signal name="toggled" handler="on_radio_adapta_brown_toggled" swapped="no"/>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">0</property>
-                                                        <property name="top_attach">5</property>
-                                                      </packing>
+                                                      <placeholder/>
                                                     </child>
                                                     <child>
-                                                      <object class="GtkRadioButton" id="radio_adapta_brown_nokto">
-                                                        <property name="label" translatable="yes">Adapta Brown Nokto</property>
-                                                        <property name="can_focus">True</property>
-                                                        <property name="receives_default">False</property>
-                                                        <property name="tooltip_text" translatable="yes">Theme sombre</property>
-                                                        <property name="draw_indicator">False</property>
-                                                        <property name="group">radio_default_theme</property>
-                                                        <signal name="toggled" handler="on_radio_adapta_brown_nokto_toggled" swapped="no"/>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="left_attach">1</property>
-                                                        <property name="top_attach">5</property>
-                                                      </packing>
+                                                      <placeholder/>
                                                     </child>
                                                   </object>
                                                   <packing>
@@ -3617,11 +3594,9 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <child>
               <object class="GtkButton" id="btn_about">
                 <property name="label">gtk-about</property>
-                <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_btn_about_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
