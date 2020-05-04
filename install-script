@@ -136,6 +136,8 @@ _installConf()
 	# Dockbarx
 	mkdir -p $HOME/.gconf/apps/
 	tar -xf /usr/share/geox-tweak/theme/dockbarx/dockbarx.tar.gz -C $HOME/.gconf/apps
+	echo $pw | sudo -S tar -xf /usr/share/geox-tweak/theme/dockbarx/dockbarx-themes-master.tar.gz -C /usr/share/dockbarx/themes
+
 	# xfdashboard
 	sudo cp -Rf /usr/share/geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock /usr/share/themes/
 	cp -f /usr/share/geox-tweak/theme/xfdashboard/xfdashboard.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml 
