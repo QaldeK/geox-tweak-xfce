@@ -658,7 +658,7 @@ class Geox:
 
     def on_radio_greybird_toggled(self, widget):
         if widget.get_active():
-            self.preview_adapta.set_from_file(sdir + "/img/greybird.png")
+            self.preview_various.set_from_file(sdir + "/img/greybird.png")
             self.gtweak.select_theme(
                 theme='Greybird',
                 windows_decor='Greybird'
