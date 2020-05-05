@@ -23,7 +23,7 @@ echo "This script will check geox-tweak-xfce dependencies
 
 ==> Network connection is require ! <== 
  
- Are you ok to procced  ? Tap enter for yes, tap ctrl+c or close terminal for no
+ Are you ok to procced  ? Tap your password if asked (Press ENTER if not), or close terminal for abort
  "
 read
 echo "---------------------------------------------------------"
