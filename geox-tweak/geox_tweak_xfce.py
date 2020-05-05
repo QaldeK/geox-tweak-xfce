@@ -440,7 +440,7 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
         ckremove = ckdir + conky
         ckstart = home + '''/.conky/conky-startup.sh'''
 
-        ckrm = [conky, 'cd', '/home']
+        ckrm = [conky, 'cd', '/Geox']
         print(ckremove)
 
         #Del lines contain ckrm

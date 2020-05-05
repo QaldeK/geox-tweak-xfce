@@ -1,9 +1,6 @@
 #!/bin/bash
-# Filename:      conkytoggleflux.sh
-# Purpose:       toggle conky on/off from fluxbox menu
-# Authors:       Kerry and anticapitalista, secipolla for antiX
-# Authors:       modified for mx linux version 17 by dolphin oracle
-# Latest change: Sun December 10, 2017.
+# conkyaddrm, fork of conkytoggleflux.sh (Kerry and anticapitalista,
+# secipolla for antiX
 ################################################################################
 
 main()
