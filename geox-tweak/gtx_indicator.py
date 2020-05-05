@@ -61,7 +61,7 @@ class Gtx_indicator:
         conky_item_shortcut.connect('activate', self.conky_cb_shortcut)
         conky_menu.append(conky_item_date)
         conky_menu.append(conky_item_info)
-        conky_menu.append(conky_item_shortcut)
+        # conky_menu.append(conky_item_shortcut)
         conky_menu_item.set_submenu(conky_menu)
 
         #set activ CheckMenuItem if conky is activ
