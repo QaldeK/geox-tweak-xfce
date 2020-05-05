@@ -14,7 +14,7 @@
 echo "---------------------------------------------------------------------------------------"
 echo "This script will check geox-tweak-xfce dependencies
 
-:: 'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' 
+:: 'python3' 'python3-gi' 'xfce4-datetime-plugin'  
 'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'
 
  ::'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'xfce4-dockbarx-plugin' 'conky-all' 'papirus-folders'
@@ -180,10 +180,10 @@ _installationDebian()
 		echo 
 
 				for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' \
-				'xfce4-battery-plugin' 'gconf2' \
+				 'gconf2' \
 				'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
 				'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
-				'xfce4-datetime-plugin' 'xfce4-battery-plugin' 'xfce4-dockbarx-plugin' \
+				'xfce4-datetime-plugin'  'xfce4-dockbarx-plugin' \
 				'conky-all' 'conky' 'papirus-icon-theme' 
 			do
 				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
@@ -298,7 +298,7 @@ _installationManjaro()
 		echo
 
 
-		for app in 'base-devel' 'yay'  'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' \
+		for app in 'base-devel' 'yay'  'python3' 'python3-gi' 'xfce4-datetime-plugin'  \
 			'plank'  'synapse' 'zeitgeist'   
 			do
 				if not pacman -Qs $package > /dev/null
