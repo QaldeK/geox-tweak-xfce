@@ -27,7 +27,7 @@ echo "This script will check geox-tweak-xfce dependencies
  "
 read
 echo "---------------------------------------------------------"
-read -p 'Please enter your user password: ' pw
+read -sp 'Please enter your user password: ' pw
 echo
 
 mainFunction () {
@@ -43,7 +43,7 @@ checkErrorLog () {
 
     if [ "${error}" != "" ]; then
     	echo "---------------------"
-    	echo "Check Error during process : /tmp/"log
+    	echo "Check Error during process : /tmp/"$log
         echo "---------------------"
         echo
 		echo "press enter for exit"
