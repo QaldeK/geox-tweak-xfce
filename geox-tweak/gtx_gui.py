@@ -162,6 +162,8 @@ class Geox:
         self.state_app(self)
         self.state_gtxi()
 
+        self.on_btn_install_miss_clicked = go('on_btn_install_miss_clicked')
+
         # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
         self.var_theme = ""
         self.theme = ""
@@ -190,12 +192,6 @@ class Geox:
         defaut = ""
         self.help_txt_zone.get_buffer().set_text(defaut)
 
-    def firstrun(self):
-        script = sdir + '/script/firstrun.sh'
-        subprocess.run("xfce4-terminal -e " + script, shell=True)
-        self.warning_app_miss.hide()
-        self.status_app_dep()
-
     def status_app_dep(self):
         '''check if the other software are install
         Show a warning if not'''
@@ -203,7 +199,7 @@ class Geox:
         app_miss = []
         app_test = ['plank', 'xfdashboard',
                     'xfce4-dockbarx-plugin', 'synapse', 'gconf2',
-                    'xfce4-datetime-plugin', 'xfce4-battery-plugin', 'conky']
+                    'xfce4-datetime-plugin', 'conky']
         self.warning_app_miss.hide()
 
         for app in app_test:
@@ -215,18 +211,18 @@ class Geox:
 
         # Si liste non-vide
         if (app_miss):
-            warning_txt = ('''Some software necessary for the
-            use of layout desktop are not installed : '''
-                           + str(app_miss) + '''\n Some layout will don't work properly. \n
-                Please click on "install it" or
-                  try to install them manually ''')
+            warning_txt = ('''Some software necessary for the use of layout desktop are not installed : '''
+                           + str(app_miss) + '''
+                           Some layout will don't work properly. Please click on "install it" or try to install them manually ''')
 
             self.txt_app_miss.set_label(warning_txt)
             self.warning_app_miss.show()
 
-    def on_btn_install_miss_clicked(self):
-        self.firstrun()
-
+    def on_btn_install_miss_clicked(self, widget):
+        script = sdir + '/script/firstrun.sh'
+        subprocess.run("xfce4-terminal -e " + script, shell=True)
+        self.warning_app_miss.hide()
+        self.status_app_dep()
 
 # @ Parametrage xfce ; volet "Other"
     def state_settings(self):
