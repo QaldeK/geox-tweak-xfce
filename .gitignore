@@ -7,3 +7,4 @@ src-to-deb.sh
 TODO
 geox-tweak/__pycache__
 geox-tweat/.sublime
+*.old
