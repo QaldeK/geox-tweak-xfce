@@ -12,7 +12,7 @@ tar -xzf "/tmp/$gh_repo.tar.gz" -C "$temp_dir"
 echo "___Launch install-script___"
 cd $temp_dir
 cd geox-tweak-xfce-master
-bash install-script
+xfce4-terminal -e "./install-script"
 
 # echo "___Clearing cache___"
 # rm -rf "/tmp/$temp_dir
