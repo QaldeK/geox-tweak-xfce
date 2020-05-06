@@ -1,9 +1,0 @@
-ChangeLog
---------------------------------
-v-0.2
-
-Add matcha theme
-Better Install-script 
-Verify if other software are install (plank, synapse, xfdashboard...)
-update interface
-Seperate interface (gui) and code 

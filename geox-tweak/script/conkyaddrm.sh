@@ -1,6 +1,8 @@
 #!/bin/bash
+
 # conkyaddrm, fork of conkytoggleflux.sh (Kerry and anticapitalista,
-# secipolla for antiX
+# secipolla for antiX, modified for Geox-Tweak-Xfce by QaldeK
+#
 ################################################################################
 
 main()

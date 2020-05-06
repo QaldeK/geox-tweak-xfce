@@ -4,6 +4,27 @@
 
 # script for complete installation of geox-tweak on Debian system (MXlinux, xubuntu, linux-mint), and perhaps Manjaro
 
+# Part of  GeoX-Tweak-Xfce
+# Copyright: 2019 QaldeK <aldek at vivaldi dot net>
+
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License with
+#  the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
+#  if not, write to the Free Software Foundation, Inc., 51 Franklin St,
+#  Fifth Floor, Boston, MA 02110-1301, USA.
+
+# On Debian systems, the complete text of the GNU General
+# Public License can be found in `/usr/share/common-licenses/GPL'.
+
 ##################################################################################
 
 
@@ -100,7 +121,7 @@ _installConf()
 	# Conky
 	mkdir -p $HOME/.conky
 	tar -xf /usr/share/geox-tweak/theme/conky.tar.gz -C $HOME/.conky
-	sudo cp -f /usr/share/geox-tweak/script/conkytoggle.sh	/usr/bin/conkytoggle.sh
+	sudo cp -f /usr/share/geox-tweak/script/conkyaddrm.sh	/usr/bin/conkyaddrm.sh
 	# Autostart
 	mkdir -p $HOME/.config/autostart/
 	cp -n /usr/share/geox-tweak/script/autostart/* $HOME/.config/autostart/

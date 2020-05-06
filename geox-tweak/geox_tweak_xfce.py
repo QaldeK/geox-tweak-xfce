@@ -394,8 +394,7 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
         ck = xf = xd = nt = ""
 
         if app == "conky":
-                ck = "toggle.sh"  
-                #FIXIT : dép:  conky est lancé par conkytoggle.sh >> OK ?
+                ck = "addrm.sh"  
                 self.app_activ(app, xf, xd, ck, nt)
 
         elif app == "xfdashboard":

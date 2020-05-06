@@ -1,5 +1,27 @@
 #!/usr/bin/env python3
 
+
+# GeoX-Tweak-Xfce
+# Copyright: 2019 QaldeK <aldek at vivaldi dot net>
+
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License with
+#  the Debian GNU/Linux distribution in file /usr/share/common-licenses/GPL;
+#  if not, write to the Free Software Foundation, Inc., 51 Franklin St,
+#  Fifth Floor, Boston, MA 02110-1301, USA.
+
+# On Debian systems, the complete text of the GNU General
+# Public License can be found in `/usr/share/common-licenses/GPL'.
+
 from geox_tweak_xfce import GeoxTweak
 import subprocess  # os et subprocess : executer des commandes et script bash
 from os.path import expanduser
@@ -290,7 +312,6 @@ class Geox:
                 self.on_btn_removable_desktop_toggled)
 
 # @ TOOLS : Bouton Toggle des App tieres
-    # TODO > dependances : app & conkytoggle.sh;)
 
     def on_gtxi_toggled(self, widget):
         if widget.get_active():
@@ -309,7 +330,7 @@ class Geox:
     def on_app_toggled(self, widget):
         """ Fonction permettant d'envoyer les commandes d'execution et
         d'extinction spécifique aux logiciels (notamment conky, lancer par
-         le script conkytoggle.sh, et xfdashboard lancer en mode démo """
+         le script conkyaddrm.sh, et xfdashboard lancer en mode démo """
 
         app = Gtk.Buildable.get_name(widget)
         ck = xf = xq = xd = nt = ""
