@@ -64,6 +64,6 @@ For manjaro, it seems difficult to install xfce4-dockbarx-plugin. Consequently, 
 
 ![Alt text](geox-tweak/img/screenshots8.png?raw=true "Other")
 
-![Alt text](geox-tweak/img/screenshots-gtxi.png?raw=true "Other")
+![Alt text](geox-tweak/img/screenshots-gtxi.png?raw=true "Indicator")
 
 
