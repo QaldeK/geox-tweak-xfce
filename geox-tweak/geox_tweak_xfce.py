@@ -8,14 +8,15 @@ from os.path import expanduser
 
 import gi  # nécessaire pour utiliser le fichier glade
 # nécessaire pour utiliser le fichier glade/ GObject?
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-gi.require_version('Gtk', '3.0')
 
 home = expanduser("~")  # path home de l'user
 sdir = os.path.dirname(os.path.abspath(__file__))  # path du script py
 
 paneldir = home + '/.config/geox-tweak-xfce/panel/'
+savedLayoutDir = paneldir + 'saved_layout/'
 config = configparser.ConfigParser()
 gtconf = home + '/.config/geox-tweak-xfce/geox-tweak.conf'
 
@@ -31,6 +32,7 @@ class GeoxTweak:
         config.read(gtconf)
         self.conf_actual()
 
+        self.ls_layout = Gtk.ListStore(str)
 
 
 
@@ -66,7 +68,7 @@ class GeoxTweak:
 
         config.write(open(gtconf, 'w'))
 
-# @ GTK/icon/libreofficeicons/plank Theme_________________
+    # @ GTK/icon/libreofficeicons/plank Theme_________________
 
     def change_theme(self, change_folder=True):
 
@@ -303,7 +305,7 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
 #         result = method_to_call()
 
 
-#@ Desktop Layout ___________
+    # @ Desktop Layout __________
 
     def change_layout(self, layout):
         """ Change xfce panel orientations and plugins """
@@ -318,16 +320,15 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
         config.write(open(gtconf, 'w'))
 
 
-    def plank_config(self, pinned, offset, position, theme):
-        args = "gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ pinned-only " + pinned + " ; \
-                gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ offset " + offset + " ; \
-                gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ position " + position + " ; \
-                gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ theme " + theme + " ;"
+    def plank_config(self, dirLy):
+
+        args = "cat " + paneldir + dirLy + "/plank/plank.ini | dconf load /net/launchpad/plank/docks/"
+
         subprocess.Popen(args, shell=True)
-        config.set('Style', 'plank_theme', theme)
+        # config.set('Style', 'plank_theme', theme)
         config.write(open(gtconf, 'w'))
 
-   # path des fichiers de conf !!
+    # path des fichiers de conf !!
     # TODO > config dockbarx : /home/geo/.gconf/apps/dockbarx/%gconf.xml
 
     def dockbarx_config(self, launcher, theme, the_me):
@@ -474,6 +475,8 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
             f.write(ckadd)
 
         subprocess.run(sdir + "/script/conkyaddrm.sh")
+
+
 
 
 ########################
