@@ -705,11 +705,10 @@ class Geox:
             self.xfdashboard.set_active(False)
             self.plank.set_active(False)
 
-    def on_radio_ubuntu_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_ubuntu_clicked(self, widget):
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.dockbarx_config(
-                launcher="[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
+                launcher="[thunar;/usr/share/applications/thunar.desktop,Web Browser;/usr/share/applications/exo-web-browser.desktop,Mail Reader;/usr/share/applications/exo-mail-reader.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop,Test;/usr/share/applications/TestFalse]",
                 theme="Unite Faenza",
                 the_me="Unite_Faenza")
             self.gtweak.change_layout(layout="ubuntu", )
@@ -717,27 +716,24 @@ class Geox:
             self.plank.set_active(False)
             self.xfdashboard.set_active(True)
 
-    def on_radio_mate_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_mate_clicked(self, widget):
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.change_layout(layout="mate")
             self.gtweak.plank_config(dirLy='mate')
             self.xfdashboard.set_active(False)
             self.plank.set_active(False)
 
-    def on_radio_xubuntu_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_xubuntu_clicked(self, widget):
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.change_layout(layout="xubuntu")
             self.gtweak.plank_config(dirLy='xubuntu')
             self.plank.set_active(True)
             self.xfdashboard.set_active(False)
 
-    def on_radio_budgie_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_budgie_clicked(self, widget):
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.dockbarx_config(
-                launcher="[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
+                launcher="[thunar;/usr/share/applications/thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
                 theme="Deep",
                 the_me="Deep")
             self.gtweak.change_layout(layout="budgie")
