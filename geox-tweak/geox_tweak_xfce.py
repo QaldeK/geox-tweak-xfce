@@ -335,11 +335,9 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
 
     def dockbarx_config(self, launcher, theme, the_me):
         args0 = "pkill -f dockbarx-plug "
-        args1 = '''gconftool-2 --type list --list-type string --set /apps/dockbarx/launchers "''' + \
-            launcher + '''" '''
-        args2 = '''gconftool-2 --type string --set /apps/dockbarx/theme "''' + theme + '''" '''
-        args3 = ''' gconftool-2 --type string --set /apps/dockbarx/themes/''' + \
-            the_me + '''/popup_style_file Magic_trans.tar.gz '''
+        args1 = '''gconftool-2 --type list --list-type string --set /apps/dockbarx/launchers "''' + launcher + '''" '''
+        args2 = '''gconftool-2 --type string --set /apps/dockbarx/theme "''' +  theme + '''" '''
+        args3 = ''' gconftool-2 --type string --set /apps/dockbarx/themes/''' + the_me + '''/popup_style_file Magic_trans.tar.gz '''
         subprocess.Popen(args0, shell=True)
         subprocess.check_call(args1, shell=True)
         subprocess.check_call(args2, shell=True)
