@@ -142,8 +142,37 @@ _installConf()
 	sudo tar -xf /usr/share/geox-tweak/theme/plank.tar.gz -C /usr/share/plank/themes/	
 
 	xfconf-query -cv xfwm4 -p /general/show_dock_shadow --create --type bool -s "false"
-	cp -Rf /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
-	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['thunar.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'torbrowser.dockitem', 'org.xfce.Catfish.dockitem', 'gmusicbrowser.dockitem', 'clementine.dockitem', 'shotwell.dockitem', 'libreoffice-startcenter.dockitem', 'mintinstall.dockitem', 'mx-packageinstaller.dockitem', 'org.gnome.Software.dockitem', 'org.keepassxc.KeePassXC.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem']"
+
+	if [ ! -d "$HOME/.config/plank" ]; then
+		echo plank not installed
+		
+		for app in 'thunar' 'firefox' 'thunderbird' 'torbrowser' 'org.xfce.Catfish' 'gmusicbrowser' 'clementine' 'shotwell' 'libreoffice-startcenter' 'mintinstall' 'mx-packageinstaller' 'org.gnome.Software' 'org.keepassxc.KeePassXC' 'exo-terminal-emulator' 'xfce-settings-manager'
+	 	do
+			APPS=/usr/share/applications/$app.desktop
+	 		if [ -f "$APPS" ]; then 
+	 			
+	 		mkdir -p $HOME/.config/geox-tweak-xfce/panel/plank/dock1/launchers/
+			
+			mkdir -p $HOME/.config/plank/dock1/launchers/
+	 		
+	 		cp -Rf /usr/share/geox-tweak/panel/plank/dock1/launchers/$app.dockitem $HOME/.config/plank/dock1/launchers/
+
+			fi
+		done
+		
+		gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['thunar.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'torbrowser.dockitem', 'org.xfce.Catfish.dockitem', 'gmusicbrowser.dockitem', 'clementine.dockitem', 'shotwell.dockitem', 'libreoffice-startcenter.dockitem', 'mintinstall.dockitem', 'mx-packageinstaller.dockitem', 'org.gnome.Software.dockitem', 'org.keepassxc.KeePassXC.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem']"
+
+	else
+		echo "=>  preserve plank config."
+		
+		cp -Rf $HOME/.config/plank/* $HOME/.config/geox-tweak-xfce/panel/plank/
+		dconf dump /net/launchpad/plank/docks/ > $HOME/.config/geox-tweak-xfce/panel/plank/plank.ini
+
+		# find $HOME/.config/geox-tweak-xfce/panel/*/plank  -exec cp -f $HOME/.config/geox-tweak-xfce/panel/plank/plank.ini {} \;
+
+		echo "Done."
+	fi
+
 
 	xfconf-query -c thunar -p /misc-single-click --create --type bool -s false  
 	xfconf-query -c thunar -p /misc-folders-first --create --type bool -s true 
