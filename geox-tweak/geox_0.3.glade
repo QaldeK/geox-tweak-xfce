@@ -155,14 +155,6 @@ github.com/QaldeK/geox-tweak-xfce</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
   </object>
-  <object class="GtkRadioButton" id="radio_custom">
-    <property name="label" translatable="yes">MX linux</property>
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="receives_default">False</property>
-    <property name="draw_indicator">False</property>
-    <property name="group">radio_custom</property>
-  </object>
   <object class="GtkRadioButton" id="radio_default_theme">
     <property name="label" translatable="yes">radiobutton</property>
     <property name="visible">True</property>
@@ -325,6 +317,8 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                       <object class="GtkFrame">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
+                                        <property name="margin_left">10</property>
+                                        <property name="margin_right">10</property>
                                         <property name="margin_top">6</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="label_xalign">0</property>
@@ -340,21 +334,6 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                             <property name="column_spacing">6</property>
                                             <property name="column_homogeneous">True</property>
                                             <child>
-                                              <object class="GtkRadioButton" id="radio_budgie">
-                                                <property name="label" translatable="yes">Budgie</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_budgie_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">3</property>
-                                                <property name="top_attach">6</property>
-                                              </packing>
-                                            </child>
-                                            <child>
                                               <object class="GtkImage" id="budgie">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
@@ -362,36 +341,6 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                               <packing>
                                                 <property name="left_attach">3</property>
                                                 <property name="top_attach">5</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_xubuntu">
-                                                <property name="label" translatable="yes">Xubuntu</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_xubuntu_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_geox">
-                                                <property name="label" translatable="yes">GeoX</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_geox_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">0</property>
-                                                <property name="top_attach">6</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -412,81 +361,6 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                               <packing>
                                                 <property name="left_attach">0</property>
                                                 <property name="top_attach">5</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_win95">
-                                                <property name="label" translatable="yes">Win95</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_win95_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_win7">
-                                                <property name="label" translatable="yes">Win7</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_win7_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">6</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_mx">
-                                                <property name="label" translatable="yes">MX linux</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_mx_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">0</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_ubuntu">
-                                                <property name="label" translatable="yes">Ubuntu </property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_ubuntu_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">6</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_mate">
-                                                <property name="label" translatable="yes">Mate</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_custom</property>
-                                                <signal name="toggled" handler="on_radio_mate_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">3</property>
-                                                <property name="top_attach">2</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -588,6 +462,110 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                               </packing>
                                             </child>
                                             <child>
+                                              <object class="GtkButton" id="btn_ly_mx">
+                                                <property name="label" translatable="yes">MX Linux</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_mx_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_xubuntu">
+                                                <property name="label" translatable="yes">xubuntu</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_xubuntu_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_win95">
+                                                <property name="label" translatable="yes">Win95</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_win95_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_mate">
+                                                <property name="label" translatable="yes">Mate</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_mate_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">3</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_geox">
+                                                <property name="label" translatable="yes">Geox</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_geox_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">6</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_ubuntu">
+                                                <property name="label" translatable="yes">Ubuntu</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_ubuntu_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">6</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_win7">
+                                                <property name="label" translatable="yes">Win7</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_win7_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">6</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_ly_budgie">
+                                                <property name="label" translatable="yes">Budgie</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">True</property>
+                                                <signal name="clicked" handler="on_btn_ly_budgie_clicked" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">3</property>
+                                                <property name="top_attach">6</property>
+                                              </packing>
+                                            </child>
+                                            <child>
                                               <placeholder/>
                                             </child>
                                             <child>
@@ -633,7 +611,7 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="margin_left">10</property>
-                                        <property name="margin_top">10</property>
+                                        <property name="margin_top">20</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="orientation">vertical</property>
                                         <property name="spacing">5</property>
@@ -3772,14 +3750,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
       </object>
     </child>
   </object>
-  <object class="GtkRadioButton" id="wd_defaut">
-    <property name="label" translatable="yes">radiobutton</property>
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="receives_default">False</property>
-    <property name="active">True</property>
-    <property name="draw_indicator">True</property>
-  </object>
   <object class="GtkPopover" id="popover_wd">
     <property name="can_focus">False</property>
     <property name="relative_to">btn_wd</property>
@@ -3795,7 +3765,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="receives_default">False</property>
             <property name="active">True</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -3809,7 +3778,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -3823,7 +3791,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -3837,7 +3804,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -3851,7 +3817,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -3865,7 +3830,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -3879,7 +3843,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -3893,7 +3856,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">2</property>
@@ -3907,7 +3869,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="receives_default">False</property>
             <property name="image">preview_wd_arc_light</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -3921,7 +3882,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">1</property>
@@ -3935,7 +3895,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -3949,7 +3908,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
-            <property name="group">wd_defaut</property>
           </object>
           <packing>
             <property name="left_attach">2</property>

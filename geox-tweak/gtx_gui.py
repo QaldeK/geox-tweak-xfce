@@ -665,39 +665,37 @@ class Geox:
 
         self.tmodel.append([new_layout])
 
+    def on_tv_layouts_cursor_changed(self, widget):
+        pass
 
     # @ Layout
-    def on_radio_geox_toggled(self, widget):
-        if widget.get_active():
 
+    def on_btn_ly_geox_clicked(self, widget):
             self.gtweak.plank_config(dirLy='geox')
             self.gtweak.dockbarx_config(
                 launcher="[]", theme="Unite Faenza", the_me="Unite_Faenza")
-            self.gtweak.pulseaudio_config(size="0.6")
             self.gtweak.change_layout(layout="geox")
+            self.gtweak.pulseaudio_config(size="0.6")
             self.xfdashboard.set_active(True)
             self.plank.set_active(True)
 
-    def on_radio_mx_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_mx_clicked(self, widget):
             self.gtweak.pulseaudio_config(size="0.6")
             self.gtweak.plank_config(dirLy='mxlinux')
             self.gtweak.change_layout(layout="mxlinux")
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
 
-    def on_radio_win95_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_win95_clicked(self, widget):
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.change_layout(layout="win95")
             self.gtweak.plank_config(dirLy='win95')
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
 
-    def on_radio_win7_toggled(self, widget):
-        if widget.get_active():
+    def on_btn_ly_win7_clicked(self, widget):
             self.gtweak.dockbarx_config(
-                launcher="[thunar;/usr/share/applications/Thunar.desktop,firefox;/usr/share/applications/firefox.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
+                launcher="[thunar;/usr/share/applications/thunar.desktop,Web Browser;/usr/share/applications/exo-web-browser.desktop,libreoffice-writer;/usr/share/applications/libreoffice-writer.desktop,exo-terminal-emulator;/usr/share/applications/exo-terminal-emulator.desktop]",
                 theme="Gaia",
                 the_me="Gaia"
             )
