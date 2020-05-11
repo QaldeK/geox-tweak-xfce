@@ -308,12 +308,14 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
     # @ Desktop Layout __________
 
     def change_layout(self, layout):
-        """ Change xfce panel orientations and plugins """
+        """ Change
+
+         xfce panel orientations and plugins """
         args = '''xfce4-panel --quit; pkill xfconfd; rm -Rf ~/.config/xfce4/panel; \
-         cp -Rf ''' + paneldir + layout + '''/xfce4/panel ~/.config/xfce4/panel; \
-                    cp -f ''' + paneldir + layout + '''/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
-                    ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
-                    sleep 2; xfce4-panel &'''
+         cp -Rf ''' + paneldir + layout + '''/xfce4/panel ~/.config/xfce4/; \
+        cp -f ''' + paneldir + layout + '''/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
+        ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
+        xfce4-panel &'''
 
         subprocess.check_call(args, shell=True)
         config.set('Style', 'layout', layout)

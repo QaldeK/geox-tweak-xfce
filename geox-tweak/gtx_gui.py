@@ -530,34 +530,25 @@ class Geox:
             self.tv_selected_layout = ls_layout[layout][0]
 
 
-    # def on_tv_layouts_cursor_changed(self, widget):
-    #     remove = self.builder.get_object('tb_rm_ly')
-    #     remove.set_sensitive(True)
-
-    #     load = self.builder.get_object('tb_load_ly')
-    #     load.set_sentive(True)
-
-
     def on_tb_load_ly_clicked(self, widget):
         layout = self.get_selected_savedLayout()
-        
-       # Xfce4 panel
-        cmd = '''xfce4-panel --quit; pkill xfconfd; rm -Rf ~/.config/xfce4/panel; \
-        cp -Rf ''' + savedLayoutDir + layout + '''/xfce4/panel ~/.config/xfce4/panel; \
-        cp -f ''' + savedLayoutDir + layout + '''/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
-        ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
+
+        # Xfce4 panel
+        cmd = '''xfce4-panel --quit; pkill xfconfd; rm ~/.config/xfce4/panel/*; \
+        cp -Rf ''' + savedLayoutDir + layout + '''/xfce4/panel ~/.config/xfce4/; \
+        cp -f ''' + savedLayoutDir + layout + '''/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
         cp -f ''' + savedLayoutDir + layout + '''/gtk.css ~/.config/gtk-3.0/gtk.css; \
-        sleep 3; xfce4-panel &'''
+        sleep 1; xfce4-panel &'''
         subprocess.check_call(cmd, shell=True)
 
 
-      # plank
+        # plank
         if os.path.isfile(savedLayoutDir + layout + "/plank/plank.ini"):
             
             cmd2 = '''cp -Rf ''' + savedLayoutDir + layout + '''/plank/ ~/.config/plank/ ;  
-            cat ''' + savedLayoutDir + layout + '''/plank/plank.ini | dconf load /net/launchpad/plank/docks/ ;
+            cat ''' + savedLayoutDir + layout + '''/plank/plank.ini | dconf load /net/launchpad/plank/docks/
             '''
-            subprocess.run(cmd2, shell=True)
+            subprocess.check_call(cmd2, shell=True)
             
             self.plank.set_active(True)
         else: 
