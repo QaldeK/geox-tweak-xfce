@@ -762,22 +762,90 @@ class Geox:
         subprocess.run("xfce4-appearance-settings")
 
     def on_toggle_adapta_compact_toggled(self, widget):
+        theme = self.theme_name.get_label()
+
         if widget.get_active():
             self.gtweak.theme_var(var_adapta='-Eta')
+            if '-Eta' not in theme:
+                theme = theme + '-Eta'
+                self.theme_name.set_label(theme)
         else:
             self.gtweak.theme_var(var_adapta="")
+            theme = theme.replace('-Eta', '')
+            self.theme_name.set_label(theme)
 
     def on_toggle_arc_hdpi_toggled(self, widget):
+        theme = self.theme_name.get_label()
+
         if widget.get_active():
             self.gtweak.theme_var(var_arc='-hdpi')
+            if '-hdpi' not in theme:
+                theme = theme + '-hdpi'
+                self.theme_name.set_label(theme)
         else:
             self.gtweak.theme_var(var_arc="")
+            theme = theme.replace('-hdpi', '')
+            self.theme_name.set_label(theme)
 
     def on_toggle_arc_xhdpi_toggled(self, widget):
+        theme = self.theme_name.get_label()
+
         if widget.get_active():
             self.gtweak.theme_var(var_arc='-xhdpi')
+            if '-xhdpi' not in theme:
+                theme = theme + '-xhpdi'
+                self.theme_name.set_label(theme)
         else:
             self.gtweak.theme_var(var_arc="")
+            theme = theme.replace('-xhdpi', '')
+            self.theme_name.set_label(theme)
+
+    # @ Check theme / bar_theme  install / rmv
+
+    def theme_status(self):
+        check_theme = self.theme_name.get_label()
+        # FIXIT : Adapta deeppurple miss !
+        if os.path.exists('/usr/share/themes/' + check_theme):
+            self.warning_theme.hide()
+            self.rm_theme.show()
+            self.apply_bar_theme.show()
+            self.bar_theme.show()
+
+        else:
+            self.apply_bar_theme.hide()
+            self.rm_theme.hide()
+            self.warning_theme.show()
+            self.bar_theme.show()
+
+    def on_btn_theme_install_clicked(self, widget):
+        theme = self.theme_name.get_label()
+        subprocess.Popen("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.gz " +
+                       theme + "'", shell=True)
+        self.theme_status()
+
+    def on_rm_theme_clicked(self, widget):
+        theme = self.theme_name.get_label()
+        print(theme)
+        dialog = Gtk.MessageDialog(
+            None,
+            0,
+            Gtk.MessageType.WARNING,
+            Gtk.ButtonsType.OK_CANCEL,
+            "The " + theme + " theme will be remove",
+        )
+        dialog.format_secondary_text(
+            "Password requiered for uninstall"
+        )
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            subprocess.Popen(
+                "xfce4-terminal -e 'sudo rm -r /usr/share/themes/" + theme + "'", shell=True)
+        elif response == Gtk.ResponseType.CANCEL:
+            print("rm canceled")
+
+        dialog.destroy()
+
+        self.theme_status()
 
     # @ theme # Button : Apply selected theme
     def on_btn_apply_clicked(self, widget):
@@ -786,12 +854,12 @@ class Geox:
         else:
             self.gtweak.change_theme(change_folder=False)
 
-    # # @ theme # PopOver windows decorator
+    # @ theme # PopOver windows decorator
     # def on_btn_wd_clicked(self, widget):
     #     self.popover_wd.show_all()
     #     self.popover_wd.popup()
 
-    # @ Preparation de la Modification des themes en fonction de la selection (radio btn)
+    # @ Preparation de la Modification des themes en fonction de la  selection (radio btn)
         # What ? Obliger de faire une fonction par objet glade ...?
         # TODO Add plano matcha...
 
@@ -802,8 +870,9 @@ class Geox:
                 theme='Greybird',
                 windows_decor='Greybird'
             )
-            self.bar_theme.show()
             self.theme_name.set_label('Greybird')
+            self.theme_status()
+            self.theme_status()
 
     def on_radio_adapta_toggled(self, widget):
         if widget.get_active():
@@ -813,7 +882,7 @@ class Geox:
                 windows_decor='Adapta',
                 folder_color='cyan'
             )
-            self.bar_theme.show()
+            self.theme_status()
             self.theme_name.set_label('Adapta')
 
     def on_radio_adapta_bluegrey_toggled(self, widget):
@@ -823,7 +892,7 @@ class Geox:
             self.gtweak.select_theme(theme='Adapta-BlueGrey', windows_decor='Adapta',
                                      folder_color='bluegrey'
                                      )
-            self.bar_theme.show()
+            self.theme_status()
             self.theme_name.set_label('Adapta-BlueGrey')
 
     def on_radio_adapta_bluegrey_nokto_toggled(self, widget):
@@ -836,7 +905,7 @@ class Geox:
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
                 folder_color='bluegrey')
-            self.bar_theme.show()
+            self.theme_status()
             self.theme_name.set_label('Adapta-BlueGrey-Nokto')
 
     def on_radio_adapta_pink_toggled(self, widget):
@@ -847,7 +916,7 @@ class Geox:
                                      folder_color='red'
                                      )
             self.theme_name.set_label('Adapta-Pink')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_adapta_pink_nokto_toggled(self, widget):
         if widget.get_active():
@@ -861,7 +930,7 @@ class Geox:
                 folder_color='red'
             )
             self.theme_name.set_label('Adapta-Pink-Nokto')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_adapta_deeppurple_toggled(self, widget):
         if widget.get_active():
@@ -871,7 +940,7 @@ class Geox:
                                      folder_color='violet'
                                      )
             self.theme_name.set_label('Adapta-DeepPurple')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_adapta_deeppurple_nokto_toggled(self, widget):
         if widget.get_active():
@@ -885,7 +954,7 @@ class Geox:
                 folder_color='violet'
             )
             self.theme_name.set_label('Adapta-DeepPurple-Nokto')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_adapta_green_toggled(self, widget):
         if widget.get_active():
@@ -894,7 +963,7 @@ class Geox:
                                      folder_color='green'
                                      )
             self.theme_name.set_label('Adapta-Green')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_adapta_green_nokto_toggled(self, widget):
         if widget.get_active():
@@ -908,7 +977,7 @@ class Geox:
                 folder_color='green'
             )
             self.theme_name.set_label('Adapta-Green-Nokto')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_adapta_nokto_toggled(self, widget):
         if widget.get_active():
@@ -921,7 +990,7 @@ class Geox:
                 folder_color='cyan'
             )
             self.theme_name.set_label('Adapta-Nokto')
-            self.bar_theme.show()
+            self.theme_status()
 
     def on_radio_matcha_aliz_toggled(self, widget):
         if widget.get_active():
@@ -930,8 +999,8 @@ class Geox:
                 theme='Matcha-aliz',
                 windows_decor='Matcha-aliz',
             )
-            self.theme_name.set_label('Matcha Aliz')
-            self.bar_theme.show()
+            self.theme_name.set_label('Matcha-aliz')
+            self.theme_status()
 
     def on_radio_matcha_sea_toggled(self, widget):
         if widget.get_active():
@@ -940,8 +1009,8 @@ class Geox:
                 theme='Matcha-sea',
                 windows_decor='Matcha-sea',
             )
-            self.theme_name.set_label('Matcha Sea')
-            self.bar_theme.show()
+            self.theme_name.set_label('Matcha-sea')
+            self.theme_status()
 
     def on_radio_matcha_azul_toggled(self, widget):
         if widget.get_active():
@@ -950,8 +1019,8 @@ class Geox:
                 theme='Matcha-azul',
                 windows_decor='Matcha-azul',
             )
-            self.theme_name.set_label('Matcha Azul')
-            self.bar_theme.show()
+            self.theme_name.set_label('Matcha-azul')
+            self.theme_status()
 
     def on_radio_matcha_dark_sea_toggled(self, widget):
         if widget.get_active():
@@ -963,8 +1032,8 @@ class Geox:
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
             )
-            self.theme_name.set_label('Matcha Dark Sea')
-            self.bar_theme.show()
+            self.theme_name.set_label('Matcha-dark-sea')
+            self.theme_status()
 
     def on_radio_matcha_dark_aliz_toggled(self, widget):
         if widget.get_active():
@@ -976,8 +1045,8 @@ class Geox:
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
             )
-            self.theme_name.set_label('Matcha Dark Aliz')
-            self.bar_theme.show()
+            self.theme_name.set_label('Matcha-dark-aliz')
+            self.theme_status()
 
     def on_radio_matcha_dark_azul_toggled(self, widget):
         if widget.get_active():
@@ -989,8 +1058,8 @@ class Geox:
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
             )
-            self.theme_name.set_label('Matcha Dark Azul')
-            self.bar_theme.show()
+            self.theme_name.set_label('Matcha-dark-azul')
+            self.theme_status()
 
     def on_radio_arc_toggled(self, widget):
         if widget.get_active():
@@ -1000,15 +1069,14 @@ class Geox:
                 windows_decor='Arc',
             )
             self.theme_name.set_label('Arc')
-            self.bar_theme.show()
-
+            self.theme_status()
 
     def on_radio_arc_dark_toggled(self, widget):
         if widget.get_active():
             self.preview_arc.set_from_file(sdir + "/img/arc-dark.png")
             self.theme_name.set_label("Arc-Dark")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1020,7 +1088,7 @@ class Geox:
         if widget.get_active():
             self.theme_name.set_label("Clearlooks")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
 
             self.gtweak.select_theme(
                 theme=themename,
@@ -1034,7 +1102,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/qogir.png")
             self.theme_name.set_label("Qogir")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1045,7 +1113,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/qogir-light.png")
             self.theme_name.set_label("Qogir-light")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
 
             self.gtweak.select_theme(
                 theme=themename,
@@ -1057,7 +1125,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/qogir-dark.png")
             self.theme_name.set_label("Qogir-dark")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1070,7 +1138,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/materia.png")
             self.theme_name.set_label("Materia")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1083,7 +1151,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/materia-dark.png")
             self.theme_name.set_label("Materia-dark")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1096,7 +1164,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/materia-light.png")
             self.theme_name.set_label("Materia-light")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1107,9 +1175,9 @@ class Geox:
     def on_radio_macos_toggled(self, widget):
         if widget.get_active():
             self.preview_various.set_from_file(sdir + "/img/macos.png")
-            self.theme_name.set_label("McOS-MJV-XFCE-Edition")
+            self.theme_name.set_label("McOS-MJV-XFCE-Edition-2.3")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1122,8 +1190,8 @@ class Geox:
     def on_radio_prodark_toggled(self, widget):
         if widget.get_active():
             self.preview_various.set_from_file(sdir + "/img/pro-dark-xfce.png")
-            self.theme_name.set_label("PRO-dark-XFCE")
-            self.bar_theme.show()
+            self.theme_name.set_label("PRO-dark-XFCE-4.14")
+            self.theme_status()
             self.gtweak.select_theme(
                 theme='PRO-dark-XFCE-4.14',
                 windows_decor='PRO-dark-XFCE-4.14',
@@ -1134,7 +1202,7 @@ class Geox:
         if widget.get_active():
             self.preview_various.set_from_file(sdir + "/img/macos-dark.png")
             self.theme_name.set_label("McOS-MJV-Dark-XFCE-Edition-2.3")
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme='McOS-MJV-Dark-XFCE-Edition-2.3',
                 windows_decor='McOS-MJV-Dark-XFCE-Edition-2.3',
@@ -1147,7 +1215,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/adwaita.png")
             self.theme_name.set_label("Adwaita")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1158,7 +1226,7 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/adwaita-dark.png")
             self.theme_name.set_label("Adwaita-dark")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
@@ -1171,187 +1239,192 @@ class Geox:
             self.preview_various.set_from_file(sdir + "/img/numix.png")
             self.theme_name.set_label("Numix")
             themename = self.theme_name.get_label()
-            self.bar_theme.show()
+            self.theme_status()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='orange'
             )
 
-
     def on_radio_mint_toggled(self, widget):
         if widget.get_active():
             self.theme_name.set_label("Mint-Y")
             self.preview_mint.set_from_file(sdir + "/img/mint-y.png")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='green'
             )
-    
+
     def on_radio_mint_grey_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-grey.png")
             self.theme_name.set_label("Mint-Y-Grey")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='grey'
             )
-    
+
     def on_radio_mint_red_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-red.png")
             self.theme_name.set_label("Mint-Y-Red")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='red'
             )
-    
+
     def on_radio_mint_purple_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-purple.png")
             self.theme_name.set_label("Mint-Y-Purple")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='violet'
             )
-    
+
     def on_radio_mint_aqua_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-aqua.png")
             self.theme_name.set_label("Mint-Y-Aqua")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='blue'
             )
-    
+
     def on_radio_mint_brown_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-brown.png")
             self.theme_name.set_label("Mint-Y-Brown")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='brown'
             )
-    
+
     def on_radio_mint_teal_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-teal.png")
             self.theme_name.set_label("Mint-Y-Teal")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
                 folder_color='teal'
             )
-    
+
     def on_radio_mint_darker_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-darker.png")
             self.theme_name.set_label("Mint-Y-Darker")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor='Mint-Y-Dark',
                 folder_color='green'
             )
-    
+
     def on_radio_mint_darker_grey_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-darker-grey.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-darker-grey.png")
             self.theme_name.set_label("Mint-Y-Darker-Grey")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor="Mint-Y-Dark-Grey",
                 folder_color='grey'
             )
-    
+
     def on_radio_mint_darker_red_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-darker-red.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-darker-red.png")
             self.theme_name.set_label("Mint-Y-Darker-Red")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor="Mint-Y-Dark-Red",
                 folder_color='red'
             )
-    
+
     def on_radio_mint_darker_purple_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-darker-purple.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-darker-purple.png")
             self.theme_name.set_label("Mint-Y-Darker-Purple")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor="Mint-Y-Dark-Purple",
                 folder_color='violet'
             )
-    
+
     def on_radio_mint_darker_aqua_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-darker-aqua.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-darker-aqua.png")
             self.theme_name.set_label("Mint-Y-Darker-Aqua")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor="Mint-Y-Dark-Aqua",
                 folder_color='blue'
             )
-    
+
     def on_radio_mint_darker_brown_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-darker-brown.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-darker-brown.png")
             self.theme_name.set_label("Mint-Y-Darker-Brown")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor="Mint-Y-Dark-Brown",
                 folder_color='brown'
             )
-    
+
     def on_radio_mint_darker_teal_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-darker-teal.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-darker-teal.png")
             self.theme_name.set_label("Mint-Y-Darker-Teal")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor="Mint-Y-Dark-Teal",
                 folder_color='teal'
             )
-    
+
     def on_radio_mint_dark_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-dark.png")
             self.theme_name.set_label("Mint-Y-Dark")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1360,12 +1433,12 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='green'
             )
-    
+
     def on_radio_mint_dark_grey_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-dark-grey.png")
             self.theme_name.set_label("Mint-Y-Dark-Grey")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1374,12 +1447,12 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='grey'
             )
-    
+
     def on_radio_mint_dark_red_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-dark-red.png")
             self.theme_name.set_label("Mint-Y-Dark-Red")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1388,12 +1461,13 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='red'
             )
-    
+
     def on_radio_mint_dark_purple_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-dark-purple.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-dark-purple.png")
             self.theme_name.set_label("Mint-Y-Dark-Purple")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1402,12 +1476,12 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='violet'
             )
-    
+
     def on_radio_mint_dark_aqua_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-dark-aqua.png")
             self.theme_name.set_label("Mint-Y-Dark-Aqua")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1416,12 +1490,13 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='blue'
             )
-    
+
     def on_radio_mint_dark_brown_toggled(self, widget):
         if widget.get_active():
-            self.preview_mint.set_from_file(sdir + "/img/mint-y-dark-brown.png")
+            self.preview_mint.set_from_file(
+                sdir + "/img/mint-y-dark-brown.png")
             self.theme_name.set_label("Mint-Y-Dark-Brown")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1430,12 +1505,12 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='brown'
             )
-    
+
     def on_radio_mint_dark_teal_toggled(self, widget):
         if widget.get_active():
             self.preview_mint.set_from_file(sdir + "/img/mint-y-dark-teal.png")
             self.theme_name.set_label("Mint-Y-Dark-Teal")
-            self.bar_theme.show()
+            self.theme_status()
             themename = self.theme_name.get_label()
             self.gtweak.select_theme(
                 theme=themename,
@@ -1444,18 +1519,17 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='teal'
             )
-    
-
-    # ICON color
+    # @ pane : ICON color _________________________________________
 
     def on_folder_toggled(self, widget):
         if widget.get_active():
             folder_color = Gtk.Buildable.get_name(widget)
             self.gtweak.on_folderc(folder_color)
 
-# @ pane : "OTHER"
 
-    # Buttons  of "Other" pane #####################
+    # @ pane : "OTHER" _____________________________
+
+    # @ Buttons  of "Other" pane 
 
     @staticmethod
     def on_btn_simpleclic_thunar_toggled(widget):
