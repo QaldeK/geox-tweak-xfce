@@ -126,9 +126,9 @@ _installConf()
 	mkdir -p $HOME/.config/autostart/
 	cp -n /usr/share/geox-tweak/script/autostart/* $HOME/.config/autostart/
 	# Geox-Tweak-Xfce
-	mkdir -p $HOME/.config/geox-tweak-xfce/
+	mkdir -p $HOME/.config/geox-tweak-xfce/panel
 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
-	cp -ru /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce/
+	cp -r /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce/
 
 	#conky fonts
 	echo $pw | sudo -S cp -R /usr/share/geox-tweak/theme/Podkova /usr/share/fonts/truetype/
@@ -221,20 +221,20 @@ _installationDebian()
 		echo "__Check depends packages ________________"
 		echo 
 
-				for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' \
-				 'gconf2' \
-				'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
-				'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
-				'xfce4-datetime-plugin'  'xfce4-dockbarx-plugin' \
-				'conky-all' 'conky' 'papirus-icon-theme' 
-			do
-				if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
-				then
-					echo $app "==> try installation ..."
-					echo $pw | sudo -S apt-get install -y $app
+		for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' \
+		 'gconf2' \
+		'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
+		'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
+		'xfce4-datetime-plugin'  'xfce4-dockbarx-plugin' \
+		'conky-all' 'conky' 'papirus-icon-theme' 
+		do
+			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+			then
+				echo $app "==> try installation ..."
+				echo $pw | sudo -S apt-get install -y $app
 
-				else
-					echo $app is installed
+			else
+				echo $app is installed
 
 			fi	
 		done
