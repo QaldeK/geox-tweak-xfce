@@ -22,19 +22,22 @@
 # On Debian systems, the complete text of the GNU General
 # Public License can be found in `/usr/share/common-licenses/GPL'.
 
-from geox_tweak_xfce import GeoxTweak
 import subprocess  # os et subprocess : executer des commandes et script bash
 from os.path import expanduser
 import os.path
 import os
 import configparser  # traiter les fichiers de configuration
-import gi  # nécessaire pour utiliser le fichier glade
+import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk  # nécessaire pour utiliser le fichier glade/ GObject?
+from gi.repository import Gtk
+import shutil
+
+from geox_tweak_xfce import GeoxTweak
 
 home = expanduser("~")  # path home de l'user
 sdir = os.path.dirname(os.path.abspath(__file__))  # path du script py
 paneldir = home + '/.config/geox-tweak-xfce/panel/'
+savedLayoutDir = paneldir + 'saved_layout/'
 config = configparser.ConfigParser()
 gtconf = home + '/.config/geox-tweak-xfce/geox-tweak.conf'
 
@@ -43,7 +46,7 @@ class Geox:
     def on_main_window_destroy(self, data=None):
         Gtk.main_quit()
 
-# @ INIT
+    # @ INIT______________________________________________
     def __init__(self):
         """ Initialisation : chargement du gtk builder 
         lisant le fichier glade ..."""
@@ -52,18 +55,18 @@ class Geox:
         glade_file = os.path.join(sdir, "geox_0.3.glade")
         self.builder.add_from_file(glade_file)
         self.builder.connect_signals(self)
-
         go = self.builder.get_object
+
         self.gtweak = GeoxTweak()
 
-        # bouton pref
+    # @ bouton pref
         self.btn_plank_pref = go("btn_plank_pref")
         self.btn_xfdashboard_pref = go("btn_xfdashboard_pref")
         self.btn_conky_pref = go("btn_conky_pref")
         self.btn_notes_pref = go("btn_notes_pref")
         self.btn_ddterm_pref = go("btn_ddterm_pref")
 
-        # Toogle Tools
+    # @ Toogle Tools
         self.plank = go("plank")
         self.xfdashboard = go("xfdashboard")
         self.synapse = go("synapse")
@@ -72,7 +75,7 @@ class Geox:
         self.notes = go("notes")
         self.gtxi = go("gtxi")
 
-        # Toggle Help TODO A traduire avant d'activer ?
+    # @    # Toggle Help TODO A traduire avant d'activer ?
         self.btn_plank_help = go("btn_plank_help")
         self.btn_xfdashboard_help = go("btn_xfdashboard_help")
         self.btn_synapse_help = go("btn_synapse_help")
@@ -678,8 +681,7 @@ class Geox:
     def on_radio_mx_toggled(self, widget):
         if widget.get_active():
             self.gtweak.pulseaudio_config(size="0.6")
-            self.gtweak.plank_config(
-                "true", "100", "bottom", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='mxlinux')
             self.gtweak.change_layout(layout="mxlinux")
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
@@ -688,8 +690,7 @@ class Geox:
         if widget.get_active():
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.change_layout(layout="win95")
-            self.gtweak.plank_config(
-                "true", "0", "top", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='win95')
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
 
@@ -702,8 +703,7 @@ class Geox:
             )
             self.gtweak.pulseaudio_config(size="0.6")
             self.gtweak.change_layout(layout="win7")
-            self.gtweak.plank_config(
-                "true", "0", "right", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='win7')
             self.xfdashboard.set_active(False)
             self.plank.set_active(False)
 
@@ -715,8 +715,7 @@ class Geox:
                 theme="Unite Faenza",
                 the_me="Unite_Faenza")
             self.gtweak.change_layout(layout="ubuntu", )
-            self.gtweak.plank_config(
-                "true", "100", "bottom", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='ubuntu')
             self.plank.set_active(False)
             self.xfdashboard.set_active(True)
 
@@ -724,8 +723,7 @@ class Geox:
         if widget.get_active():
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.change_layout(layout="mate")
-            self.gtweak.plank_config(
-                "true", "0", "left", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='mate')
             self.xfdashboard.set_active(False)
             self.plank.set_active(False)
 
@@ -733,8 +731,7 @@ class Geox:
         if widget.get_active():
             self.gtweak.pulseaudio_config(size="1")
             self.gtweak.change_layout(layout="xubuntu")
-            self.gtweak.plank_config(
-                "true", "0", "bottom", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='xubuntu')
             self.plank.set_active(True)
             self.xfdashboard.set_active(False)
 
@@ -746,13 +743,14 @@ class Geox:
                 theme="Deep",
                 the_me="Deep")
             self.gtweak.change_layout(layout="budgie")
-            self.gtweak.plank_config(
-                "true", "100", "left", theme=self.plank_theme)
+            self.gtweak.plank_config(dirLy='budgie')
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
 
-# @ Onglet : "Window theme"
-    # @ Bouton additonnel pointant vers les outils de parametrage xfce natifs
+    # @ Onglet : "Window theme"______________________________________
+
+    # @ Bouton additonnel pointant vers les outils de parametrage xfce natifs + compact / hdpi
+
     @staticmethod
     def on_btn_widows_decor_clicked(widget):
         subprocess.run("xfwm4-settings")
@@ -1632,6 +1630,71 @@ class Geox:
     def on_btn_notification_settings_clicked(widget):
         subprocess.Popen("xfce4-notifyd-config", shell=True)
 
+    # @ Parametrage xfce ; volet "Other"
+
+    def state_settings(self):
+        """ Verifie les parametrage de xfce dans xfconf pour
+        que les check_button refletent bien la configuration actuelle """
+        if subprocess.getoutput(
+                '''xfconf-query -c thunar -p /misc-single-click''') == "true":
+            self.btn_simpleclic_thunar.handler_block_by_func(
+                self.on_btn_simpleclic_thunar_toggled)
+            self.btn_simpleclic_thunar.set_active(True)
+            self.btn_simpleclic_thunar.handler_unblock_by_func(
+                self.on_btn_simpleclic_thunar_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c thunar -p /misc-folders-first''') == "true":
+            self.btn_folder_file.handler_block_by_func(
+                self.on_btn_folder_file_toggled)
+            self.btn_folder_file.set_active(True)
+            self.btn_folder_file.handler_unblock_by_func(
+                self.on_btn_folder_file_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c thunar -p /misc-text-beside-icons'''
+        ) == "true":
+            self.btn_txt_next_icons.handler_block_by_func(
+                self.on_btn_txt_next_icons_toggled)
+            self.btn_txt_next_icons.set_active(True)
+            self.btn_txt_next_icons.handler_unblock_by_func(
+                self.on_btn_txt_next_icons_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click'''
+        ) == "true":
+            self.btn_simpleclic_desktop.handler_block_by_func(
+                self.on_btn_simpleclic_desktop_toggled)
+            self.btn_simpleclic_desktop.set_active(True)
+            self.btn_simpleclic_desktop.handler_unblock_by_func(
+                self.on_btn_simpleclic_desktop_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash'''
+        ) == "true":
+            self.btn_trash_desktop.handler_block_by_func(
+                self.on_btn_trash_desktop_toggled)
+            self.btn_trash_desktop.set_active(True)
+            self.btn_trash_desktop.handler_unblock_by_func(
+                self.on_btn_trash_desktop_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home'''
+        ) == "true":
+            self.btn_home_desktop.handler_block_by_func(
+                self.on_btn_home_desktop_toggled)
+            self.btn_home_desktop.set_active(True)
+            self.btn_home_desktop.handler_unblock_by_func(
+                self.on_btn_home_desktop_toggled)
+
+        if subprocess.getoutput(
+                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable'''
+        ) == "true":
+            self.btn_removable_desktop.handler_block_by_func(
+                self.on_btn_removable_desktop_toggled)
+            self.btn_removable_desktop.set_active(True)
+            self.btn_removable_desktop.handler_unblock_by_func(
+                self.on_btn_removable_desktop_toggled)
 
 ####
 
