@@ -501,6 +501,7 @@ class Geox:
         #FIXIT Add directory to firstrun/install_script 
 
         new_layout = self.entry_layout.get_text()
+        new_layout = new_layout.replace(' ', '_')
 
         if new_layout not in os.listdir(paneldir + 'saved_layout/'):
             self.add_new_layout(new_layout)

@@ -1,0 +1,1021 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"geox-tweak-xf",
+				"geox-tweak-xfce_mx19"
+			],
+			[
+				"geox-tweak-x",
+				"geox-tweak-xfce_mx19"
+			],
+			[
+				"geo",
+				"geox-tweak"
+			],
+			[
+				"libr",
+				"libreoffice_icons"
+			],
+			[
+				"libre",
+				"libreoffice_icons\tstatement"
+			],
+			[
+				"_instal",
+				"_installationManjaro"
+			],
+			[
+				"geox",
+				"geox-tweak-xfce_ubuntu-18"
+			],
+			[
+				"ge",
+				"geox-tweak-xfce_buster"
+			],
+			[
+				"geox-tweak-xfce",
+				"geox-tweak-xfce_buster"
+			],
+			[
+				"no",
+				"noconfirm"
+			],
+			[
+				"fi",
+				"firstrun"
+			],
+			[
+				"set",
+				"set_from_file"
+			],
+			[
+				"pop",
+				"popover_wd"
+			],
+			[
+				"che",
+				"check_call\tfunction"
+			],
+			[
+				"state",
+				"state_app\tfunction"
+			],
+			[
+				"chec",
+				"check_output"
+			],
+			[
+				"gtx",
+				"gtx_indicator"
+			],
+			[
+				"de",
+				"desktop"
+			],
+			[
+				"GeoX-Tweak-Xfc",
+				"geox-tweak-xfce"
+			],
+			[
+				"wa",
+				"warning_app_miss"
+			],
+			[
+				"w",
+				"warning_app_miss\tstatement"
+			],
+			[
+				"warn",
+				"warning_app_miss"
+			],
+			[
+				"true",
+				"True"
+			],
+			[
+				"vi",
+				"visible"
+			],
+			[
+				"war",
+				"warning_app_miss"
+			],
+			[
+				"state_dockb",
+				"state_dockbarx\tstatement"
+			],
+			[
+				"item_da",
+				"conky_item_date"
+			],
+			[
+				"new",
+				"new_f\tstatement"
+			],
+			[
+				"conk",
+				"conky_item"
+			],
+			[
+				"conkuy",
+				"conky_item_shorcut\tstatement"
+			],
+			[
+				"con",
+				"connect"
+			],
+			[
+				"preview_ma",
+				"preview_matcha\tstatement"
+			],
+			[
+				"lines",
+				"lines_seen\tstatement"
+			],
+			[
+				"conky",
+				"conkytoggle"
+			],
+			[
+				"wr",
+				"writelines\tfunction"
+			],
+			[
+				"c",
+				"ckstart"
+			],
+			[
+				"auto",
+				"autostart_on"
+			],
+			[
+				"sh",
+				"showconky\tstatement"
+			],
+			[
+				"wid",
+				"widget"
+			],
+			[
+				"chan",
+				"change_layout\tfunction"
+			],
+			[
+				"Pap",
+				"Papirus-Light"
+			],
+			[
+				"Ada",
+				"Adapta-Nokto"
+			],
+			[
+				"dark",
+				"darktheme"
+			],
+			[
+				"li",
+				"lighttheme\tstatement"
+			],
+			[
+				"la",
+				"layout\tparam"
+			],
+			[
+				"La",
+				"Layout\tclass"
+			],
+			[
+				"Adapta-Gre",
+				"Adapta-Green-Nokto"
+			],
+			[
+				"Adapta-D",
+				"Adapta-DeepPurple-Nokto"
+			],
+			[
+				"Adapta-de",
+				"Adapta-DeepPurple"
+			],
+			[
+				"Adapta-p",
+				"Adapta-Pink-Nokto"
+			],
+			[
+				"blu",
+				"bluegrey"
+			],
+			[
+				"Adapta-B",
+				"Adapta-BlueGrey"
+			],
+			[
+				"icons",
+				"iconslibreoffice"
+			],
+			[
+				"blue",
+				"blue"
+			],
+			[
+				"folde",
+				"folder_color"
+			],
+			[
+				"on_radio",
+				"on_radio_theme_toggled"
+			],
+			[
+				"ico",
+				"icons_name"
+			],
+			[
+				"theme",
+				"theme_Name\tstatement"
+			],
+			[
+				"f",
+				"function"
+			],
+			[
+				"confi",
+				"configure"
+			],
+			[
+				"App",
+				"AppInstall"
+			],
+			[
+				"gexo",
+				"geox-tweak"
+			],
+			[
+				"papi",
+				"papirus-folders"
+			],
+			[
+				"geox-t",
+				"geox-tweak"
+			],
+			[
+				"pa",
+				"path_base"
+			],
+			[
+				"ac",
+				"activconf"
+			],
+			[
+				"ho",
+				"HOME"
+			],
+			[
+				"pap",
+				"papirus-folders"
+			],
+			[
+				"ins",
+				"install"
+			],
+			[
+				"install",
+				"installation"
+			],
+			[
+				"apt",
+				"apt-get"
+			],
+			[
+				"au",
+				"autostart"
+			],
+			[
+				"conf",
+				"config\tstatement"
+			],
+			[
+				"Home",
+				"HOME"
+			],
+			[
+				"pro",
+				"PRO-dark-XFCE-edition-II-1"
+			],
+			[
+				"pla",
+				"plank_theme\tstatement"
+			],
+			[
+				"plank",
+				"plank_theme\tstatement"
+			],
+			[
+				"plank_",
+				"plank_theme"
+			],
+			[
+				"Ad",
+				"Adwaita-dark"
+			],
+			[
+				"tru",
+				"True\tkeyword"
+			],
+			[
+				"pulse",
+				"pulseaudio_config"
+			],
+			[
+				"arg",
+				"args2"
+			],
+			[
+				"d",
+				"plain_tasks_new_with_date"
+			],
+			[
+				"T",
+				"True"
+			],
+			[
+				"Sh",
+				"shell"
+			]
+		]
+	},
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Anaconda Python Builder",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Anaconda Python Builder",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"show",
+				"Fold Python : show documentation"
+			],
+			[
+				"exp",
+				"ExpandRegion"
+			],
+			[
+				"bo",
+				"Bookmarks: Toggle"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"ormvl",
+				"Origami: Move File to Pane on the Left"
+			],
+			[
+				"goto",
+				"Anaconda: Goto object definition"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"enap",
+				"Package Control: Enable Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"ana doc",
+				"Anaconda: Display object docs"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"highli",
+				"HighlightWords: Toggle Settings"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"auto",
+				"AutoPEP8: Format Code"
+			],
+			[
+				"view",
+				"View: Toggle Side Bar"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"ana",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"pa",
+				"Package Control: Enable Package"
+			],
+			[
+				"py",
+				"PyYapf: Format Document"
+			],
+			[
+				"histo",
+				"Local History: Compare & Replace"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"y",
+				"PyYapf: Format Document"
+			],
+			[
+				"toggle lin",
+				"SublimeLinter: Toggle Highlights"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"book",
+				"Bookmarks: Toggle"
+			],
+			[
+				"next",
+				"Bookmarks: Select Next"
+			],
+			[
+				"sid",
+				"View: Toggle Side Bar"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"lint",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"deb",
+				"Debugger: Refresh phantoms"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"doc",
+				"Anaconda: Display object docs"
+			],
+			[
+				"find",
+				"Anaconda: Find object usage"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"error",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"local",
+				"Local History: Save Now"
+			],
+			[
+				"debu",
+				"Debugger: Start"
+			],
+			[
+				"repla",
+				"Local History: Compare & Replace"
+			],
+			[
+				"loca",
+				"Local History: Compare & Replace"
+			],
+			[
+				"build",
+				"Build With: Anaconda Python Builder"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"todo",
+				"Set Syntax: Git Rebase Todo"
+			],
+			[
+				"ya",
+				"PyYapf: Format Selection"
+			],
+			[
+				"contr ",
+				"Package Control: Install Package"
+			],
+			[
+				"contr ins",
+				"Package Control: Install Package"
+			],
+			[
+				"boun",
+				"List bound keys"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"sublime",
+				"Sublime Merge: File History"
+			],
+			[
+				"task",
+				"Tasks: Complete"
+			],
+			[
+				"pack pin",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"his",
+				"Sublime Merge: File History"
+			],
+			[
+				"enter",
+				"Anaconda: Next lint error"
+			],
+			[
+				"",
+				"Build With: Anaconda Python Builder"
+			],
+			[
+				"Package Control:",
+				"Package Control: Install Package"
+			],
+			[
+				"pep",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"Pythn",
+				"Build With: Anaconda Python Builder"
+			],
+			[
+				"console",
+				"Set Syntax: R Console"
+			],
+			[
+				"ke",
+				"Preferences: Key Bindings"
+			],
+			[
+				"vie",
+				"View: Toggle Side Bar"
+			],
+			[
+				"anaconda pe",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"ana ru",
+				"Anaconda: Run Current File Tests"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 194.0,
+		"history":
+		[
+			"test = subprocess.Popen(arg, check=True, stdout=subprocess.PIPE)",
+			"test = subprocess.run(arg, check=True, stdout=subprocess.PIPE)",
+			"print(test)",
+			"test = subprocess.Popen(arg, shell=True)",
+			"arg= '''pgrep -f \"$ if pgrep -f \"gtx_indicator.py\" 2>/dev/null; then echo yes; else echo no; fi; exit 1'''",
+			"test = subprocess.Popen(arg, shell=True)",
+			"test = subprocess.check_output(arg, shell=True)",
+			"arg= '''pgrep -f \"$ if pgrep -f \"gtx_indicator.py\" 2>/dev/null'''",
+			"test = subprocess.check_output(arg, shell=True)",
+			"arg= '''pgrep -f \"$ if pgrep -f \"gtx_indicator.py\" 2>/dev/null; then echo yes; else echo no; fi; exit 1'''",
+			"test = subprocess.check_output(arg, shell=True)",
+			"arg= '''pgrep -f \"$ if pgrep -f \"gtx_indicator.py\" 2>/dev/null; then echo yes; else echo no; fi; exit 0'''",
+			"test = subprocess.check_output(arg, shell=True)",
+			"arg= '''pgrep -f \"$ if pgrep -f \"gtx_indicator.py\" 2>/dev/null; then echo yes; else echo no; fi'''",
+			"test = subprocess.check_output(arg, shell=True)",
+			"arg= '''pgrep -f \"$ if pgrep -f \"gtx_indicator.py\" 2>/dev/null; then echo yes; else echo no; fi'''",
+			"print(test)",
+			"test = subprocess.check_output(arg, shell=True)",
+			"test = subprocess.check_output(arg, stdout=rep, shell=True)",
+			"test = subprocess.call(arg, stdout=rep, shell=True)",
+			"rep = \"\"",
+			"test = subprocess.call(arg, stdout=rep, shell=True)",
+			"print(test)",
+			"test = subprocess.call(arg, shell=True)",
+			"import subprocess",
+			"subprocess.call(arg, shell=True)",
+			"test = subprocess.call(arg, shell=True)",
+			"print(arg)",
+			"arg= '''pgrep -f \"gtx_indicator.py\" 2>/dev/null'''",
+			"import socket; socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((\"localhost\", 51017))",
+			"import socket; socket.socket.socket(socket.AF_INET,socket.SOCK_STREAM).connect(\"/home/geo/.local/share/anaconda/run/geox-tweak/anaconda.sock\")",
+			"import socket; socket.socket.socket(socket.AF_INET,socket.SOCK_STREAM).connect(~/.local/share/anaconda/run/geox-tweak/anaconda.sock)",
+			"import socket; socket.socket.socket(socket.AF_INET,socket.SOCK_STREAM).connect(/home/geo/.local/share/anaconda/run/geox-tweak/anaconda.sock)",
+			"import socket;socket.socket(socket.AF_INET,socket.SOCK_STREAM).connect(/home/geo/.local/share/anaconda/run/geox-tweak/anaconda.sock)",
+			"import socket; socket.socket(socket.AF_INET,socket.SOCK_STREAM).connect(/home/geo/.local/share/anaconda/run/geox-tweak/anaconda.sock)",
+			"import socket; socket.socket(socket.AF_INET,socker.SOCK_STREAM).connect(/home/geo/.local/share/anaconda/run/geox-tweak/anaconda.sock)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": true,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/geo/Developpement/geox-tweak-xfce/deb/geox-tweak-xfce_buster/DEBIAN/control",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/geox_tweak_xfce.py",
+		"/home/geo/Developpement/geox-tweak-xfce/deb/geox-tweak-xfce_buster/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/script/firstrun.sh.old",
+		"/home/geo/.config/sublime-merge/Packages/User/Preferences.sublime-settings",
+		"/home/geo/Developpement/geox-tweak-xfce/src-to-deb.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak-xfce_buster/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/ds-dd.sh",
+		"/home/geo/Developpement/geox/xfce-geox-conf.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/README.md",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/README.md",
+		"/home/geo/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/geo/Developpement/geox-tweak-xfce/deb/geox-tweak-xfce_mx19.1/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src-to-deb.sh",
+		"/media/geo/1D0B-0ED9/0-gtx/NEW/geox-tweak-xfce/geox-tweak-xfce/deb/Buster/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/gtx_indicator.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/gtx_gui.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/dl_and_install.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/script/firstrun.sh",
+		"/media/geo/1D0B-0ED9/0-gtx/NEW/geox-tweak-xfce/geox-tweak-xfce/install-script",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak-xfce/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/deb/geox-tweak-xfce/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/install-script",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/.gitignore",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/script/geox-tweak (copie 1)",
+		"/home/geo/.config/autostart/gtx-indicator.desktop",
+		"/etc/pm/sleep.d/00_check_touchpad_status",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/ChangeLog",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/showconky.sh",
+		"/home/geo/.conky/conky-startup.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/uninstall",
+		"/home/geo/.config/sublime-text-3/Packages/PlainNotes/Notes.sublime-settings",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/firstrun.sh.old",
+		"/home/geo/Dropbox/Notes/test.note",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/test.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/install_geox.desktop",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/install-script.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/GeoX-Tweak.desktop",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/geox-tweak",
+		"/usr/bin/redshift-gtk",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/install",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox_tweak_xfce_test.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/conkyaddrm.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/conkytoggle.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox-tweak",
+		"/usr/bin/conky-manager-uninstall",
+		"/usr/bin/conkytoggle.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/gtx_common.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox_tweak_xfce.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/folder-color.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/gtx_gui.py",
+		"/usr/local/bin/automathemely",
+		"/home/geo/Autre/Logiciels/AutomaThemely-1.3/install_scripts/preremove.sh",
+		"/home/geo/Téléchargements/python3.7-automathemely.sh",
+		"/usr/local/bin/deartifact-xfce-systray-icons",
+		"/home/geo/.config/sublime-text-3/Packages/User/HighlightWords.sublime-settings",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox-tweak-common.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox-tweak-xfce_0.2",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox-tweak-indicator.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/__init.py__",
+		"/home/geo/.config/sublime-text-3/Packages/Local History/settings/LocalHistory.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/User/LocalHistory.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/geo/Developpement/geox-tweak-plugin/geox-tweak-indicator.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/McOS-MJV-XFCE-Edition-2.3/xfwm4/close-prelight.xpm",
+		"/usr/lib/python3.7/os.py",
+		"/home/geo/.config/sublime-text-3/Packages/HighlightWords/HighlightWords.sublime-settings",
+		"/usr/lib/python3/dist-packages/gi/overrides/Gtk.py",
+		"/home/geo/.config/sublime-text-3/Packages/User/ColorHighlighter.sublime-settings",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/geoxtweak-appdep.sh",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak/DEBIAN/postinst",
+		"/home/geo/Documents/BIBLIOTEK/pageA6.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/firstrun.sh",
+		"/home/geo/.conky/Geox/time-date-info-white",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox-tweak.conf",
+		"/usr/lib/python3.7/subprocess.py",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak.sublime-project",
+		"/media/geo/Mediatek/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/install",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak-ubuntu18/DEBIAN/control",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak-ubuntu18/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak-mx18/DEBIAN/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/activ.conf",
+		"/media/geo/Mediatek/Developpement/geox-tweak-xfce/geox-tweak-xfce/setup.py",
+		"/home/geo/.cache/.fr-lE52pE/usr/lib/python2.7/dist-packages/libmat/__init__.py",
+		"/home/geo/.cache/.fr-sou9Lw/prerm",
+		"/home/geo/.cache/.fr-rgRJbJ/postinst",
+		"/home/geo/.cache/.fr-4cOzg2/postinst",
+		"/home/geo/.cache/.fr-ghhwMZ/usr/bin/cryptkeeper",
+		"/home/geo/.cache/.fr-nCCVu5/postinst",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/doc/papirus-icon-theme/copyright",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak-mx18/DEBIAN/control",
+		"/home/geo/.config/sublime-text-3/Packages/HighlightWords/Default (Linux).sublime-keymap",
+		"/home/geo/.config/sublime-text-3/Packages/WordHighlight/Word Highlight.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/WordHighlight/Default (Linux).sublime-keymap",
+		"/home/geo/.config/sublime-text-3/Packages/WordHighlight/Default (Linux).sublime-mousemap",
+		"/home/geo/.config/sublime-text-3/Packages/GotoDocumentation/Default (Linux).sublime-keymap",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/script/papirus-folders-master/papirus-folders",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak/usr/share/geox-tweak/geox-tweak",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak/DEBIAN/control",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/deb/geox-tweak/usr/share/geox-tweak/script/geoxtweak-appdep.sh",
+		"/home/geo/Developpement/geox/app-installer-4mx/app-installer-4mx-zenity.sh",
+		"/home/geo/Developpement/geox/app-installer-4mx/app-installer-4mx (copie 1).sh",
+		"/home/geo/Developpement/geox/app-installer-4mx/prerequis-app-installer.sh",
+		"/home/geo/Developpement/geox/geox-appdep.sh",
+		"/home/geo/.config/sublime-text-3/Packages/Alignment/Base File.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
+		"/home/geo/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/AutoPEP8/AutoPep8.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/User/Anaconda.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/User/Python.sublime-settings",
+		"/home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/src/geox-tweak/geox.glade",
+		"/home/geo/.config/sublime-text-3/Packages/ExpandRegion/ExpandRegion.sublime-settings",
+		"/home/geo/.themes/oomox-arc-dark/gtk-3.0/gtk.css",
+		"/home/geo/Autre/theme/2_a modif/Arc-Green-Dark/gtk-3.0/gtk.css",
+		"/home/geo/Autre/theme/1_script/Arc-Theme-Colora-master/installation2.sh",
+		"/home/geo/Developpement/geox-tweak/geox-tweak.sublime-project",
+		"/home/geo/Developpement/geox-tweak/deb/geox-tweak/DEBIAN/preinst",
+		"/home/geo/.themes/Arc-Evopop/gtk-3.0/gtk.css",
+		"/home/geo/Autre/theme/Arc-Cherry/gtk-3.0/gtk.css",
+		"/home/geo/Developpement/geox-tweak/src/README.md",
+		"/home/geo/Developpement/geox-tweak/dev/geox-tweak/geox-tweak",
+		"/home/geo/.config/sublime-text-3/Packages/Insert-Filepath/InsertFilepath.sublime-settings",
+		"/home/geo/.config/sublime-text-3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/home/geo/Developpement/geox-tweak/dev/setup.py",
+		"/home/geo/Developpement/geox-tweak/dev/GeoX-Tweak.desktop",
+		"/home/geo/Developpement/geox-tweak/dist/deb/geox-tweak/usr/share/geox-tweak/theme/dockbarx/dockbarx/%gconf.xml",
+		"/home/geo/.config/gtk-3.0/gtk.css",
+		"/home/geo/.config/sublime-text-3/Packages/Anaconda/Default (Linux).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"/home/geo/Developpement/geox-tweak-xfce/deb"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"depend"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 47.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Debugger":
+	{
+		"height": 232.0
+	},
+	"output.SublimeLinter":
+	{
+		"height": 288.0
+	},
+	"output.anaconda_documentation":
+	{
+		"height": 181.0
+	},
+	"output.autopep8":
+	{
+		"height": 132.0
+	},
+	"output.exec":
+	{
+		"height": 212.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 127.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 132.0
+	},
+	"pinned_build_system": "Anaconda Python Builder",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"colorp",
+				"geox-tweak/McOS-MJV-XFCE-Edition-2.3/xfwm4/close-prelight.xpm"
+			],
+			[
+				"sdit",
+				"src/geox-tweak/doc/papirus-icon-theme/copyright"
+			],
+			[
+				"",
+				"geox-tweak/geox-tweak"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Developpement/geox-tweak-xfce/geox-tweak-xfce/install.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 160.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"autostart_on"
+			],
+			[
+				"app",
+				"app_control"
+			]
+		],
+		"width": 592.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 231.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

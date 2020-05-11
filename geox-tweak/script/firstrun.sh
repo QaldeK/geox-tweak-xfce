@@ -116,19 +116,19 @@ _installConf()
 	sudo cp -Rf /usr/share/geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock /usr/share/themes/
 	cp -f /usr/share/geox-tweak/theme/xfdashboard/xfdashboard.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml 
 	# Synapse
-	mkdir -p $HOME/.config/synapse/
+	mkdir $HOME/.config/synapse/
 	cp -f /usr/share/geox-tweak/theme/synapse/* $HOME/.config/synapse/
 	# Conky
-	mkdir -p $HOME/.conky
+	mkdir $HOME/.conky
 	tar -xf /usr/share/geox-tweak/theme/conky.tar.gz -C $HOME/.conky
 	sudo cp -f /usr/share/geox-tweak/script/conkyaddrm.sh	/usr/bin/conkyaddrm.sh
 	# Autostart
-	mkdir -p $HOME/.config/autostart/
+	mkdir $HOME/.config/autostart/
 	cp -n /usr/share/geox-tweak/script/autostart/* $HOME/.config/autostart/
 	# Geox-Tweak-Xfce
 	mkdir -p $HOME/.config/geox-tweak-xfce/panel
 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
-	cp -r /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce/
+	cp -r /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce/panel/
 
 	#conky fonts
 	echo $pw | sudo -S cp -R /usr/share/geox-tweak/theme/Podkova /usr/share/fonts/truetype/
@@ -155,7 +155,7 @@ _installConf()
 			
 			mkdir -p $HOME/.config/plank/dock1/launchers/
 	 		
-	 		cp -Rf /usr/share/geox-tweak/panel/plank/dock1/launchers/$app.dockitem $HOME/.config/plank/dock1/launchers/
+	 		cp -Rf /usr/share/geox-tweak/theme/plank/dock1/launchers/$app.dockitem $HOME/.config/plank/dock1/launchers/
 
 			fi
 		done
