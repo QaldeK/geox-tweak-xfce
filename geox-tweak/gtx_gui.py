@@ -82,12 +82,7 @@ class Geox:
         self.help_txt_zone = go("help_txt_zone")
         self.defaut_help()
 
-        # @ APP missing
-        self.warning_app_miss = go("warning_app_miss")
-        self.txt_app_miss = go("txt_app_miss")
-        self.status_app_dep()
-
-        # @ Layout preview
+    # @ Layout preview
         self.geox = go("geox")
         self.geox.set_from_file(sdir + "/img/pv-geox.png")
         self.xubuntu = go("xubuntu")
@@ -111,7 +106,7 @@ class Geox:
         self.btn_apply = go("btn_apply")
         self.toggle_adapta_compact = go("toggle_adapta_compact")
 
-        # @ Onglet "Other"
+    # @ Onglet "Other"
         self.btn_simpleclic_thunar = go("btn_simpleclic_thunar")
         self.btn_simpleclic_desktop = go("btn_simpleclic_desktop")
         self.btn_txt_next_icons = go("btn_txt_next_icons")
@@ -128,12 +123,12 @@ class Geox:
         self.btn_desktop_settings = go("btn_desktop_settings")
         self.btn_thunar_settings = go("btn_thunar_settings")
 
-        # @ POPOVER windows decor
+    # @ POPOVER windows decor
         # self.popover_wd = go("popover_wd")
         # self.preview_wd_arc_light = go('preview_wd_arc_light')
         # self.preview_wd_arc_light.set_from_file(sdir + '/img/wd_arc_light.png')
 
-        # @ preview self.theme
+    # @ preview self.theme
         self.preview_adapta = go("preview_adapta")
         self.preview_adapta.set_from_file(sdir + "/img/adapta.png")
         self.preview_various = go("preview_various")
@@ -145,10 +140,7 @@ class Geox:
         self.preview_mint = go("preview_mint")
         self.preview_mint.set_from_file(sdir + "/img/mint-y.png")
 
-        self.bar_theme = go("bar_theme")
-        self.bar_theme.hide()
-
-        # Icon color
+    # @ Icon color
         self.folder = ""
 
         self.icon_black = go("icon_black")
@@ -176,29 +168,55 @@ class Geox:
         self.icon_grey = go("icon_grey")
         self.icon_grey.set_from_file(sdir + "/img/grey.svg")
 
-        # Configuration xfce actuelle
+    # @ Configuration xfce actuelle / Etat des logiciel tiers
         self.state_settings()
 
         # /!\ Positionner apres la declaration des btn rapportées aux états
         # testés ;
         self.state_app(self)
         self.state_gtxi()
-
         self.on_btn_install_miss_clicked = go('on_btn_install_miss_clicked')
 
-        # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
+    # @ APP missing
+        self.warning_app_miss = go("warning_app_miss")
+        self.txt_app_miss = go("txt_app_miss")
+        self.status_app_dep()    
+
+    # @ Bar Theme : Apply / install / rmv
+        self.bar_theme = go("bar_theme")
+        self.btn_theme_install = go("btn_theme_install")
+        # self.on_btn_theme_install_clicked = go("on_btn_theme_install_clicked")
+        self.bar_theme.hide()
+        self.apply_bar_theme = go('apply_bar_theme')
+        self.warning_theme = go("warning_theme")
+        self.warning_theme.hide()
+        self.rm_theme = go('rm_theme')
+
+        # self.on_rm_theme_clicked = go('on_rm_theme_clicked')
+
+    # @    # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
         self.var_theme = ""
         self.theme = ""
         self.windows_decor = ""
         self.icons = ""
         self.layout = ""
         self.libreoffice_icons = ""
+
         # TODO : Renommer (confusion) assigné glade...
         self.theme_name = go("theme_name")
 
         self.chk_folder_color = go("chk_folder_color")
 
-        # @ affichage de la fenetre
+    # @ Save Layout
+        # self.ls_layout = Gtk.ListStore(str)
+
+        # self.tv_layouts = go('tv_layouts')
+        self.tv_layouts = self.builder.get_object('tv_layouts')
+        self.tmodel = self.tv_layouts.get_model()
+        self.entry_layout = go('entry_layout')
+        self.slayout_list()
+
+    # @ affichage de la fenetre
         self.window = go("main_window")
         self.window.show()
 
@@ -214,15 +232,22 @@ class Geox:
         defaut = ""
         self.help_txt_zone.get_buffer().set_text(defaut)
 
+
+    # @ pane :Panel layout___________________________________
+
+    # @ Status App / Installed ?
     def status_app_dep(self):
         '''check if the other software are install
         Show a warning if not'''
+        
+        #TODO GtkwarningDialog ?
+
+        self.warning_app_miss.hide()
 
         app_miss = []
         app_test = ['plank', 'xfdashboard',
                     'xfce4-dockbarx-plugin', 'synapse', 'gconf2',
                     'xfce4-datetime-plugin', 'conky']
-        self.warning_app_miss.hide()
 
         for app in app_test:
             script = '''dpkg-query -W -f='${Status}' ''' + \
@@ -233,12 +258,13 @@ class Geox:
 
         # Si liste non-vide
         if (app_miss):
-            warning_txt = ('''Some software necessary for the use of layout desktop are not installed : '''
+            warning_txt = ('''Some software necessary are not installed : '''
                            + str(app_miss) + '''
                            Some layout will don't work properly. Please click on "install it" or try to install them manually ''')
-
+          
             self.txt_app_miss.set_label(warning_txt)
             self.warning_app_miss.show()
+
 
     def on_btn_install_miss_clicked(self, widget):
         script = sdir + '/script/firstrun.sh'
@@ -246,72 +272,88 @@ class Geox:
         self.warning_app_miss.hide()
         self.status_app_dep()
 
-# @ Parametrage xfce ; volet "Other"
-    def state_settings(self):
-        """ Verifie les parametrage de xfce dans xfconf pour
-        que les check_button refletent bien la configuration actuelle """
-        if subprocess.getoutput(
-                '''xfconf-query -c thunar -p /misc-single-click''') == "true":
-            self.btn_simpleclic_thunar.handler_block_by_func(
-                self.on_btn_simpleclic_thunar_toggled)
-            self.btn_simpleclic_thunar.set_active(True)
-            self.btn_simpleclic_thunar.handler_unblock_by_func(
-                self.on_btn_simpleclic_thunar_toggled)
+    # @ Verification de l'etat des logiciels (actif ou pas)
 
-        if subprocess.getoutput(
-                '''xfconf-query -c thunar -p /misc-folders-first''') == "true":
-            self.btn_folder_file.handler_block_by_func(
-                self.on_btn_folder_file_toggled)
-            self.btn_folder_file.set_active(True)
-            self.btn_folder_file.handler_unblock_by_func(
-                self.on_btn_folder_file_toggled)
+    def state_gtxi(self):
+        arg = '''pgrep -f "gtx_indicator.py" &>/dev/null'''
+        test_gtxi = subprocess.run(arg, shell=True, stdout=subprocess.PIPE)
+        if not test_gtxi.stdout:
+            self.gtxi.handler_block_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_active(False)
+            self.gtxi.handler_unblock_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_label("off")
+        else:
+            self.gtxi.handler_block_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_active(True)
+            self.gtxi.handler_unblock_by_func(self.on_gtxi_toggled)
+            self.gtxi.set_label("on")
 
-        if subprocess.getoutput(
-                '''xfconf-query -c thunar -p /misc-text-beside-icons'''
-        ) == "true":
-            self.btn_txt_next_icons.handler_block_by_func(
-                self.on_btn_txt_next_icons_toggled)
-            self.btn_txt_next_icons.set_active(True)
-            self.btn_txt_next_icons.handler_unblock_by_func(
-                self.on_btn_txt_next_icons_toggled)
+    def state_app(self, widget):
+        # dictinnaire des app a verifier
+        apps = {
+            "synapse": self.synapse,
+            "plank": self.plank,
+            "xfdashboard": self.xfdashboard,
+            "conky": self.conky,
+            "xfce4-notes": self.notes,
+        }
 
-        if subprocess.getoutput(
-                '''xfconf-query -c xfce4-desktop -p /desktop-icons/single-click'''
-        ) == "true":
-            self.btn_simpleclic_desktop.handler_block_by_func(
-                self.on_btn_simpleclic_desktop_toggled)
-            self.btn_simpleclic_desktop.set_active(True)
-            self.btn_simpleclic_desktop.handler_unblock_by_func(
-                self.on_btn_simpleclic_desktop_toggled)
+        prefapps = {
+            "plank": self.btn_plank_pref,
+            "xfdashboard": self.btn_xfdashboard_pref,
+            "conky": self.btn_conky_pref,
+            "xfce4-notes": self.btn_notes_pref
+        }
 
-        if subprocess.getoutput(
-                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash'''
-        ) == "true":
-            self.btn_trash_desktop.handler_block_by_func(
-                self.on_btn_trash_desktop_toggled)
-            self.btn_trash_desktop.set_active(True)
-            self.btn_trash_desktop.handler_unblock_by_func(
-                self.on_btn_trash_desktop_toggled)
+        appactive = bool
 
-        if subprocess.getoutput(
-                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home'''
-        ) == "true":
-            self.btn_home_desktop.handler_block_by_func(
-                self.on_btn_home_desktop_toggled)
-            self.btn_home_desktop.set_active(True)
-            self.btn_home_desktop.handler_unblock_by_func(
-                self.on_btn_home_desktop_toggled)
+        # Verifie si le logiciel est actif
+        for app in apps.keys():
+            selfapp = apps[app]
 
-        if subprocess.getoutput(
-                '''xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable'''
-        ) == "true":
-            self.btn_removable_desktop.handler_block_by_func(
-                self.on_btn_removable_desktop_toggled)
-            self.btn_removable_desktop.set_active(True)
-            self.btn_removable_desktop.handler_unblock_by_func(
-                self.on_btn_removable_desktop_toggled)
+            if os.system("pidof " + app +
+                         " >/dev/null 2>&1"):  # /!\ Renvoie True si non-actif
+                self.app_state(selfapp, appactive(True))
 
-# @ TOOLS : Bouton Toggle des App tieres
+            else:
+                self.app_state(selfapp, appactive(False))
+
+        for prefapp in prefapps.keys():
+            selfprefapp = prefapps[prefapp]
+            if os.system("pidof " + prefapp + " >/dev/null 2>&1"):
+                self.state_btn_pref(selfprefapp, appactive(True))
+
+            else:
+                self.state_btn_pref(selfprefapp, appactive(False))
+
+    def app_state(self, selfapp, appactive):
+        """ Adapter le label on/off en fonction de l'etat des logiciels"""
+
+        if appactive:
+            # Bloque la fonction du bouton pour pouvoir changer
+            # son état sans l'activer
+            selfapp.handler_block_by_func(self.on_app_toggled)
+            selfapp.set_active(False)
+            selfapp.handler_unblock_by_func(self.on_app_toggled)
+            selfapp.set_label("off")
+
+        else:
+            selfapp.handler_block_by_func(self.on_app_toggled)
+            state = selfapp.get_active()
+            selfapp.set_active(not state)
+            selfapp.handler_unblock_by_func(self.on_app_toggled)
+            selfapp.set_label("on")
+
+    @staticmethod
+    def state_btn_pref(selfprefapp, appactive):
+
+        if appactive:
+            selfprefapp.hide()
+
+        else:
+            selfprefapp.show()
+
+    # @ TOOLS : Bouton Toggle des App tieres
 
     def on_gtxi_toggled(self, widget):
         if widget.get_active():
