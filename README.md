@@ -1,6 +1,6 @@
 ##################
 Author : QaldeK - aldek@vivaldi.net
-Version : 0.2.1
+Version : 0.2.1 (beta)
 License : GPL
 Depends: python3, synapse, xfdashboard, plank, xfce4-notes, conky-all, xfce4-dockbarx-plugin, papirus-icon-theme,'python3' 'python3-gi' 'xfce4-datetime-plugin' 'xfce4-battery-plugin' 'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf
 Git : https://github.com/QaldeK/geox-tweak
