@@ -482,112 +482,192 @@ class Geox:
 
         self.help_txt_zone.get_buffer().set_text(help_txt)
 
-# @ Verification de l'etat des logiciels (actif ou pas)
-    def state_gtxi(self):
-        arg = '''pgrep -f "gtx_indicator.py" &>/dev/null'''
-        test_gtxi = subprocess.run(arg, shell=True, stdout=subprocess.PIPE)
-        if not test_gtxi.stdout:
-            self.gtxi.handler_block_by_func(self.on_gtxi_toggled)
-            self.gtxi.set_active(False)
-            self.gtxi.handler_unblock_by_func(self.on_gtxi_toggled)
-            self.gtxi.set_label("off")
-        else:
-            self.gtxi.handler_block_by_func(self.on_gtxi_toggled)
-            self.gtxi.set_active(True)
-            self.gtxi.handler_unblock_by_func(self.on_gtxi_toggled)
-            self.gtxi.set_label("on")
 
-    def state_app(self, widget):
-        # dictinnaire des app a verifier
-        apps = {
-            "synapse": self.synapse,
-            "plank": self.plank,
-            "xfdashboard": self.xfdashboard,
-            "conky": self.conky,
-            "xfce4-notes": self.notes,
-        }
-
-        prefapps = {
-            "plank": self.btn_plank_pref,
-            "xfdashboard": self.btn_xfdashboard_pref,
-            "conky": self.btn_conky_pref,
-            "xfce4-notes": self.btn_notes_pref
-        }
-
-        appactive = bool
-
-        # Verifie si le logiciel est actif
-        for app in apps.keys():
-            selfapp = apps[app]
-
-            if os.system("pidof " + app +
-                         " >/dev/null 2>&1"):  # /!\ Renvoie True si non-actif
-                self.app_state(selfapp, appactive(True))
-
-            else:
-                self.app_state(selfapp, appactive(False))
-
-        for prefapp in prefapps.keys():
-            selfprefapp = prefapps[prefapp]
-            if os.system("pidof " + prefapp + " >/dev/null 2>&1"):
-                self.state_btn_pref(selfprefapp, appactive(True))
-
-            else:
-                self.state_btn_pref(selfprefapp, appactive(False))
-
-    def app_state(self, selfapp, appactive):
-        """ Adapter le label en fonction de l'etat des logiciels"""
-
-        if appactive:
-            # Bloque la fonction du bouton pour pouvoir changer
-            # son état sans l'activer
-            selfapp.handler_block_by_func(self.on_app_toggled)
-            selfapp.set_active(False)
-            selfapp.handler_unblock_by_func(self.on_app_toggled)
-            selfapp.set_label("off")
-
-        else:
-            selfapp.handler_block_by_func(self.on_app_toggled)
-            state = selfapp.get_active()
-            selfapp.set_active(not state)
-            selfapp.handler_unblock_by_func(self.on_app_toggled)
-            selfapp.set_label("on")
-
-    @staticmethod
-    def state_btn_pref(selfprefapp, appactive):
-
-        if appactive:
-            selfprefapp.hide()
-
-        else:
-            selfprefapp.show()
-
-# @ theme installé et non installé
-    # TODO
-
-    def installed_themes(self):
-        """ check if themes are installed or not (geox-tweak.conf verification OR real check before change ??)  """
-
-        themes = ('qogir', 'qogir-dark', 'materia', 'numix', 'arc',
-                  'arc_red', 'arc_cherry', 'macos', 'macos_dark',
-                  'prodark', 'adwaita', 'adwaita-dark', 'adapta'
-                  'adapta_bluegrey', 'adapta_pink', 'adapta_deeppurple'
-                  'adapta_green')
-        for theme in themes:
-            if config.get('ThemeInstall', theme) == 'no':
-                pass  # TODO
-
-# @ Panel layout
     # TODO  autre configuration : theme xfdashboard ? &
 
+    # @ Layout backup
+
+
+    def slayout_list(self):
+        '''append ListStore from /saved_layout/slayouts'''
+        for saved_layout in os.listdir(paneldir + 'saved_layout/'):
+            self.tmodel.append([saved_layout])
+
+    def on_entry_layout_icon_press(self, widget, Gtk_Entry_Icon_Secondary, event):
+        '''Save actual Layout configuration and append to SavedListStore when btn clicked'''
+        #FIXIT Add directory to firstrun/install_script 
+
+        new_layout = self.entry_layout.get_text()
+
+        if new_layout not in os.listdir(paneldir + 'saved_layout/'):
+            self.add_new_layout(new_layout)
+
+        else:
+            dialog = Gtk.MessageDialog(
+                None,
+                0,
+                Gtk.MessageType.ERROR,
+                Gtk.ButtonsType.CANCEL,
+                "This layout name allready exist",
+            )
+            dialog.format_secondary_text(
+                "Please choose an another name"
+            )
+            response = dialog.run()
+            if response == Gtk.ResponseType.CANCEL:
+                self.entry_layout.grab_focus()
+
+            dialog.destroy()
+
+
+    def on_tv_select_layout_changed(self, selection):
+        ls_layout, layout = selection.get_selected()
+        if layout is not None:
+            print('select :', ls_layout[layout][0])
+            self.tv_selected_layout = ls_layout[layout][0]
+
+
+    # def on_tv_layouts_cursor_changed(self, widget):
+    #     remove = self.builder.get_object('tb_rm_ly')
+    #     remove.set_sensitive(True)
+
+    #     load = self.builder.get_object('tb_load_ly')
+    #     load.set_sentive(True)
+
+
+    def on_tb_load_ly_clicked(self, widget):
+        layout = self.get_selected_savedLayout()
+        
+       # Xfce4 panel
+        cmd = '''xfce4-panel --quit; pkill xfconfd; rm -Rf ~/.config/xfce4/panel; \
+        cp -Rf ''' + savedLayoutDir + layout + '''/xfce4/panel ~/.config/xfce4/panel; \
+        cp -f ''' + savedLayoutDir + layout + '''/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml \
+        ~/.config/xfce4/xfconf/xfce-perchannel-xml; \
+        cp -f ''' + savedLayoutDir + layout + '''/gtk.css ~/.config/gtk-3.0/gtk.css; \
+        sleep 3; xfce4-panel &'''
+        subprocess.check_call(cmd, shell=True)
+
+
+      # plank
+        if os.path.isfile(savedLayoutDir + layout + "/plank/plank.ini"):
+            
+            cmd2 = '''cp -Rf ''' + savedLayoutDir + layout + '''/plank/ ~/.config/plank/ ;  
+            cat ''' + savedLayoutDir + layout + '''/plank/plank.ini | dconf load /net/launchpad/plank/docks/ ;
+            '''
+            subprocess.run(cmd2, shell=True)
+            
+            self.plank.set_active(True)
+        else: 
+            self.plank.set_active(False)
+
+        # Dockbarx
+        args0 = "pkill -f dockbarx-plug "
+        subprocess.Popen(args0, shell=True)
+
+        cmd3 = '''gconftool-2 --load ''' + savedLayoutDir + layout + '''/dockbarx/dockbarx.xml '''
+        subprocess.run(cmd3, shell=True)
+
+        config.set('Style', 'layout', layout)
+        config.write(open(gtconf, 'w'))
+
+        # Xfdashboard
+        if os.path.isfile(savedLayoutDir + layout + "/xfdashboard.xml"):
+            src = savedLayoutDir + layout + "/xfdashboard.xml"
+            dst = home + "/.config/xfce4/xfconf/xfce-perchannel-xml/"
+            shutil.copy(src, dst)
+
+            self.xfdashboard.set_active(True)
+        else:
+            self.xfdashboard.set_active(False)
+
+
+    def on_tb_rm_ly_clicked(self, widget):
+        tmodel, treeiter, values = self.get_selected_layout()
+        layout = values[0]
+
+        dialog = Gtk.MessageDialog(
+            None,
+            0,
+            Gtk.MessageType.WARNING,
+            Gtk.ButtonsType.OK_CANCEL,
+            "The selected Layout will be removed",
+        )
+        dialog.format_secondary_text(
+            "This is OK ?"
+        )
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            dst = home + "/.config/geox-tweak-xfce/panel/saved_layout/" + layout
+            shutil.rmtree(dst)
+            tmodel.remove(treeiter)
+
+        elif response == Gtk.ResponseType.CANCEL:
+            pass
+    
+        dialog.destroy()
+
+
+    def get_selected_layout(self):
+        tmodel, treeiter = self.tv_layouts.get_selection().get_selected()
+        values = tmodel[treeiter][:]
+        return (tmodel, treeiter, values)
+
+
+    def get_selected_savedLayout(self):
+        values = self.get_selected_layout()[2]
+        layout = values[0]
+        return layout
+
+
+    def add_new_layout(self, new_layout):
+
+        # Xfce-panel
+        dst = home + "/.config/geox-tweak-xfce/panel/saved_layout/" +new_layout + "/xfce4/panel"
+        src = home + "/.config/xfce4/panel/"
+        shutil.copytree(src, dst)
+
+        dst = home + "/.config/geox-tweak-xfce/panel/saved_layout/" +new_layout + "/xfce4/xfconf/xfce-perchannel-xml/"
+        src = home + "/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml"
+        os.makedirs(dst)
+        shutil.copy(src, dst)
+
+        src = home + "/.config/gtk-3.0/gtk.css"
+        dst = savedLayoutDir + new_layout
+        shutil.copy(src, dst)
+
+        # Plank
+        if not os.system("pidof plank >/dev/null 2>&1"):
+            src = home + "/.config/plank/"
+            dst = home + "/.config/geox-tweak-xfce/panel/saved_layout/" + new_layout + "/plank/"
+            shutil.copytree(src, dst)
+
+            cmdPlank = '''dconf dump /net/launchpad/plank/docks/ > ''' + savedLayoutDir + new_layout + '''/plank/plank.ini'''
+            subprocess.run(cmdPlank, shell=True)
+    
+        # Xfdashboard
+        if not os.system("pidof xfdashboard >/dev/null 2>&1"):
+            
+            src = home + "/.config/xfce4/xfconf/xfce-perchannel-xml//xfdashboard.xml"
+            dst = savedLayoutDir + new_layout
+            shutil.copy(src, dst)
+
+        # Dockbarx
+        src = home + "/.gconf/apps/dockbarx/"
+        dst = home + "/.config/geox-tweak-xfce/panel/saved_layout/" + new_layout + "/dockbarx/"
+        shutil.copytree(src, dst)
+
+        cmd3 = '''gconftool-2 --dump /apps/dockbarx >  ''' + savedLayoutDir + new_layout + '''/dockbarx/dockbarx.xml'''
+        subprocess.run(cmd3, shell=True)
+
+
+        self.tmodel.append([new_layout])
+
+
+    # @ Layout
     def on_radio_geox_toggled(self, widget):
         if widget.get_active():
-            self.gtweak.plank_config(
-                pinned="true",
-                offset="100",
-                position="bottom",
-                theme=self.plank_theme  # theme doit etre precisé sinon argument manquant
-            )
+
+            self.gtweak.plank_config(dirLy='geox')
             self.gtweak.dockbarx_config(
                 launcher="[]", theme="Unite Faenza", the_me="Unite_Faenza")
             self.gtweak.pulseaudio_config(size="0.6")
