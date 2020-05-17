@@ -1640,6 +1640,8 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
+                icons_name='Papirus-Dark',
+                libreoffice_icons='papirus-dark'
                 )
     def on_radio_nordic_polar_toggled(self, widget):
         if widget.get_active():
