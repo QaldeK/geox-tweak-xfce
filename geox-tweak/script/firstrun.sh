@@ -227,7 +227,7 @@ _installationDebian()
 		'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
 		'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
 		'xfce4-datetime-plugin'  'xfce4-dockbarx-plugin' \
-		'conky-all' 'conky' 'papirus-icon-theme' 
+		'conky-all' 'conky' 'papirus-icon-theme' 'tar' 'xz-utils'
 		do
 			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
 			then
@@ -373,7 +373,7 @@ _installationManjaro()
 
 
 	for app in 'base-devel' 'yay'  'python3' 'python3-gi' 'xfce4-datetime-plugin'  \
-		'plank'  'synapse' 'zeitgeist'   
+		'plank'  'synapse' 'zeitgeist' 'tar' 'xz-utils'  
 		do
 			if not pacman -Qs $package > /dev/null
 			then

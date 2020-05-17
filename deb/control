@@ -3,8 +3,8 @@ Version: 0.2.1
 Section: base
 Priority: optional
 Architecture: all
-Depends: python3 (>=3.6), python3-gi, gconf2, gir1.2-gtk-3.0, gtk2-engines-murrine, gtk2-engines-pixbuf, 
-Recommends: plank, xfdashboard, xfdashoard-plugin, xfce4-dockbarx-plugin, conky, synapse, conky-all, papirus-icon-theme, papirus-folders, xfce4-datetime-plugin
+Depends: python3 (>=3.6), python3-gi, gconf2, gir1.2-gtk-3.0, gtk2-engines-murrine, gtk2-engines-pixbuf, tar, xz-utils
+Recommends: plank, xfdashboard, xfdashoard-plugin, xfce4-dockbarx-plugin, conky, synapse, conky-all, papirus-icon-theme, papirus-folders, xfce4-datetime-plugin, 
 Maintainer: QaleK <aldek@vivaldi.net>
 Homepage: <https://github.com/QaldeK/geox-tweak-xfce>
 Description: Cutomize XFCE !

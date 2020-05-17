@@ -213,9 +213,128 @@ _installation()	{
 	
 _installationDep() 
 	{ 
+
+		if [ -f /etc/lsb-release ]; then
+		    # For some versions of Debian/Ubuntu without lsb_release command
+		    . /etc/lsb-release
+		    os=$DISTRIB_ID
+		    ver=$DISTRIB_RELEASE
+		    echo " "
+		    echo "for" $os $ver
+		    echo " "
+		fi
+
+		distrib=$os$ver
+		
+		if [ $os = "MX" ] || [ $os = "Debian" ]; then
+			_installationDebian 
+		elif [ $os = "Ubuntu" ] || [ $os = "LinuxMint" ] ; then
+			_installationDebian
+		elif [ $os = "ManjaroLinux" ] ; then
+			_installationManjaro
+		fi
+
 		cd /usr/share/geox-tweak/script
 		./firstrun.sh
 	}
+
+_installationDebian()
+	{	
+		echo 
+		echo "__Check depends packages ________________"
+		echo 
+
+		for app in 'python3' 'python3-gi' 'xfce4-datetime-plugin' \
+		 'gconf2' \
+		'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
+		'papirus-icon-theme' 'tar' 'xz-utils'
+		do
+			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+			then
+				echo $app "==> try installation ..."
+				echo $pw | sudo -S apt-get install -y $app
+
+			else
+				echo $app is installed
+
+			fi	
+		done
+
+		# @ Papirus icon theme
+		if [ ! -d "/usr/share/icons/Papirus"  ]
+			# Install : Papirus-icon-theme
+			then
+				echo papirus-icon-theme installation ...
+				wget -qO- https://git.io/papirus-icon-theme-install | sh
+		fi		
+		
+		if [ ! -e '/usr/share/libreoffice/share/config/images_papirus.zip' ]; then
+			wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
+		fi	
+
+		if [ ! -e "/usr/bin/papirus-folders" ]
+			#Install : papirus-folders
+			then 
+				echo papirus-folders installation ...
+				wget -qO- https://git.io/papirus-folders-install | sh
+			else
+				echo papirus-folders is installed
+		fi
+
+	}
+
+_installationManjaro()
+	{
+
+	echo "Geox-Tweak-Xfce need xfce4-dockbarx-plugin for some layout desktop theme, but this script don't install it. Please try to install xfce4-dockbarx-plugin manually
+
+	Press enter for continue..."
+
+	read
+	
+	echo 
+	echo "__Check depends packages ________________"
+	echo
+
+
+	for app in 'base-devel' 'yay'  'python3' 'python3-gi' 'xfce4-datetime-plugin' 'tar' 'xz-utils'  
+		do
+			if not pacman -Qs $package > /dev/null
+			then
+				echo $app installation ...
+				echo $pw | sudo -S pacman -S --noconfirm $app
+
+			else
+				echo $app is installed
+		fi	
+	done
+
+	if [ ! -d "/usr/share/icons/Papirus"  ]
+		# Install : Papirus-icon-theme
+		then
+			echo "----------------------"
+			echo papirus-icon-theme installation ...
+			echo ".................................."
+			echo $pw | sudo -S sudo pacman -S --noconfirm papirus-icon-theme
+		else
+			echo papirus-icon-theme is installed
+	fi
+
+	if [ ! -e '/usr/share/libreoffice/share/config/images_papirus.zip' ]; then
+		wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
+	fi	
+
+	if [ ! -e "/usr/bin/papirus-folders" ]
+		#Install : papirus-folders
+		then 
+			echo papirus-folders installation ...
+			wget -qO- https://git.io/papirus-folders-install | sh
+		else
+			echo papirus-folders is installed
+	fi
+	
+}
+
 
 
 mainFunction _installation
