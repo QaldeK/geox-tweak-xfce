@@ -31,7 +31,6 @@ import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 import shutil
-
 from geox_tweak_xfce import GeoxTweak
 
 home = expanduser("~")  # path home de l'user
@@ -142,6 +141,8 @@ class Geox:
         self.preview_arc.set_from_file(sdir + "/img/arc.png")
         self.preview_mint = go("preview_mint")
         self.preview_mint.set_from_file(sdir + "/img/mint-y.png")
+        self.preview_qogir = go("preview_qogir")
+        self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
 
     # @ Icon color
         self.folder = ""
@@ -186,13 +187,10 @@ class Geox:
         self.status_app_dep()    
 
     # @ Bar Theme : Apply / install / rmv
-        self.bar_theme = go("bar_theme")
-        self.btn_theme_install = go("btn_theme_install")
-        # self.on_btn_theme_install_clicked = go("on_btn_theme_install_clicked")
-        self.bar_theme.hide()
         self.apply_bar_theme = go('apply_bar_theme')
-        self.warning_theme = go("warning_theme")
-        self.warning_theme.hide()
+        self.apply_bar_theme.hide()
+        self.install_bar_theme = go("install_bar_theme")
+        self.install_bar_theme.hide()
         self.rm_theme = go('rm_theme')
 
         # self.on_rm_theme_clicked = go('on_rm_theme_clicked')
@@ -236,7 +234,7 @@ class Geox:
         self.help_txt_zone.get_buffer().set_text(defaut)
 
 
-    # @ pane :Panel layout___________________________________
+    # @ pane :Panel layout ###############################
 
     # @ Status App / Installed ?
     def status_app_dep(self):
@@ -733,8 +731,7 @@ class Geox:
             self.plank.set_active(False)
             self.xfdashboard.set_active(False)
 
-    # @ Onglet : "Window theme"______________________________________
-
+    # @ Onglet : "Window theme" #################################
     # @ Bouton additonnel pointant vers les outils de parametrage xfce natifs + compact / hdpi
 
     @staticmethod
@@ -789,47 +786,74 @@ class Geox:
     def theme_status(self):
         check_theme = self.theme_name.get_label()
         # FIXIT : Adapta deeppurple miss !
-        if os.path.exists('/usr/share/themes/' + check_theme):
-            self.warning_theme.hide()
-            self.rm_theme.show()
+        if os.path.exists('/usr/share/themes/' + check_theme) or os.path.exists(home + '/.themes/' + check_theme):
+            self.install_bar_theme.hide()
             self.apply_bar_theme.show()
-            self.bar_theme.show()
 
         else:
             self.apply_bar_theme.hide()
-            self.rm_theme.hide()
-            self.warning_theme.show()
-            self.bar_theme.show()
+            self.install_bar_theme.show()
+
 
     def on_btn_theme_install_clicked(self, widget):
+        #FIXIT Path ( pq pas en .local/user ?, sans bash ni mdp...)
+       
         theme = self.theme_name.get_label()
-        subprocess.Popen("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.gz " +
-                       theme + "'", shell=True)
-        self.theme_status()
+
+        subprocess.check_call("cd ~/.themes ; tar -xf " + sdir + "/theme/themes.tar.xz " + theme, shell=True)        
+
+        if ('dark' in theme or
+            'Dark' in theme or
+            'Nokto' in theme):
+
+            t = self.gtweak.dark_light(theme)
+            themeVar = t[0]
+            print(theme + themeVar)
+            if 'missing' not in themeVar:
+                try:
+                    subprocess.check_call("cd ~/.themes ; tar -xf " + sdir + "/theme/themes.tar.xz " + themeVar, shell=True)
+                except Exception as e:
+                    print(e)
+            
+
+        else:
+            t = self.gtweak.light_dark(theme)
+            themeVar = t[0]
+            print(theme + themeVar)
+
+            if 'missing' not in themeVar:
+                try:
+                    subprocess.check_call("cd ~/.themes ; tar -xf " + sdir + "/theme/themes.tar.xz " + themeVar , shell=True)
+                    
+                except Exception as e:
+                    print(e)
+            
+        self.install_bar_theme.hide()
+        self.apply_bar_theme.show()
 
     def on_rm_theme_clicked(self, widget):
         theme = self.theme_name.get_label()
         print(theme)
         dialog = Gtk.MessageDialog(
-            None,
-            0,
-            Gtk.MessageType.WARNING,
-            Gtk.ButtonsType.OK_CANCEL,
-            "The " + theme + " theme will be remove",
+            parent=None,
+            message_type=Gtk.MessageType.WARNING,
+            buttons=Gtk.ButtonsType.OK_CANCEL,
+            text="The " + theme + " theme will be remove",
         )
         dialog.format_secondary_text(
-            "Password requiered for uninstall"
+            "(only if in ~/.themes/)"
         )
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             subprocess.Popen(
-                "xfce4-terminal -e 'sudo rm -r /usr/share/themes/" + theme + "'", shell=True)
+                "rm -r ~/.themes/" + theme, shell=True)
+            self.apply_bar_theme.hide()
+            self.install_bar_theme.show()
         elif response == Gtk.ResponseType.CANCEL:
             print("rm canceled")
 
         dialog.destroy()
 
-        self.theme_status()
 
     # @ theme # Button : Apply selected theme
     def on_btn_apply_clicked(self, widget):
@@ -1054,6 +1078,16 @@ class Geox:
             )
             self.theme_name.set_label('Arc')
             self.theme_status()
+    
+    def on_radio_arc_slate_toggled(self, widget):
+        if widget.get_active():
+            self.preview_arc.set_from_file(sdir + "/img/arc-dark-slate.png")
+            self.gtweak.select_theme(
+                theme='Arc-Dark-SLATE',
+                windows_decor='Arc-Dark-SLATE',
+            )
+            self.theme_name.set_label('Arc-Dark-SLATE')
+            self.theme_status()
 
     def on_radio_arc_dark_toggled(self, widget):
         if widget.get_active():
@@ -1083,7 +1117,7 @@ class Geox:
 
     def on_radio_qogir_toggled(self, widget):
         if widget.get_active():
-            self.preview_various.set_from_file(sdir + "/img/qogir.png")
+            self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
             self.theme_name.set_label("Qogir")
             themename = self.theme_name.get_label()
             self.theme_status()
@@ -1094,7 +1128,7 @@ class Geox:
 
     def on_radio_qogir_light_toggled(self, widget):
         if widget.get_active():
-            self.preview_various.set_from_file(sdir + "/img/qogir-light.png")
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-light.png")
             self.theme_name.set_label("Qogir-light")
             themename = self.theme_name.get_label()
             self.theme_status()
@@ -1106,8 +1140,80 @@ class Geox:
 
     def on_radio_qogir_dark_toggled(self, widget):
         if widget.get_active():
-            self.preview_various.set_from_file(sdir + "/img/qogir-dark.png")
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-dark.png")
             self.theme_name.set_label("Qogir-dark")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+                icons_name='Papirus-Dark',
+                libreoffice_icons='papirus-dark',
+            )
+
+    def on_radio_qogir_manjaro_toggled(self, widget):
+        if widget.get_active():
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-manjaro.png")
+            self.theme_name.set_label("Qogir-manjaro-win")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+            )
+
+    def on_radio_qogir_manjaro_light_toggled(self, widget):
+        if widget.get_active():
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-manjaro-light.png")
+            self.theme_name.set_label("Qogir-manjaro-win-light")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+            )
+
+    def on_radio_qogir_manjaro_dark_toggled(self, widget):
+        if widget.get_active():
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-manjaro-dark.png")
+            self.theme_name.set_label("Qogir-manjaro-win-dark")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+                icons_name='Papirus-Dark',
+                libreoffice_icons='papirus-dark',
+            )
+
+    def on_radio_qogir_ubuntu_toggled(self, widget):
+        if widget.get_active():
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-ubuntu.png")
+            self.theme_name.set_label("Qogir-ubuntu-win")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+            )
+
+    def on_radio_qogir_ubuntu_light_toggled(self, widget):
+        if widget.get_active():
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-ubuntu-light.png")
+            self.theme_name.set_label("Qogir-ubuntu-win-light")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+            )
+
+    def on_radio_qogir_ubuntu_dark_toggled(self, widget):
+        if widget.get_active():
+            self.preview_qogir.set_from_file(sdir + "/img/qogir-ubuntu-dark.png")
+            self.theme_name.set_label("Qogir-ubuntu-win-dark")
             themename = self.theme_name.get_label()
             self.theme_status()
             self.gtweak.select_theme(
@@ -1219,6 +1325,7 @@ class Geox:
             )
 
     def on_radio_numix_toggled(self, widget):
+        #Fixit : hide icon in btn (peaufinage des fenetre?>> si dark, ceux des menu invisible, et inversement)
         if widget.get_active():
             self.preview_various.set_from_file(sdir + "/img/numix.png")
             self.theme_name.set_label("Numix")
@@ -1227,7 +1334,9 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
-                folder_color='orange'
+                folder_color='orange',
+                icons_name='Papirus-Dark'
+
             )
 
     def on_radio_mint_toggled(self, widget):
@@ -1503,6 +1612,53 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='teal'
             )
+
+    def on_radio_prof_toggled(self, widget):
+        if widget.get_active():
+            self.preview_various.set_from_file(sdir + "/img/prof.png")
+            self.theme_name.set_label("Prof--XFCE-2.1")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+                )
+
+    def on_radio_nordic_toggled(self, widget):
+        if widget.get_active():
+            self.preview_various.set_from_file(sdir + "/img/nordic.png")
+            self.theme_name.set_label("Nordic")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+                )
+    def on_radio_nordic_polar_toggled(self, widget):
+        if widget.get_active():
+            self.preview_various.set_from_file(sdir + "/img/nordic-polar.png")
+            self.theme_name.set_label("Nordic-Polar")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+                )
+
+
+    def on_radio_Cloudy_SoftBlue_Light_toggled(self, widget):
+        if widget.get_active():
+            self.preview_various.set_from_file(sdir + "/img/cloudy-softblue-light.png")
+            self.theme_name.set_label("Cloudy-SoftBlue-Light")
+            themename = self.theme_name.get_label()
+            self.theme_status()
+            self.gtweak.select_theme(
+                theme=themename,
+                windows_decor=themename,
+                )
+
+    
+                
     # @ pane : ICON color _________________________________________
 
     def on_folder_toggled(self, widget):

@@ -128,10 +128,11 @@ _installConf()
 	# Geox-Tweak-Xfce
 	mkdir -p $HOME/.config/geox-tweak-xfce/panel
 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
-	cp -r /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce/panel/
+	cp -r /usr/share/geox-tweak/panel/* $HOME/.config/geox-tweak-xfce/panel/
 
 	#conky fonts
 	echo $pw | sudo -S cp -R /usr/share/geox-tweak/theme/Podkova /usr/share/fonts/truetype/
+
 
 
 	echo '''#pulseaudio-button * {-gtk-icon-transform: scale(1);}
@@ -139,7 +140,7 @@ _installConf()
 #xfce4-power-manager-plugin * {-gtk-icon-transform: scale(1);}''' >> $HOME/.config/gtk-3.0/gtk.css
 
 	#  plank
-	sudo tar -xf /usr/share/geox-tweak/theme/plank.tar.gz -C /usr/share/plank/themes/	
+	sudo tar -xf /usr/share/geox-tweak/theme/plank.tar.gz -C /usr/share/
 
 	xfconf-query -cv xfwm4 -p /general/show_dock_shadow --create --type bool -s "false"
 

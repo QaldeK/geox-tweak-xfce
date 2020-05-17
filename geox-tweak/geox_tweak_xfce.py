@@ -195,11 +195,37 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
         config.write(open(gtconf, 'w'))
         print("new folder color : " + cfolder)
 
+
     def dark_mode(self):
         self.theme = subprocess.getoutput(
             "xfconf-query -c xsettings -p /Net/ThemeName")
+        
         dtheme = self.theme
         
+        t = self.light_dark(dtheme)
+
+        darktheme = t[0]
+        wdarktheme = t[1]
+        
+        if darktheme == 'missing':
+            subprocess.run('''notify-send "GTX-Indicator" " ''' + self.theme + ''' have no dark-theme option" -t 5000''', shell=True)
+
+        else:
+
+            print(darktheme)
+            self.select_theme(
+                theme=darktheme,
+                windows_decor=wdarktheme,
+                icons_name="Papirus-Dark",
+                libreoffice_icons="papirus-dark",
+                )
+
+            self.change_theme(change_folder=False)  
+
+    def light_dark(self, dtheme):
+
+        wdarktheme = None
+
         if 'Mint' in dtheme:
             if 'Darker' in dtheme:
                 darktheme = dtheme.replace('Darker', 'Dark')
@@ -225,72 +251,81 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
         elif 'Materia' in dtheme or 'Qogir' in dtheme or 'Adwaita' in dtheme:
             darktheme = dtheme + '-dark'
             darktheme = darktheme.replace('-light', '')
-
+        
         else:
-            subprocess.run('''notify-send "GTX-Indicator" " ''' + self.theme + ''' have no dark-theme option" -t 5000''', shell=True)
+            darktheme = 'missing'
 
         if '-Eta' in darktheme:
             wdarktheme = darktheme.replace('-Eta', '')
 
-        else:
+        elif wdarktheme is None:
             wdarktheme = darktheme
 
+        return (darktheme, wdarktheme) 
+        
 
-        print(darktheme)
-        self.select_theme(
-            theme=darktheme,
-            windows_decor=wdarktheme,
-            icons_name="Papirus-Dark",
-            libreoffice_icons="papirus-dark",
-            )
-
-        self.change_theme(change_folder=False)               
 
     def light_mode(self):
 
         self.theme = subprocess.getoutput(
             "xfconf-query -c xsettings -p /Net/ThemeName")
-        lighttheme = self.theme
+        ltheme = self.theme
 
-        if 'Adapta' in self.theme:
-            lighttheme = lighttheme.replace('-Nokto', '')
+        t = self.dark_light(ltheme)
 
-        elif 'Arc' in self.theme:
-            lighttheme = lighttheme.replace('-Dark', '')
+        lighttheme = t[0]
+        wlighttheme = t[1]
 
-        elif 'MJV' in self.theme:
-            lighttheme = 'McOS-MJV-XFCE-Edition-2.3'
-
-        elif 'Matcha' in self.theme:
-            lighttheme = lighttheme.replace('-dark', '')
-
-        elif 'Materia' in self.theme or 'Qogir' in self.theme or 'Adwaita' in self.theme:
-            lighttheme = lighttheme.replace('-dark', '')
-
-        elif 'Mint' in self.theme:
-            lighttheme = lighttheme.replace('-Dark', '')
+        if lighttheme == 'missing':
+            subprocess.run('''notify-send "GTX-Indicator" " ''' + self.theme + ''' have no light-theme option" -t 5000''', shell=True)
 
         else:
-            subprocess.run('''notify-send "GTX-Indicator" " ''' + self.theme + ''' have no dark-theme option" -t 5000''', shell=True)
 
-
-        if 'Eta' in self.theme:
-            wlighttheme = lighttheme.replace('-Eta', '')
-        else:
-            wlighttheme = lighttheme
-
-        print(lighttheme)
-        self.select_theme(
-            theme=lighttheme,
-            windows_decor=wlighttheme,
-            icons_name="Papirus",
-            libreoffice_icons="papirus"
+            print(lighttheme)
+            self.select_theme(
+                theme=lighttheme,
+                windows_decor=wlighttheme,
+                icons_name="Papirus",
+                libreoffice_icons="papirus"
         )
 
 
         self.change_theme(change_folder=False)
 
+    def dark_light(self, ltheme):
+        
+        wlighttheme = None
 
+        if 'Adapta' in self.theme:
+            lighttheme = ltheme.replace('-Nokto', '')
+
+        elif 'Arc' in self.theme:
+            lighttheme = ltheme.replace('-Dark', '')
+
+        elif 'MJV' in self.theme:
+            lighttheme = 'McOS-MJV-XFCE-Edition-2.3'
+
+        elif 'Matcha' in self.theme:
+            lighttheme = ltheme.replace('-dark', '')
+
+        elif 'Materia' in self.theme or 'Qogir' in self.theme or 'Adwaita' in self.theme:
+            lighttheme = ltheme.replace('-dark', '')
+
+        elif 'Mint' in self.theme:
+            lighttheme = ltheme.replace('-Dark', '')
+
+        else:
+            lighttheme = 'missing'
+
+
+        if 'Eta' in self.theme:
+            wlighttheme = ltheme.replace('-Eta', '')
+        
+        elif wlighttheme is None:
+            wlighttheme = ltheme
+
+
+        return (lighttheme, wlighttheme)
 
 # class Commands():
 #    def cmd_foo(self):

@@ -204,8 +204,10 @@ github.com/QaldeK/geox-tweak-xfce</property>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">5</property>
-                    <property name="margin_right">5</property>
+                    <property name="margin_left">10</property>
+                    <property name="margin_right">10</property>
+                    <property name="margin_top">3</property>
+                    <property name="margin_bottom">3</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkScrolledWindow">
@@ -2330,6 +2332,24 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                                 <property name="top_attach">1</property>
                                               </packing>
                                             </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_arc_slate">
+                                                <property name="label" translatable="yes">Arc Slate</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_arc_slate_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
                                           </object>
                                         </child>
                                         <child type="label">
@@ -2498,7 +2518,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">1</property>
+                                                <property name="top_attach">2</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2513,7 +2533,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">3</property>
+                                                <property name="top_attach">4</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2528,7 +2548,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">1</property>
+                                                <property name="top_attach">2</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2543,7 +2563,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">3</property>
+                                                <property name="top_attach">4</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2558,67 +2578,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">2</property>
-                                                <property name="top_attach">3</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_qogir">
-                                                <property name="label" translatable="yes">Qogir</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_qogir_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">0</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_qogir_light">
-                                                <property name="label" translatable="yes">Qogir Light</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_qogir_light_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_qogir_dark">
-                                                <property name="label" translatable="yes">Qogir Dark</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_qogir_dark_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">2</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkRadioButton" id="radio_numix">
-                                                <property name="label" translatable="yes">Numix</property>
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
-                                                <property name="receives_default">False</property>
-                                                <property name="draw_indicator">False</property>
-                                                <property name="group">radio_default_theme</property>
-                                                <signal name="toggled" handler="on_radio_numix_toggled" swapped="no"/>
-                                              </object>
-                                              <packing>
-                                                <property name="left_attach">1</property>
-                                                <property name="top_attach">0</property>
+                                                <property name="top_attach">4</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2648,7 +2608,7 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
-                                                <property name="top_attach">4</property>
+                                                <property name="top_attach">5</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2663,7 +2623,37 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">1</property>
-                                                <property name="top_attach">4</property>
+                                                <property name="top_attach">5</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_nordic">
+                                                <property name="label" translatable="yes">Nordic</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_nordic_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">3</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_nordic_polar">
+                                                <property name="label" translatable="yes">Nordic Polar</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_nordic_polar_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">3</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -2677,9 +2667,69 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                                 <signal name="toggled" handler="on_radio_prodark_toggled" swapped="no"/>
                                               </object>
                                               <packing>
-                                                <property name="left_attach">2</property>
-                                                <property name="top_attach">4</property>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">6</property>
                                               </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_prof">
+                                                <property name="label" translatable="yes">Prof--Xfce-2.1</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_prof_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">6</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_numix">
+                                                <property name="label" translatable="yes">Numix</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_numix_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_Cloudy_SoftBlue_Light">
+                                                <property name="label" translatable="yes">Cloudy SoftBlue Light</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_Cloudy_SoftBlue_Light_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
+                                            </child>
+                                            <child>
+                                              <placeholder/>
                                             </child>
                                             <child>
                                               <placeholder/>
@@ -2731,6 +2781,184 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                                       <packing>
                                         <property name="left_attach">0</property>
                                         <property name="top_attach">6</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkFrame">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="label_xalign">0</property>
+                                        <property name="shadow_type">none</property>
+                                        <child>
+                                          <object class="GtkGrid">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="margin_top">7</property>
+                                            <property name="row_spacing">6</property>
+                                            <property name="column_spacing">3</property>
+                                            <property name="column_homogeneous">True</property>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir1">
+                                                <property name="label" translatable="yes">Qogir</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_light1">
+                                                <property name="label" translatable="yes">Qogir Light</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_dark1">
+                                                <property name="label" translatable="yes">Qogir Dark</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_manjaro">
+                                                <property name="label" translatable="yes">Qogir Manjaro</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_qogir_manjaro_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">1</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_manjaro_dark">
+                                                <property name="label" translatable="yes">Qogir Manjaro Dark</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_qogir_manjaro_dark_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">1</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_manjaro_light">
+                                                <property name="label" translatable="yes">Qogir Manjaro Light</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_qogir_manjaro_light_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">1</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_ubuntu_light">
+                                                <property name="label" translatable="yes">Qogir Ubuntu Light</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_qogir_ubuntu_light_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">2</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_ubuntu_dark">
+                                                <property name="label" translatable="yes">Qogir Ubuntu Dark</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_qogir_ubuntu_dark_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">1</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkRadioButton" id="radio_qogir_ubuntu">
+                                                <property name="label" translatable="yes">Qogir Ubuntu</property>
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">True</property>
+                                                <property name="receives_default">False</property>
+                                                <property name="draw_indicator">False</property>
+                                                <property name="group">radio_default_theme</property>
+                                                <signal name="toggled" handler="on_radio_qogir_ubuntu_toggled" swapped="no"/>
+                                              </object>
+                                              <packing>
+                                                <property name="left_attach">0</property>
+                                                <property name="top_attach">2</property>
+                                              </packing>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child type="label">
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="margin_top">6</property>
+                                            <property name="label">Qogir variant</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="top_attach">15</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage" id="preview_qogir">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="valign">start</property>
+                                        <property name="margin_top">6</property>
+                                        <property name="margin_bottom">6</property>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">0</property>
+                                        <property name="top_attach">15</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -2844,16 +3072,117 @@ In this case, consider choosing an icons theme that is consistent with the chose
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkInfoBar" id="install_bar_theme">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="message_type">warning</property>
+                        <child internal-child="action_area">
+                          <object class="GtkButtonBox">
+                            <property name="can_focus">False</property>
+                            <property name="spacing">6</property>
+                            <property name="layout_style">end</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child internal-child="content_area">
+                          <object class="GtkBox">
+                            <property name="can_focus">False</property>
+                            <property name="spacing">16</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="warning_theme">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">end</property>
+                            <property name="spacing">21</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="stock">gtk-dialog-error</property>
+                                <property name="icon_size">3</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="theme_miss">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">This theme is not installed on your system.</property>
+                                <attributes>
+                                  <attribute name="weight" value="semibold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="btn_theme_install">
+                                <property name="label" translatable="yes">Install now !</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="margin_left">6</property>
+                                <property name="margin_right">6</property>
+                                <property name="margin_top">6</property>
+                                <property name="margin_bottom">6</property>
+                                <signal name="clicked" handler="on_btn_theme_install_clicked" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="pack_type">end</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">2</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkInfoBar" id="bar_theme">
+                      <object class="GtkInfoBar" id="apply_bar_theme">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">4</property>
                         <child internal-child="action_area">
-                          <object class="GtkButtonBox" id="apply_bar_theme">
+                          <object class="GtkButtonBox">
                             <property name="can_focus">False</property>
                             <property name="spacing">5</property>
                             <property name="layout_style">end</property>
@@ -2880,6 +3209,8 @@ In this case, consider choosing an icons theme that is consistent with the chose
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="halign">end</property>
+                                <property name="margin_left">6</property>
+                                <property name="margin_right">6</property>
                                 <property name="margin_top">6</property>
                                 <property name="margin_bottom">6</property>
                                 <property name="use_stock">True</property>
@@ -2960,64 +3291,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
                                 <property name="position">3</property>
                               </packing>
                             </child>
-                            <child>
-                              <object class="GtkBox" id="warning_theme">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">end</property>
-                                <property name="spacing">8</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="stock">gtk-dialog-error</property>
-                                    <property name="icon_size">3</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="theme_miss">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">This theme is not installed on your system.</property>
-                                    <attributes>
-                                      <attribute name="weight" value="semibold"/>
-                                    </attributes>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="btn_theme_install">
-                                    <property name="label" translatable="yes">Install now !</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="margin_top">6</property>
-                                    <property name="margin_bottom">6</property>
-                                    <signal name="clicked" handler="on_btn_theme_install_clicked" swapped="no"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
-                                <property name="pack_type">end</property>
-                                <property name="position">4</property>
-                              </packing>
-                            </child>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -3043,287 +3316,268 @@ In this case, consider choosing an icons theme that is consistent with the chose
                   <object class="GtkViewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">6</property>
+                    <property name="margin_right">6</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_top">10</property>
-                        <property name="margin_bottom">7</property>
                         <property name="orientation">vertical</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkFrame">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="orientation">vertical</property>
+                            <property name="label_xalign">0</property>
+                            <property name="shadow_type">none</property>
                             <child>
-                              <placeholder/>
-                            </child>
-                            <child>
-                              <object class="GtkFrame">
+                              <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label_xalign">0</property>
-                                <property name="shadow_type">none</property>
+                                <property name="orientation">vertical</property>
                                 <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="valign">start</property>
-                                        <property name="margin_top">10</property>
-                                        <property name="margin_bottom">10</property>
-                                        <property name="label" translatable="yes">Select the icon color for the folders
-(only works if the "papirus" icon theme is active ; password required)</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkGrid">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="row_spacing">8</property>
-                                        <property name="column_spacing">8</property>
-                                        <child>
-                                          <object class="GtkRadioButton" id="bluegrey">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_bluegrey</property>
-                                            <property name="image_position">top</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">2</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="grey">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_grey</property>
-                                            <property name="image_position">top</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">0</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="brown">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_brown</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">3</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="black">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_black</property>
-                                            <property name="image_position">top</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="blue">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_blue</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">0</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="teal">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_teal</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">3</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="green">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_green</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">2</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="cyan">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_cyan</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="orange">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_orange</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">4</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="yellow">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_yellow</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">5</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="red">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_red</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">4</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkRadioButton" id="violet">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="image">icon_violet</property>
-                                            <property name="always_show_image">True</property>
-                                            <property name="draw_indicator">False</property>
-                                            <property name="group">folder_colo</property>
-                                            <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">5</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child type="label">
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">Folders color</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                    </attributes>
+                                    <property name="halign">start</property>
+                                    <property name="valign">start</property>
+                                    <property name="margin_top">10</property>
+                                    <property name="margin_bottom">10</property>
+                                    <property name="label" translatable="yes">Select the icon color for the folders
+(only works if the "papirus" icon theme is active ; password required)</property>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkGrid">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="row_spacing">8</property>
+                                    <property name="column_spacing">8</property>
+                                    <child>
+                                      <object class="GtkRadioButton" id="bluegrey">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_bluegrey</property>
+                                        <property name="image_position">top</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">2</property>
+                                        <property name="top_attach">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="grey">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_grey</property>
+                                        <property name="image_position">top</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">0</property>
+                                        <property name="top_attach">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="brown">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_brown</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">3</property>
+                                        <property name="top_attach">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="black">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_black</property>
+                                        <property name="image_position">top</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="top_attach">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="blue">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_blue</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">0</property>
+                                        <property name="top_attach">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="teal">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_teal</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">3</property>
+                                        <property name="top_attach">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="green">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_green</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">2</property>
+                                        <property name="top_attach">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="cyan">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_cyan</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="top_attach">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="orange">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_orange</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">4</property>
+                                        <property name="top_attach">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="yellow">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_yellow</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">5</property>
+                                        <property name="top_attach">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="red">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_red</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">4</property>
+                                        <property name="top_attach">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="violet">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="image">icon_violet</property>
+                                        <property name="always_show_image">True</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">folder_colo</property>
+                                        <signal name="toggled" handler="on_folder_toggled" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">5</property>
+                                        <property name="top_attach">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
+                            </child>
+                            <child type="label">
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Folders color</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
                             </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
                         </child>
                       </object>
                     </child>
