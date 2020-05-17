@@ -262,7 +262,6 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
             wdarktheme = darktheme
 
         return (darktheme, wdarktheme) 
-        
 
 
     def light_mode(self):
@@ -289,8 +288,8 @@ xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
                 libreoffice_icons="papirus"
         )
 
-
         self.change_theme(change_folder=False)
+
 
     def dark_light(self, ltheme):
         

@@ -1160,6 +1160,7 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
+                folder_color='teal'
             )
 
     def on_radio_qogir_manjaro_light_toggled(self, widget):
@@ -1172,6 +1173,7 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
+                folder_color='teal'
             )
 
     def on_radio_qogir_manjaro_dark_toggled(self, widget):
@@ -1185,6 +1187,8 @@ class Geox:
                 windows_decor=themename,
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
+                folder_color='teal'
+
             )
 
     def on_radio_qogir_ubuntu_toggled(self, widget):
@@ -1196,6 +1200,7 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
+                folder_color='orange'
             )
 
     def on_radio_qogir_ubuntu_light_toggled(self, widget):
@@ -1208,6 +1213,7 @@ class Geox:
             self.gtweak.select_theme(
                 theme=themename,
                 windows_decor=themename,
+                folder_color='orange'
             )
 
     def on_radio_qogir_ubuntu_dark_toggled(self, widget):
@@ -1221,6 +1227,7 @@ class Geox:
                 windows_decor=themename,
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
+                folder_color='orange'
             )
 
     def on_radio_materia_toggled(self, widget):
