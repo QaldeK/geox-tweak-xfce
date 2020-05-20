@@ -131,6 +131,12 @@ _installation()	{
 	echo $pw | sudo -S chmod 555 /usr/bin/geox-tweak /usr/bin/gtx-indicator
 	echo $pw | sudo -S cp ./geox-tweak/script/conkytoggle.sh /usr/bin
 	echo $pw | sudo -S chmod 555 /usr/bin/conkytoggle.sh
+	
+	#user config 
+	mkdir -p $HOME/.config/geox-tweak-xfce/panel
+	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
+	cp -r /usr/share/geox-tweak/panel/* $HOME/.config/geox-tweak-xfce/panel/
+
 
 	echo $pw | sudo -S cp -R ./geox-tweak/doc /usr/share/doc
 
