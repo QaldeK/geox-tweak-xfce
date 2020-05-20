@@ -898,7 +898,12 @@ class Geox:
                 folder_color='cyan'
             )
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
             self.theme_name.set_label('Adapta')
+
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_bluegrey_toggled(self, widget):
         if widget.get_active():
@@ -908,7 +913,11 @@ class Geox:
                                      folder_color='bluegrey'
                                      )
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
             self.theme_name.set_label('Adapta-BlueGrey')
+
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
 
     def on_radio_adapta_bluegrey_nokto_toggled(self, widget):
         if widget.get_active():
