@@ -185,11 +185,12 @@ class GeoxTweak:
 
         cfolder = self.folder
         # import pdb; pdb.set_trace()
-        script = '''#!/bin/bash
-Theme=$(xfconf-query -c xsettings -p /Net/IconThemeName)
-xfce4-terminal -e "sudo papirus-folders -t $Theme -C ''' + cfolder + ''' " '''
 
-        subprocess.Popen(script, shell=True)
+        #Fixit or nor ? (xfce4-terminal -e)
+        script = '''Theme=$(xfconf-query -c xsettings -p /Net/IconThemeName);
+sudo papirus-folders -t $Theme -C ''' + cfolder
+
+        subprocess.run(script, shell=True)
 
         config.set('Style', 'folder', cfolder)
         config.write(open(gtconf, 'w'))
