@@ -144,6 +144,13 @@ class Geox:
         self.preview_qogir = go("preview_qogir")
         self.preview_qogir.set_from_file(sdir + "/img/qogir.png")
 
+        self.toggle_adapta_compact = go("toggle_adapta_compact")
+        self.toggle_arc_hdpi = go('toggle_arc_hdpi')
+        self.toggle_arc_xhdpi = go('toggle_arc_xhdpi')
+        self.toggle_arc_hdpi.set_sensitive(False)
+        self.toggle_arc_xhdpi.set_sensitive(False)
+        self.toggle_adapta_compact.set_sensitive(False)
+
     # @ Icon color
         self.folder = ""
 
