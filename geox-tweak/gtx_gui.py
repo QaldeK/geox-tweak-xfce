@@ -106,7 +106,37 @@ class Geox:
         self.btn_all_theme = go("btn_all_theme")
         self.btn_widows_decor = go("btn_widows_decor")
         self.btn_apply = go("btn_apply")
-        self.toggle_adapta_compact = go("toggle_adapta_compact")
+
+
+    # @    # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
+        self.var_theme = ""
+        self.theme = ""
+        self.windows_decor = ""
+        self.icons = ""
+        self.layout = ""
+        self.libreoffice_icons = ""
+
+        # TODO : Renommer (confusion) assigné glade...
+        self.theme_name = go("theme_name")
+
+        self.chk_folder_color = go("chk_folder_color")
+
+    # @ Save Layout
+        # self.ls_layout = Gtk.ListStore(str)
+
+        # self.tv_layouts = go('tv_layouts')
+        self.tv_layouts = self.builder.get_object('tv_layouts')
+        self.tmodel = self.tv_layouts.get_model()
+        self.entry_layout = go('entry_layout')
+        self.slayout_list()
+
+    # @ affichage de la fenetre
+        self.window = go("main_window")
+        self.window.show()
+
+        config.read(gtconf)
+        plank_theme = config.get("Style", "plank_theme")
+        self.plank_theme = plank_theme
 
     # @ Onglet "Other"
         self.btn_simpleclic_thunar = go("btn_simpleclic_thunar")
@@ -125,10 +155,6 @@ class Geox:
         self.btn_desktop_settings = go("btn_desktop_settings")
         self.btn_thunar_settings = go("btn_thunar_settings")
 
-    # @ POPOVER windows decor
-        # self.popover_wd = go("popover_wd")
-        # self.preview_wd_arc_light = go('preview_wd_arc_light')
-        # self.preview_wd_arc_light.set_from_file(sdir + '/img/wd_arc_light.png')
 
     # @ preview self.theme
         self.preview_adapta = go("preview_adapta")
@@ -202,35 +228,6 @@ class Geox:
 
         # self.on_rm_theme_clicked = go('on_rm_theme_clicked')
 
-    # @    # ID des label du fichier de configuration geox-tweak.conf (> modifié par "config.")
-        self.var_theme = ""
-        self.theme = ""
-        self.windows_decor = ""
-        self.icons = ""
-        self.layout = ""
-        self.libreoffice_icons = ""
-
-        # TODO : Renommer (confusion) assigné glade...
-        self.theme_name = go("theme_name")
-
-        self.chk_folder_color = go("chk_folder_color")
-
-    # @ Save Layout
-        # self.ls_layout = Gtk.ListStore(str)
-
-        # self.tv_layouts = go('tv_layouts')
-        self.tv_layouts = self.builder.get_object('tv_layouts')
-        self.tmodel = self.tv_layouts.get_model()
-        self.entry_layout = go('entry_layout')
-        self.slayout_list()
-
-    # @ affichage de la fenetre
-        self.window = go("main_window")
-        self.window.show()
-
-        config.read(gtconf)
-        plank_theme = config.get("Style", "plank_theme")
-        self.plank_theme = plank_theme
 
     @staticmethod
     def on_btn_quit_clicked(widget):
@@ -869,10 +866,6 @@ class Geox:
         else:
             self.gtweak.change_theme(change_folder=False)
 
-    # @ theme # PopOver windows decorator
-    # def on_btn_wd_clicked(self, widget):
-    #     self.popover_wd.show_all()
-    #     self.popover_wd.popup()
 
     # @ Preparation de la Modification des themes en fonction de la  selection (radio btn)
         # What ? Obliger de faire une fonction par objet glade ...?
@@ -1057,6 +1050,8 @@ class Geox:
             )
             self.theme_name.set_label('Matcha-aliz')
             self.theme_status()
+
+
 
     def on_radio_matcha_sea_toggled(self, widget):
         if widget.get_active():
@@ -1724,8 +1719,7 @@ class Geox:
                 windows_decor=themename,
                 )
 
-    
-                
+                    
     # @ pane : ICON color _________________________________________
 
     def on_folder_toggled(self, widget):
