@@ -226,8 +226,8 @@ _installationDebian()
 		 'gconf2' \
 		'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf'\
 		'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' \
-		'xfce4-datetime-plugin'  'xfce4-dockbarx-plugin' \
-		'conky-all' 'conky' 'papirus-icon-theme' 'tar' 'xz-utils'
+		'xfce4-datetime-plugin' 'conky-all' 'conky' 'papirus-icon-theme' 'tar' 'xz-utils'
+		#xfce4-dockbarx-plugin >> move in specific distrib
 		do
 			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
 			then
@@ -279,12 +279,9 @@ _installationUnbuntu()
 			sleep 2
             echo $pw | sudo -S apt update
 			echo $pw | sudo -S apt install dockbarx xfce4-dockbarx-plugin dockbarx-themes-extra 
-            echo $pw | sudo -S rm /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list
+            # echo $pw | sudo -S rm /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list
 		fi
 
-
-
-		
 		if [ $(dpkg-query -W -f='${Status}' plank  2>/dev/null | grep -c "ok installed") -eq 0 ];
 		then
 			echo "---> PPA for Plank  ... 
@@ -319,7 +316,7 @@ _installationUnbuntu()
 			add_ppa xuzhen666/dockbarx
 			echo $pw | sudo -S apt-get update
 
-			echo $pw | sudo -S apt-get install -y xfce4-dockbarx-plugin
+			echo $pw | sudo -S apt-get install -y xfce4-dockbarx-plugin dockbarx-themes-extra
 		fi	
 		
 	}
@@ -341,8 +338,17 @@ _installationMX()
 
 	sleep 2
 
-	echo $pw | sudo -S apt-get update
+	if [ $distrib = "MX19" ]; then 
+		echo $pw | sudo -S sh -c "echo 'deb http://ppa.launchpad.net/xuzhen666/dockbarx/ubuntu focal main' >/etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-focal.list"
+	    echo $pw | sudo -S apt-key adv --recv-keys --keyserver
+	    keyserver.ubuntu.com  77d026e2eead66bd sleep 2 echo $pw | sudo -S
+	    apt update echo $pw | sudo -S apt install dockbarx
+	    xfce4-dockbarx-plugin dockbarx-themes-extra
+	    # echo $pw | sudo -S rm /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list
 	
+	# echo $pw | sudo -S apt-get update
+
+
 		for app in 	'python-gconf' 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'xfce4-dockbarx-plugin' \
 		'conky-all' 'conky-manager'
 		do
