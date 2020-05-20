@@ -151,10 +151,6 @@ github.com/QaldeK/geox-tweak-xfce</property>
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkImage" id="preview_wd_arc_light">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-  </object>
   <object class="GtkRadioButton" id="radio_default_theme">
     <property name="label" translatable="yes">radiobutton</property>
     <property name="visible">True</property>
@@ -330,6 +326,8 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
+                                            <property name="margin_left">6</property>
+                                            <property name="margin_right">6</property>
                                             <property name="margin_top">6</property>
                                             <property name="margin_bottom">6</property>
                                             <property name="row_spacing">3</property>
@@ -746,11 +744,15 @@ github.com/QaldeK/geox-tweak-xfce</property>
                                   <object class="GtkBox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
+                                    <property name="margin_left">6</property>
+                                    <property name="margin_right">6</property>
                                     <property name="spacing">15</property>
                                     <child>
                                       <object class="GtkFrame">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
+                                        <property name="margin_left">6</property>
+                                        <property name="margin_right">6</property>
                                         <property name="margin_top">6</property>
                                         <property name="margin_bottom">6</property>
                                         <property name="label_xalign">0</property>
@@ -1415,6 +1417,8 @@ fichier, etc. (Activer avec Ctrl+Espace)</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">start</property>
+                        <property name="margin_left">6</property>
+                        <property name="margin_right">6</property>
                         <property name="shadow_type">in</property>
                         <property name="propagate_natural_width">True</property>
                         <property name="propagate_natural_height">True</property>
@@ -3264,16 +3268,7 @@ In this case, consider choosing an icons theme that is consistent with the chose
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="btn_wd">
-                                <property name="label" translatable="yes">Windows Decorator</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">2</property>
-                              </packing>
+                              <placeholder/>
                             </child>
                             <child>
                               <object class="GtkButton" id="rm_theme">
@@ -3324,11 +3319,19 @@ In this case, consider choosing an icons theme that is consistent with the chose
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="margin_left">6</property>
+                        <property name="margin_right">6</property>
+                        <property name="margin_top">6</property>
+                        <property name="margin_bottom">6</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkFrame">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">6</property>
+                            <property name="margin_right">6</property>
+                            <property name="margin_top">6</property>
+                            <property name="margin_bottom">6</property>
                             <property name="label_xalign">0</property>
                             <property name="shadow_type">none</property>
                             <child>
@@ -3999,173 +4002,6 @@ In this case, consider choosing an icons theme that is consistent with the chose
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkPopover" id="popover_wd">
-    <property name="can_focus">False</property>
-    <property name="relative_to">btn_wd</property>
-    <child>
-      <object class="GtkGrid">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkRadioButton" id="wd_adpata">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="active">True</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_adpata1">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_arc_dark">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_adpata3">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_adpata4">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_materia_dark">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_adpata6">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_adpata7">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_arc_light">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="image">preview_wd_arc_light</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_materia_dark1">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_materia_light">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkRadioButton" id="wd_materia_dark3">
-            <property name="label" translatable="yes">radiobutton</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">2</property>
-            <property name="top_attach">3</property>
           </packing>
         </child>
       </object>
