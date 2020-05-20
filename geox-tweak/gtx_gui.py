@@ -804,7 +804,7 @@ class Geox:
        
         theme = self.theme_name.get_label()
 
-        subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.xz " + theme + "'", shell=True)        
+        subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /usr/share/geox-tweak/theme/themes.tar.xz " + theme + "'", shell=True)        
 
         if ('dark' in theme or
             'Dark' in theme or
@@ -815,7 +815,7 @@ class Geox:
             print(theme + themeVar)
             if 'missing' not in themeVar:
                 try:
-                    subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.xz "  + themeVar + "'", shell=True)
+                    subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /usr/share/geox-tweak/theme/themes.tar.xz "  + themeVar + "'", shell=True)
                 except Exception as e:
                     print(e)
             
@@ -827,7 +827,7 @@ class Geox:
 
             if 'missing' not in themeVar:
                 try:
-                    subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.xz "  + themeVar + "'", shell=True)
+                    subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /usr/share/geox-tweak/theme/themes.tar.xz "  + themeVar + "'", shell=True)
                     
                 except Exception as e:
                     print(e)
