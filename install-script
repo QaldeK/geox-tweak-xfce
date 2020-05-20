@@ -145,71 +145,9 @@ _installation()	{
 
 	_installationDep
 
-	#_installConf
 }
 
-# _installConf()
-# {
-# 	# Fixit Debian postinst
-# 	echo "----------------------------------------------"
-# 	echo "Copying extra configuration files"
-# 	echo "----------------------------------------------"
-# 	# Dockbarx
-# 	mkdir -p $HOME/.gconf/apps/
-# 	tar -xf /usr/share/geox-tweak/theme/dockbarx/dockbarx.tar.gz -C $HOME/.gconf/apps
-# 	echo $pw | sudo -S tar -xf /usr/share/geox-tweak/theme/dockbarx/dockbarx-themes-master.tar.gz -C /usr/share/dockbarx/themes
 
-# 	# xfdashboard
-# 	sudo cp -Rf /usr/share/geox-tweak/theme/xfdashboard/xfdashboard-dark-nodock /usr/share/themes/
-# 	cp -f /usr/share/geox-tweak/theme/xfdashboard/xfdashboard.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml 
-# 	# Synapse
-# 	mkdir -p $HOME/.config/synapse/
-# 	cp -f /usr/share/geox-tweak/theme/synapse/* $HOME/.config/synapse/
-# 	# Conky
-# 	mkdir -p $HOME/.conky
-# 	tar -xf /usr/share/geox-tweak/theme/conky.tar.gz -C $HOME/.conky
-# 	sudo cp -f /usr/share/geox-tweak/script/conkytoggle.sh	/usr/bin/conkytoggle.sh
-# 	# Autostart
-# 	mkdir -p $HOME/.config/autostart/
-# 	cp -n /usr/share/geox-tweak/script/autostart/* $HOME/.config/autostart/
-# 	# Geox-Tweak-Xfce
-# 	mkdir $HOME/.config/geox-tweak-xfce/
-# 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
-# 	cp -ru /usr/share/geox-tweak/panel/ $HOME/.config/geox-tweak-xfce/
-
-# 	#conky fonts
-# 	echo $pw | sudo -S cp -R /usr/share/geox-tweak/theme/Podkova /usr/share/fonts/truetype/
-
-# 	echo '''#pulseaudio-button * {-gtk-icon-transform: scale(1);}
-# #xfce4-notification-plugin * {-gtk-icon-transform: scale(1);}
-# #xfce4-power-manager-plugin * {-gtk-icon-transform: scale(1);}''' >> $HOME/.config/gtk-3.0/gtk.css
-
-# 	#  plank
-# 	sudo tar -xf /usr/share/geox-tweak/theme/plank.tar.gz -C /usr/share/plank/themes/	
-
-# 	xfconf-query -cv xfwm4 -p /general/show_dock_shadow --create --type bool -s "false"
-# 	cp -Rf /usr/share/geox-tweak/panel/plank/* $HOME/.config/plank/
-# 	gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['thunar.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'torbrowser.dockitem', 'org.xfce.Catfish.dockitem', 'gmusicbrowser.dockitem', 'clementine.dockitem', 'shotwell.dockitem', 'libreoffice-startcenter.dockitem', 'mintinstall.dockitem', 'mx-packageinstaller.dockitem', 'org.gnome.Software.dockitem', 'org.keepassxc.KeePassXC.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem']"
-
-# 	xfconf-query -c thunar -p /misc-single-click --create --type bool -s false  
-# 	xfconf-query -c thunar -p /misc-folders-first --create --type bool -s true 
-# 	xfconf-query -c thunar -p /misc-text-beside-icons --create --type bool -s false 
-# 	xfconf-query -c xfce4-desktop -p /desktop-icons/single-click --create --type bool -s false 
-# 	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-trash --create --type bool -s true 
-# 	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-home --create --type bool -s true 
-# 	xfconf-query -c xfce4-desktop -p /desktop-icons/file-icons/show-removable --create --type bool -s true 
-
-
-# 	sudo tar -xf /usr/share/geox-tweak/theme/themes.tar.gz -C
-# 	/usr/share/themes/ --skip-old-files
-
-# 	echo "=>  preserve whiskermenu config."
-# 	path_panel=/usr/share/geox-tweak/panel
-# 	echo $pw | sudo -S find $HOME/.config/xfce4/panel/ -name "whisker*" -exec cp -f -r -v {} $path_panel/whiskermenu-20.rc \;
-# 	echo $pw | sudo -S find $path_panel/*/xfce4/panel/  -maxdepth 0 -exec cp -f $path_panel/whiskermenu-20.rc {} \;
-
-# 	echo "Done."
-# }
 	
 _installationDep() 
 	{ 
