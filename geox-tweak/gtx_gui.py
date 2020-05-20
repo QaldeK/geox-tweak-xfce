@@ -930,7 +930,11 @@ class Geox:
                 libreoffice_icons='papirus-dark',
                 folder_color='bluegrey')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
             self.theme_name.set_label('Adapta-BlueGrey-Nokto')
+
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
 
     def on_radio_adapta_pink_toggled(self, widget):
         if widget.get_active():
@@ -941,6 +945,10 @@ class Geox:
                                      )
             self.theme_name.set_label('Adapta-Pink')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_pink_nokto_toggled(self, widget):
         if widget.get_active():
@@ -955,6 +963,10 @@ class Geox:
             )
             self.theme_name.set_label('Adapta-Pink-Nokto')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_deeppurple_toggled(self, widget):
         if widget.get_active():
@@ -965,6 +977,10 @@ class Geox:
                                      )
             self.theme_name.set_label('Adapta-DeepPurple')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_deeppurple_nokto_toggled(self, widget):
         if widget.get_active():
@@ -979,6 +995,10 @@ class Geox:
             )
             self.theme_name.set_label('Adapta-DeepPurple-Nokto')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_green_toggled(self, widget):
         if widget.get_active():
@@ -988,6 +1008,10 @@ class Geox:
                                      )
             self.theme_name.set_label('Adapta-Green')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_green_nokto_toggled(self, widget):
         if widget.get_active():
@@ -1002,6 +1026,10 @@ class Geox:
             )
             self.theme_name.set_label('Adapta-Green-Nokto')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_adapta_nokto_toggled(self, widget):
         if widget.get_active():
@@ -1015,6 +1043,10 @@ class Geox:
             )
             self.theme_name.set_label('Adapta-Nokto')
             self.theme_status()
+            self.toggle_adapta_compact.set_sensitive(True)
+        else:
+            self.toggle_adapta_compact.set_sensitive(False)
+
 
     def on_radio_matcha_aliz_toggled(self, widget):
         if widget.get_active():
@@ -1092,8 +1124,13 @@ class Geox:
                 theme='Arc',
                 windows_decor='Arc',
             )
+            self.toggle_arc_hdpi.set_sensitive(True)
+            self.toggle_arc_xhdpi.set_sensitive(True)
             self.theme_name.set_label('Arc')
             self.theme_status()
+        else:
+            self.toggle_arc_hdpi.set_sensitive(False)
+            self.toggle_arc_xhdpi.set_sensitive(False)
     
     def on_radio_arc_slate_toggled(self, widget):
         if widget.get_active():
@@ -1117,6 +1154,11 @@ class Geox:
                 icons_name='Papirus-Dark',
                 libreoffice_icons='papirus-dark',
             )
+            self.toggle_arc_hdpi.set_sensitive(True)
+            self.toggle_arc_xhdpi.set_sensitive(True)
+        else:
+            self.toggle_arc_hdpi.set_sensitive(False)
+            self.toggle_arc_xhdpi.set_sensitive(False)
 
     def on_radio_clearlooks_toggled(self, widget):
         if widget.get_active():
