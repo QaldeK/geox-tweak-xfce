@@ -263,7 +263,7 @@ _installationDebian()
 
 	}
 
-_installationUnbuntu()
+_installationUbuntu()
 	{
 		_installationDebian
 
