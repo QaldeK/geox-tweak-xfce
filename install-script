@@ -36,7 +36,7 @@
 
 
 echo "---------------------------------------------------------------------------------------"
-echo "This script will install geox-tweak-xfce and various GTK theme for XFCE (Qogir, Mint-y, Arc, Adapta, MJV-McOS, PRo-Dark-Xfce...)
+echo "This script will install geox-tweak-xfce and dependancy ('python3' 'python3-gi' 'xfce4-datetime-plugin' 'gconf2' 'gir1.2-gtk-3.0' 'gtk2-engines-murrine' 'gtk2-engines-pixbuf' 'papirus-icon-theme' 'tar' 'xz-utils')
  
  Are you ok to procced  ? Tap enter for yes, tap ctrl+c or close terminal for no"
 echo
@@ -132,7 +132,7 @@ _installation()	{
 	echo $pw | sudo -S cp ./geox-tweak/script/conkytoggle.sh /usr/bin
 	echo $pw | sudo -S chmod 555 /usr/bin/conkytoggle.sh
 	
-	#user config 
+	# user config 
 	mkdir -p $HOME/.config/geox-tweak-xfce/panel
 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
 	cp -r /usr/share/geox-tweak/panel/* $HOME/.config/geox-tweak-xfce/panel/
@@ -141,13 +141,6 @@ _installation()	{
 	echo $pw | sudo -S cp -R ./geox-tweak/doc /usr/share/doc
 
 	echo "==> Geox-Tweak-Xfce :: Installation Done." 
-
-	echo "----------------------------------------------"
-	echo "Install Gtk themes..."
-	echo "----------------------------------------------"
-	echo $pw | sudo -S tar -xzf /usr/share/geox-tweak/theme/themes.tar.gz -C /usr/share/themes --skip-old-files
-	cp -ru /usr/share/geox-tweak/panel $HOME/.config/geox-tweak-xfce
-	echo "==> Done."
 
 	_installationDep
 

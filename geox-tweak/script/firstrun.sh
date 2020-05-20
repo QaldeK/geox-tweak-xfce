@@ -141,12 +141,12 @@ _installConf()
 
 	#  plank
 	sudo tar -xf /usr/share/geox-tweak/theme/plank.tar.gz -C /usr/share/
-
 	xfconf-query -cv xfwm4 -p /general/show_dock_shadow --create --type bool -s "false"
 
 	if [ ! -d "$HOME/.config/plank" ]; then
+
 		echo plank not installed
-		
+			
 		for app in 'thunar' 'firefox' 'thunderbird' 'torbrowser' 'org.xfce.Catfish' 'gmusicbrowser' 'clementine' 'shotwell' 'libreoffice-startcenter' 'mintinstall' 'mx-packageinstaller' 'org.gnome.Software' 'org.keepassxc.KeePassXC' 'exo-terminal-emulator' 'xfce-settings-manager'
 	 	do
 			APPS=/usr/share/applications/$app.desktop
@@ -160,7 +160,7 @@ _installConf()
 
 			fi
 		done
-		
+
 		gsettings set net.launchpad.plank.dock.settings:/net/launchpad/plank/docks/dock1/ dock-items "['thunar.dockitem', 'firefox.dockitem', 'thunderbird.dockitem', 'torbrowser.dockitem', 'org.xfce.Catfish.dockitem', 'gmusicbrowser.dockitem', 'clementine.dockitem', 'shotwell.dockitem', 'libreoffice-startcenter.dockitem', 'mintinstall.dockitem', 'mx-packageinstaller.dockitem', 'org.gnome.Software.dockitem', 'org.keepassxc.KeePassXC.dockitem', 'exo-terminal-emulator.dockitem', 'xfce-settings-manager.dockitem']"
 
 	else
@@ -346,18 +346,17 @@ _installationMX()
 	    xfce4-dockbarx-plugin dockbarx-themes-extra
 	    # echo $pw | sudo -S rm /etc/apt/sources.list.d/xuzhen666-ubuntu-dockbarx-disco.list
 	
-	# echo $pw | sudo -S apt-get update
+	fi
 
-
-		for app in 	'python-gconf' 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'xfce4-dockbarx-plugin' \
-		'conky-all' 'conky-manager'
-		do
-			if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
-			then
-				echo $app "installation from test repo"
-				echo $pw | sudo -S apt-get install -y $app
-			fi	
-		done
+	for app in 	'python-gconf' 'plank' 'xfdashboard' 'xfdashboard-plugins' 'synapse' 'zeitgeist' 'xfce4-dockbarx-plugin' \
+	'conky-all' 'conky-manager'
+	do
+		if [ $(dpkg-query -W -f='${Status}' $app 2>/dev/null | grep -c "ok installed") -eq 0 ];
+		then
+			echo $app "installation from test repo"
+			echo $pw | sudo -S apt-get install -y $app
+		fi	
+	done
 
 
 	echo $pw | sudo -S sed -i 's/.* test/#&/'  /etc/apt/sources.list.d/mx.list
