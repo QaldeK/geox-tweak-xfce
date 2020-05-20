@@ -35,12 +35,12 @@ Finally, GTX comes with gtx-indicators: a small software that fits in the notifi
 GTX has been tested on the following Linux distributions: Linux Mint Xfce 19.03, Xubuntu 18.04; MX Linux 19.01. It should install and properly install third-party software on which it depends simply by typing in a terminal:
 
 
- 	wget -qO- https://raw.githubusercontent.com/QaldeK/geox-tweak-xfce/master/dl_and_install.sh# | sh
+ 	wget -O- https://raw.githubusercontent.com/QaldeK/geox-tweak-xfce/master/dl_and_install.sh# | sh
 
 
 Uninstall :
  
-	wget -qO- https://raw.githubusercontent.com/QaldeK/geox-tweak-xfce/master/uninstall# | bash
+	wget -O- https://raw.githubusercontent.com/QaldeK/geox-tweak-xfce/master/uninstall# | bash
 
 
 
