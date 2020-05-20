@@ -807,7 +807,7 @@ class Geox:
        
         theme = self.theme_name.get_label()
 
-        subprocess.check_call("cd ~/.themes ; tar -xf " + sdir + "/theme/themes.tar.xz " + theme, shell=True)        
+        subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.xz " + theme + "'", shell=True)        
 
         if ('dark' in theme or
             'Dark' in theme or
@@ -818,7 +818,7 @@ class Geox:
             print(theme + themeVar)
             if 'missing' not in themeVar:
                 try:
-                    subprocess.check_call("cd ~/.themes ; tar -xf " + sdir + "/theme/themes.tar.xz " + themeVar, shell=True)
+                    subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.xz "  + themeVar + "'", shell=True)
                 except Exception as e:
                     print(e)
             
@@ -830,7 +830,7 @@ class Geox:
 
             if 'missing' not in themeVar:
                 try:
-                    subprocess.check_call("cd ~/.themes ; tar -xf " + sdir + "/theme/themes.tar.xz " + themeVar , shell=True)
+                    subprocess.check_call("cd /usr/share/themes/; xfce4-terminal -e 'sudo tar -xf /home/geo/Developpement/geox-tweak-xfce/geox-tweak-xfce/geox-tweak/theme/themes.tar.xz "  + themeVar + "'", shell=True)
                     
                 except Exception as e:
                     print(e)
@@ -848,12 +848,12 @@ class Geox:
             text="The " + theme + " theme will be remove",
         )
         dialog.format_secondary_text(
-            "(only if in ~/.themes/)"
+            "(Password requiered for uninstall)"
         )
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             subprocess.Popen(
-                "rm -r ~/.themes/" + theme, shell=True)
+                "xfce4-terminal -e 'sudo rm -r /usr/share/themes/" + theme + "'", shell=True)
             self.apply_bar_theme.hide()
             self.install_bar_theme.show()
         elif response == Gtk.ResponseType.CANCEL:
