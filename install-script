@@ -41,7 +41,7 @@ echo "This script will install geox-tweak-xfce and dependancy ('python3' 'python
  Are you ok to procced  ? Tap enter for yes, tap ctrl+c or close terminal for no"
 echo
 read
-echo "---------------------------------------------------------"
+echo "Password Or tap enter again---------------------------------------"
 read -sp 'User password is require: ' pw
 echo
 
