@@ -133,7 +133,7 @@ _installation()	{
 	echo $pw | sudo -S chmod 555 /usr/bin/conkytoggle.sh
 	
 	# user config 
-	mkdir -p $HOME/.config/geox-tweak-xfce/panel
+	mkdir -p $HOME/.config/geox-tweak-xfce/panel/saved_layout
 	cp /usr/share/geox-tweak/geox-tweak.conf $HOME/.config/geox-tweak-xfce/
 	cp -r /usr/share/geox-tweak/panel/* $HOME/.config/geox-tweak-xfce/panel/
 
